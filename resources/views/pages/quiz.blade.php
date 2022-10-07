@@ -6,6 +6,7 @@ use App\Models\Question;
 
 <x-app-layout>
 @section('header', 'Quiz page')
+@section('style', 'quiz')
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -22,9 +23,11 @@ use App\Models\Question;
                         <div class="p-6 bg-white border-gray-200" id="question-image">
                             <img src="{{ $question['image_url'] }}">
                         </div>
-                        @foreach (Question::find($question["id"])->options as $option)
-                            {{$option["text"]}}
-                        @endforeach
+                        <div class="options-container">
+                            @foreach (Question::find($question["id"])->options as $option)
+                                <input type="radio" data-question-id="{{$question['id']}}">{{$option["text"]}}</input>
+                            @endforeach
+                        </div>
                     </div>
                     @endforeach
  

@@ -920,6 +920,10 @@ select {
 .fill-current {
   fill: currentColor;
 }
+.object-center {
+  -o-object-position: center;
+     object-position: center;
+}
 .p-6 {
   padding: 1.5rem;
 }
@@ -950,13 +954,13 @@ select {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
-.py-6 {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
 .py-12 {
   padding-top: 3rem;
   padding-bottom: 3rem;
+}
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 .py-1 {
   padding-top: 0.25rem;
@@ -1158,6 +1162,16 @@ select {
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
+#questions-container {
+  background-color: red;
+}
+#questions-container .single-question {
+  display: none;
+}
+#questions-container .single-question.enabled {
+  display: block;
+}
+
 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;

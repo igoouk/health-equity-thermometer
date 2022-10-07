@@ -1,0 +1,12 @@
+#questions-container{
+    background-color: red;
+
+
+    .single-question{
+        display: none;
+
+        &.enabled{
+            display: block;
+        }
+    }
+}
