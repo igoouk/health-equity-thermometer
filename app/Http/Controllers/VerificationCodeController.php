@@ -1,28 +1,85 @@
 <?php
- 
+
 namespace App\Http\Controllers;
- 
-use App\Http\Controllers\Controller;
-use App\Mail\VerificationCode;
-use App\Models\User;
+
+use App\Models\VerificationCode;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
- 
+
 class VerificationCodeController extends Controller
 {
     /**
-     * Send verification code to user
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function sendCode(Request $request)
+    public function store(Request $request)
     {
+        //
+    }
 
-        // Ship the order...
-        
-        $result = Mail::to($request->email)->send(new VerificationCode());
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\VerificationCode  $verificationCode
+     * @return \Illuminate\Http\Response
+     */
+    public function show(VerificationCode $verificationCode)
+    {
+        //
+    }
 
-        echo $result;
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\VerificationCode  $verificationCode
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(VerificationCode $verificationCode)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\VerificationCode  $verificationCode
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, VerificationCode $verificationCode)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\VerificationCode  $verificationCode
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(VerificationCode $verificationCode)
+    {
+        //
     }
 }

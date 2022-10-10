@@ -5039,13 +5039,13 @@ __webpack_require__.r(__webpack_exports__);
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].start();
 $(document).ready(function () {
-  $("#verify-button").on("click", function () {
-    sendVerification($("#email-input").val());
-  });
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
+  });
+  $("#send-code-button").on("click", function () {
+    sendVerification($("#email-input").val());
   });
 });
 

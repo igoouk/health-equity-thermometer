@@ -8,16 +8,17 @@ Alpine.start();
 
 
 $( document ).ready(function() {
-    
-    $("#verify-button").on("click", function(){
-        sendVerification($("#email-input").val());
-    })
-
     $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       });
+      
+    $("#send-code-button").on("click", function(){
+        sendVerification($("#email-input").val());
+    })
+
+    
 });
 
 function sendVerification(email) {

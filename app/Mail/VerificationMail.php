@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class VerificationCode extends Mailable
+class VerificationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,6 +29,6 @@ class VerificationCode extends Mailable
     public function build()
     {
         return $this->subject('E-mail verification')
-                ->view('emails.verification-code');
+                ->view('emails.verification-mail');
     }
 }
