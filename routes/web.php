@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VerificationCodeController;
 use App\Models\Question;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::post('send-code', [VerificationCodeController::class, 'sendCode']);
 
 require __DIR__.'/auth.php';

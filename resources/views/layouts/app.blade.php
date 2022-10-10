@@ -10,6 +10,8 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
         <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}" />
+        <script src="{{ URL::asset('js/jquery-3.6.1.min.js') }}"></script>
+        <script src="{{ URL::asset('js/app.js') }}"></script>
         <!-- Scripts -->
         <!-- Scripts -->
     </head>
