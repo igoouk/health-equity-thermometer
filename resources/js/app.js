@@ -1,53 +1,32 @@
-import './bootstrap';
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
 
-import Alpine from 'alpinejs';
+require('./bootstrap');
 
-window.Alpine = Alpine;
+window.Vue = require('vue').default;
 
-Alpine.start();
+/**
+ * The following block of code may be used to automatically register your
+ * Vue components. It will recursively scan this directory for the Vue
+ * components and automatically register them with their "basename".
+ *
+ * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ */
 
+// const files = require.context('./', true, /\.vue$/i)
+// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-$( document ).ready(function() {
-    $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-      
-    $("#send-code-button").on("click", function(){
-        sendVerification($("#email-input").val());
-    })
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-    
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+const app = new Vue({
+    el: '#app',
 });
-
-function sendVerification(email) {
-    $.ajax({
-       type:'POST',
-       url:$("#verify-button").data("route"),
-       data: {"email":email},
-       beforeSend:function(){
-        $("#verify-button").hide();
-        $("#email-input").append("<h2>Please wait..</h2>");
-       },
-       success:function(data) {
-          console.log("show verification input and button");
-       }
-    });
- }
-
-function getVerification(email) {
-    $.ajax({
-       type:'POST',
-       url:'/getmsg',
-       data:'_token = <?php echo csrf_token() ?>',
-       beforeSend:function(){
-        $("#verify-button").hide();
-        $("#email-input").append("<h2>Please wait..</h2>");
-       },
-       success:function(data) {
-          $("#msg").html(data.msg);
-       }
-    });
- }
-

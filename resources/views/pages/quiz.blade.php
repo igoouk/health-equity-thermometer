@@ -4,10 +4,10 @@ use App\Models\Question;
 
 ?>
 
-<x-app-layout>
 @section('header', 'Quiz page')
 @section('style', 'quiz')
-
+@extends('layouts.app', ['page' => __('Quiz'), 'pageSlug' => 'quiz'])
+@section('content')
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden sm:rounded-lg object-center" id="questions-container">
@@ -37,4 +37,4 @@ use App\Models\Question;
             <div id="next-question">Next question</div>
         </div>
     </div>
-</x-app-layout>
+@endsection

@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        LaravelFrontendPresets\BlackPreset\BlackPresetServiceProvider::class,
         /*
          * Application Service Providers...
          */

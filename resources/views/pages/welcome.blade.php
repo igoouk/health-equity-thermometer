@@ -1,12 +1,14 @@
 
-<x-app-layout>
+@extends('layouts.app', ['page' => __('Welcome'), 'pageSlug' => 'welcome'])
 @section('header', 'Welcome Page')
+@section('content')
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden sm:rounded-lg">
                 <div id="login-container">
                     <input type="text" id="email-input">Enter email</input>
-                    <a id="send-code-button" data-route="{{url('send-code')}}">Get verification code!</a>
+                    <a id="send-code-button" data-route="{{url('send-code')}}">Get verification code</a>
+                    <a id="verify-code-button" data-route="{{url('verify-code')}}">Verify code</a>
                 </div>
                 <div class="p-6 bg-white border-gray-200" id="instruction-image">
                     Explanation image
@@ -17,4 +19,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

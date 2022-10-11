@@ -5050,15 +5050,13 @@ $(document).ready(function () {
 });
 
 function sendVerification(email) {
+  $("#verify-button").hide();
+  $("#email-input").append("<h2>Please wait..</h2>");
   $.ajax({
     type: 'POST',
-    url: $("#verify-button").data("route"),
+    url: $("#send-code-button").data("route"),
     data: {
       "email": email
-    },
-    beforeSend: function beforeSend() {
-      $("#verify-button").hide();
-      $("#email-input").append("<h2>Please wait..</h2>");
     },
     success: function success(data) {
       console.log("show verification input and button");
