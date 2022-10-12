@@ -1,11 +1,12 @@
 
 <?php
 use App\Models\Question;
-
+if (session()->get('verified') != "1") {
+    redirect('/home');
+ }
 ?>
 
 @section('header', 'Quiz page')
-@section('style', 'quiz')
 @extends('layouts.app', ['page' => __('Quiz'), 'pageSlug' => 'quiz'])
 @section('content')
     <div class="py-12">
@@ -38,3 +39,8 @@ use App\Models\Question;
         </div>
     </div>
 @endsection
+
+<?php
+
+
+?>

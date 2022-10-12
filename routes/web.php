@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\VerificationCodeController;
+use App\Http\Controllers\VerificationMailController;
 use App\Models\Question;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +19,11 @@ require __DIR__.'/auth.php';
 
 Route::get('/quiz', function () {
     return view('pages/quiz', ['questions' => Question::all()]);
-});
+})->middleware('verifiedUser')->name("quiz");
+
 Route::get('/', function () {
     return view('pages/welcome');
-});
+})->name("home");
 
 
 Route::get('/dashboard', function () {
@@ -30,15 +31,16 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::post('send-code', [VerificationMailController::class, 'sendCode']);
+Route::post('verify-code', [VerificationMailController::class, 'verifyCode']);
 
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
 
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
+//Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'App\Http\Controllers\PageController@icons']);

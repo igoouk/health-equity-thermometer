@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class VerificationCodeController extends Controller
 {
+/*
+    public function getLatest(String $user_id = null)
+    {
+        $verificationCode = VerificationCode::where('user_id', $user_id)->orderByDesc('created_at')->limit(1);
+        return $verificationCode;
+    }*/
+
     /**
      * Display a listing of the resource.
      *
