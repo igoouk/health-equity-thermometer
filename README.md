@@ -41,3 +41,6 @@ Development:
 Production & staging:
 Settings can be found in appropiate env files. Server should point the /public folder like local. 
 "composer install --optimize-autoloader --no-dev" command should run after each successful push to server.
+
+Application uses Bcrypt algorithm for hashing passwords. If the admin pass is required to be resetted, new one can be generated here: https://bcrypt.online/
+Also when creating a new dashboard user, the password can be produced here again. All the details should be created within the users table in the db. 
