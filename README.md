@@ -40,4 +40,4 @@ Development:
 
 Production & staging:
 Settings can be found in appropiate env files. Server should point the /public folder like local. 
-
+"composer install --optimize-autoloader --no-dev" command should run after each successful push to server.
