@@ -14,7 +14,9 @@ class CreateVerificationCodesTable extends Migration
     public function up()
     {
         Schema::create('verification_codes', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id'); // autoincrement id field
+            $table->integer('user_id');   // string field
+            $table->string('code', 500);   // string field
             $table->timestamps();
         });
     }

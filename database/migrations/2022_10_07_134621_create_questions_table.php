@@ -14,8 +14,12 @@ class CreateQuestionsTable extends Migration
     public function up()
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id'); // autoincrement id field
+            $table->string('text', 500);   // string field
+            $table->string('image_url', 500);   // string field
+            $table->string('information', 500);   // string field
             $table->timestamps();
+
         });
     }
 

@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\Result;
 
-class CheckIfUserVerified
+class CheckIfInitialAttempt
 {
     /**
      * Handle an incoming request.
@@ -16,9 +17,13 @@ class CheckIfUserVerified
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->session()->get('verified') != "1") {
-            return redirect(url('/'));
+
+        $previousResult = Result::where("user_id", session()->get('user_id'))->first();
+
+        if($request->id == 1 && $previousResult != null) {
+            return redirect(url('/quiz/2'));
         }
+
 
         return $next($request);
     }

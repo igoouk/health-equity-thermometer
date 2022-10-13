@@ -14,8 +14,9 @@ class CreateResultsTable extends Migration
     public function up()
     {
         Schema::create('results', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->increments('id'); // autoincrement id field
+            $table->integer('user_id');   // string field
+            $table->json('selected_options');   // string field
         });
     }
 

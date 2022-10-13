@@ -4,6 +4,7 @@ use App\Http\Controllers\VerificationMailController;
 use App\Models\Question;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 require __DIR__.'/auth.php';
 /*
@@ -17,8 +18,8 @@ require __DIR__.'/auth.php';
 |
 */
 
-Route::get('/quiz', function () {
-    return view('pages/quiz', ['questions' => Question::all()]);
+Route::get('/quiz/{id}', function (Request $request, $id) {
+    return view('pages/quiz', ['questions' => Question::all(), 'questionId' => $id]);
 })->middleware('verifiedUser')->name("quiz");
 
 Route::get('/', function () {
@@ -50,6 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('tables', ['as' => 'pages.tables', 'uses' => 'App\Http\Controllers\PageController@tables']);
 		Route::get('typography', ['as' => 'pages.typography', 'uses' => 'App\Http\Controllers\PageController@typography']);
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'App\Http\Controllers\PageController@upgrade']);
+		Route::get('userlist', ['as' => 'pages.user-list', 'uses' => 'App\Http\Controllers\PageController@userlist']);
 });
 
 Route::group(['middleware' => 'auth'], function () {

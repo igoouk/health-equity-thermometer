@@ -14,7 +14,9 @@ class CreateQuestionOptionsTable extends Migration
     public function up()
     {
         Schema::create('question_options', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id'); // autoincrement id field
+            $table->integer('question_id');   // string field
+            $table->string('text', 500);   // string field
             $table->timestamps();
         });
     }

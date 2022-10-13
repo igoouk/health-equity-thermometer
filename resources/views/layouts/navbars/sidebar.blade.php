@@ -1,16 +1,20 @@
 <div class="sidebar">
     <div class="sidebar-wrapper">
-        <div class="logo">
-            <a href="#" class="simple-text logo-mini">{{ __('BD') }}</a>
-            <a href="#" class="simple-text logo-normal">{{ __('Black Dashboard') }}</a>
-        </div>
+        
         <ul class="nav">
             <li @if ($pageSlug == 'dashboard') class="active " @endif>
-                <a href="{{ route('home') }}">
+                <a href="{{ route('dashboard') }}">
                     <i class="tim-icons icon-chart-pie-36"></i>
-                    <p>{{ __('Dashboard') }}</p>
+                    <p>{{ __('Home') }}</p>
                 </a>
             </li>
+            <li @if ($pageSlug == 'user-list') class="active " @endif>
+                <a href="{{ route('pages.user-list') }}">
+                    <i class="tim-icons icon-puzzle-10"></i>
+                    <p>{{ __('User List') }}</p>
+                </a>
+            </li>
+            <!--
             <li>
                 <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
                     <i class="fab fa-laravel" ></i>
@@ -53,12 +57,7 @@
                     <p>{{ __('Notifications') }}</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'tables') class="active " @endif>
-                <a href="{{ route('pages.tables') }}">
-                    <i class="tim-icons icon-puzzle-10"></i>
-                    <p>{{ __('Table List') }}</p>
-                </a>
-            </li>
+            
             <li @if ($pageSlug == 'typography') class="active " @endif>
                 <a href="{{ route('pages.typography') }}">
                     <i class="tim-icons icon-align-center"></i>
@@ -76,7 +75,7 @@
                     <i class="tim-icons icon-spaceship"></i>
                     <p>{{ __('Upgrade to PRO') }}</p>
                 </a>
-            </li>
+            </li>-->
         </ul>
     </div>
 </div>

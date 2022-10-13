@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+
 class PageController extends Controller
 {
     /**
@@ -72,5 +74,15 @@ class PageController extends Controller
     public function upgrade()
     {
         return view('pages.upgrade');
+    }
+
+        /**
+     * Display user list page
+     *
+     * @return \Illuminate\View\View
+     */
+    public function userlist()
+    {
+        return view('pages.user-list',['users' => User::all()]);
     }
 }

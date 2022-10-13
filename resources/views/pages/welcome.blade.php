@@ -15,7 +15,7 @@
                     Explanation image
                 </div>
                 <div>
-                    <a id="start-quiz" href="{{ url('/quiz/') }}">Start Quiz</a>
+                    <a id="start-quiz" href="{{ url('/quiz/1') }}">Start Quiz</a>
                 </div>
             </div>
         </div>

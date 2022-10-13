@@ -16,6 +16,18 @@ $( document ).ready(function() {
         verifyCode($("#code-input").val());
     });
 
+
+
+    /**
+     * On each question page there will be a submit button and when it is submitted a popup will come up with relevant information.
+ 
+The red question has 3 images and draggable words, all words needs to be associated with the right image to be correct.
+ 
+For all the following questions, except the last purple one, the answer is multi-select.
+ 
+On the orange question, if you answer no on the first and none of above on the second you will be taken directly to results page with the correct information 
+(in powerpoint). Otherwise you will go through all questions, even if you answer them wrong, with no possibility of going back and changing your answer.
+ */
 });
 function sendCode(email) {
     $.ajax({
@@ -50,7 +62,7 @@ function verifyCode(code) {
                 $("#email-input").show();
                 $("#send-code-button").show();
             }else{
-                window.location.href = "/quiz" ;
+                window.location.href = data ;
             }
         }
     });
