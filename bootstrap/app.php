@@ -41,6 +41,37 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+
+/*
+|-----------------------------------------------
+| Load domain-specific .env file if it exists
+|-----------------------------------------------
+*/
+
+if(isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])){
+    
+    $domain = $_SERVER['HTTP_HOST'];
+    $envName = "";
+    if (isset($domain)) {
+
+
+        if (str_contains($domain, "igoodev")) {
+            $envName = "staging";
+        }elseif(str_contains($domain, "productionurl")){
+            $envName = "production";
+        }
+        
+
+        $dotenv = Dotenv\Dotenv::createImmutable(base_path(), '.env.'.$envName);
+    
+        try {
+            $dotenv->load();
+        } catch (\Dotenv\Exception\InvalidPathException $e) {
+            // No custom .env file found for this domain
+        }
+    }
+}
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
