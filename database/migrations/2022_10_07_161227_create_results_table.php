@@ -17,6 +17,7 @@ class CreateResultsTable extends Migration
             $table->increments('id'); // autoincrement id field
             $table->integer('user_id');   // string field
             $table->json('selected_options');   // string field
+            $table->timestamps();
         });
     }
 
