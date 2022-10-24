@@ -8301,6 +8301,9 @@ $(document).ready(function () {
   $("#submit-answer-button").on("click", function () {
     checkAnswer($(".single-question").data("id"));
   });
+  $("#next-button").on("click", function () {
+    window.location.href = $(this).data("route");
+  });
   /**
    * On each question page there will be a submit button and when it is submitted a popup will come up with relevant information.
   The red question has 3 images and draggable words, all words needs to be associated with the right image to be correct.
@@ -8325,7 +8328,11 @@ $(document).ready(function () {
       error: function error(data) {
         console.log(data);
       },
-      success: function success(data) {}
+      success: function success(data) {
+        if (data == "1") {
+          $("#information-popup").show();
+        } else {}
+      }
     });
   }
 });

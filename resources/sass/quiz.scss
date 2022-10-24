@@ -12,4 +12,15 @@
             display: none;
         }
     }
+   
+}
+#information-popup{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 9999;
+    top: 0;
+    display: none;
+    height: 100%;
+    background-color: red;
 }

@@ -17,6 +17,7 @@ class Result extends Model
      */
     protected $fillable = [
         'user_id',
-        'selected_options'
+        'selected_options',
+        'level'
     ];
 }

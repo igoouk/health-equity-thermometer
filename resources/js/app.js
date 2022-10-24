@@ -19,9 +19,11 @@ $( document ).ready(function() {
     $("#submit-answer-button").on("click", function(){
         checkAnswer($(".single-question").data("id"));
     });
+    $("#next-button").on("click", function(){
+        window.location.href = $(this).data("route");
+    });
 
-
-
+    
     /**
      * On each question page there will be a submit button and when it is submitted a popup will come up with relevant information.
  
@@ -52,8 +54,11 @@ function checkAnswer(questionId) {
             console.log(data);
         },
         success:function(data) {
-            
-    
+            if (data == "1") {
+                $("#information-popup").show();
+            } else {
+                
+            }
         }
     });
 }

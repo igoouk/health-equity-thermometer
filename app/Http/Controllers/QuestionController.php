@@ -29,15 +29,20 @@ class QuestionController extends Controller
         
         session(['selectedOptions' => $tempOptions]);
         if ($arraysAreEqual) {
-            # code...
+            return "1";
         }else{
-            $result = Result::create([
-                'user_id' => session()->get('user_id'),
-                'selected_options' => session()->get('selectedOptions'),
-            ]);
+            try {
+                $result = Result::create([
+                    'user_id' => session()->get('user_id'),
+                    'selected_options' => session()->get('selectedOptions'),
+                    'level' => $request->questionId
+                ]);
+            } catch (\Throwable $th) {
+                return $th;
+            }
+            return "1";
         }
-        echo $arraysAreEqual;
-        //echo $result;
+        
     }
     /**
      * Display a listing of the resource.
