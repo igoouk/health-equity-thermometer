@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\VerificationMailController;
 use App\Models\Question;
 use Illuminate\Support\Facades\Route;
@@ -19,12 +20,14 @@ require __DIR__.'/auth.php';
 */
 
 Route::get('/quiz/{id}', function (Request $request, $id) {
-    return view('pages/quiz', ['questions' => Question::all(), 'questionId' => $id]);
-})->middleware('verifiedUser')->name("quiz");
+    return view('pages/quiz', ['question' => Question::find($id), 'questionId' => $id]);
+//})->middleware('verifiedUser')->name("quiz");
+})->name("quiz");
 
 Route::get('/', function () {
     return view('pages/welcome');
 })->name("home");
+
 
 
 Route::get('/dashboard', function () {
@@ -33,6 +36,7 @@ Route::get('/dashboard', function () {
 
 Route::post('send-code', [VerificationMailController::class, 'sendCode']);
 Route::post('verify-code', [VerificationMailController::class, 'verifyCode']);
+Route::post('check-answer', [QuestionController::class, 'checkAnswer']);
 
 
 

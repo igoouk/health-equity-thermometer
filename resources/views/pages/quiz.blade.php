@@ -5,7 +5,7 @@ if (session()->get('verified') != "1") {
     redirect('/home');
  }
 
-$question = Question::find($questionId);
+$nextQuestion = ($questionId != 6) ? $questionId + 1 : 6; 
 ?>
 
 @section('header', 'Quiz page')
@@ -25,19 +25,28 @@ $question = Question::find($questionId);
                         </div>
                         <div class="options-container">
                             @foreach ($question->options as $option)
-                                <input type="radio" data-question-id="{{$question['id']}}">{{$option["text"]}}</input>
+                                <input type="checkbox" data-option-id="{{$option['id']}}">{{$option["text"]}}</input>
                             @endforeach
                         </div>
                         <div class="question-information">
-                            {{$question["information"]}}
+                            
                         </div>
                     </div>
 
  
-                    <!--<a id="start-quiz" href="{{ url('/quiz/') }}">Start Quiz</a>-->
+                    
                 
             </div>
-            <div id="next-question">Next question</div>
+            @if ($questionId != 7)
+            <div id="submit-answer-button" data-route="{{url('check-answer')}}">Submit answer</div>
+            <div id="information-popup">
+                {{$question["information"]}}
+
+                <div id="next-button" data-route="{{ url('/quiz/<?php echo $nextQuestion ?>') }}">Next question</div>
+            </div>
+            @else
+
+            @endif
         </div>
     </div>
 @endsection

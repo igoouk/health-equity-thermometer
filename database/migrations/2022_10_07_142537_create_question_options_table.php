@@ -17,6 +17,8 @@ class CreateQuestionOptionsTable extends Migration
             $table->increments('id'); // autoincrement id field
             $table->integer('question_id');   // string field
             $table->string('text', 500);   // string field
+            $table->string('image', 500);   // string field
+            $table->string('optional_text', 500);   // string field
             $table->timestamps();
         });
     }

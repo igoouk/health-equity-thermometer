@@ -17,7 +17,8 @@ class CreateQuestionsTable extends Migration
             $table->increments('id'); // autoincrement id field
             $table->string('text', 500);   // string field
             $table->string('image_url', 500);   // string field
-            $table->string('information', 500);   // string field
+            $table->string('information', 5000);   // string field
+            $table->string('correct_answer', 100);   // string field
             $table->timestamps();
 
         });

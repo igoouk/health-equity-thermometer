@@ -59,6 +59,8 @@ if(isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])){
             $envName = "staging";
         }elseif(str_contains($domain, "productionurl")){
             $envName = "production";
+        }elseif(str_contains($domain, "local")){
+            $envName = "local";
         }
         
 

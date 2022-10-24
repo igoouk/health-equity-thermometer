@@ -9,4 +9,14 @@ class Result extends Model
 {
     use HasFactory;
     protected $table = 'results';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'user_id',
+        'selected_options'
+    ];
 }

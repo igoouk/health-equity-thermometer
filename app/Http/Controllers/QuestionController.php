@@ -3,10 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Result;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+
+
+    /**
+     * Send verification code to user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function checkAnswer(Request $request)
+    {
+        $correctAnswer = explode(",", Question::where('id', $request->questionId)->first()->correct_answer);
+        $arraysAreEqual = ($correctAnswer == $request->selectedOptions);
+        $previouslySelectedOptions = session()->get('selectedOptions');
+        if ($previouslySelectedOptions) {
+            $tempOptions = strval(implode(",",$request->selectedOptions)).",". strval($previouslySelectedOptions);
+        }else{
+            $tempOptions = strval(implode(",",$request->selectedOptions));
+        }
+        
+        session(['selectedOptions' => $tempOptions]);
+        if ($arraysAreEqual) {
+            # code...
+        }else{
+            $result = Result::create([
+                'user_id' => session()->get('user_id'),
+                'selected_options' => session()->get('selectedOptions'),
+            ]);
+        }
+        echo $arraysAreEqual;
+        //echo $result;
+    }
     /**
      * Display a listing of the resource.
      *

@@ -16,7 +16,7 @@ Admin template: Black Dashboard
 
 # Requirements:
 Composer
-npm
+npm  (version 16.13.2)   (If using nvm, use command "nvm use 16.13.2")
 
 # Local installation:
 1)Clone the project to your local
