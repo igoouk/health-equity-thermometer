@@ -11961,6 +11961,9 @@ select{
   height: 100%;
   background-color: red;
 }
+#information-popup #next-button {
+  display: none;
+}
 
 #login-container #verify-code-button, #login-container #code-input {
   display: none;
@@ -11970,6 +11973,22 @@ select{
 }
 #login-container .single-question.enabled {
   display: block;
+}
+
+#demographics-container {
+  background-color: red;
+}
+#demographics-container #interest-section #interest-options-work, #demographics-container #interest-section #interest-options-personal {
+  display: none;
+}
+#demographics-container #activity-section {
+  display: none;
+}
+#demographics-container #activity-section #activity-target, #demographics-container #activity-section #activity-selection {
+  display: none;
+}
+#demographics-container #activity-section #activity-target .target-text {
+  display: none;
 }
 
 html {

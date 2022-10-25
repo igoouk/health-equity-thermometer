@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\VerificationMailController;
 use App\Models\Question;
+use App\Models\Country;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -27,7 +29,9 @@ Route::get('/quiz/{id}', function (Request $request, $id) {
 Route::get('/', function () {
     return view('pages/welcome');
 })->name("home");
-
+Route::get('/demographics', function () {
+    return view('pages/demographics', ['countries' => Country::all()]);
+})->name("demographics");
 
 
 Route::get('/dashboard', function () {
@@ -37,6 +41,7 @@ Route::get('/dashboard', function () {
 Route::post('send-code', [VerificationMailController::class, 'sendCode']);
 Route::post('verify-code', [VerificationMailController::class, 'verifyCode']);
 Route::post('check-answer', [QuestionController::class, 'checkAnswer']);
+Route::post('get-cities', [CityController::class, 'getCities']);
 
 
 

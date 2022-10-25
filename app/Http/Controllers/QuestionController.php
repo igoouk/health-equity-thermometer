@@ -35,8 +35,9 @@ class QuestionController extends Controller
                 $result = Result::create([
                     'user_id' => session()->get('user_id'),
                     'selected_options' => session()->get('selectedOptions'),
-                    'level' => $request->questionId
+                    'level' => ($request->questionId)-1
                 ]);
+                session(['selectedOptions' => null]);
             } catch (\Throwable $th) {
                 return $th;
             }

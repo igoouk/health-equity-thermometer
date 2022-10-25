@@ -1,0 +1,37 @@
+#demographics-container{
+    background-color: red;
+
+
+    #interest-section{
+        #interest-form{
+            p{
+                
+            }
+        }
+        #work-city, #personal-city{
+            //display: none;
+        }
+
+        #interest-options-work, #interest-options-personal{
+            display: none;
+        }
+
+        #next-button{
+            //display: none;
+        }
+    }
+
+    #activity-section{
+        display: none;
+        #activity-target,#activity-selection{
+            display: none;
+        }
+
+        #activity-target{
+            .target-text{
+                display: none;
+            }
+        }
+    }
+   
+}

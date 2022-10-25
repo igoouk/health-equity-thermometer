@@ -8,39 +8,113 @@ $( document ).ready(function() {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       });
-      
-    $("#send-code-button").on("click", function(){
-        sendCode($("#email-input").val());
-    });
-    $("#verify-code-button").on("click", function(){
-        verifyCode($("#code-input").val());
-    });
+    if ($("#quiz-container").length > 0) {
+        $("#send-code-button").on("click", function(){
+            sendCode($("#email-input").val());
+        });
+        $("#verify-code-button").on("click", function(){
+            verifyCode($("#code-input").val());
+        });
 
-    $("#submit-answer-button").on("click", function(){
-        checkAnswer($(".single-question").data("id"));
-    });
-    $("#next-button").on("click", function(){
-        window.location.href = $(this).data("route");
-    });
+        $("#submit-answer-button").on("click", function(){
+            checkAnswer($(".single-question").data("id"));
+        });
+        $("#next-button").on("click", function(){
+            window.location.href = $(this).data("route");
+        });
+    };
 
-    
-    /**
-     * On each question page there will be a submit button and when it is submitted a popup will come up with relevant information.
- 
-The red question has 3 images and draggable words, all words needs to be associated with the right image to be correct.
- 
-For all the following questions, except the last purple one, the answer is multi-select.
- 
-On the orange question, if you answer no on the first and none of above on the second you will be taken directly to results page with the correct information 
-(in powerpoint). Otherwise you will go through all questions, even if you answer them wrong, with no possibility of going back and changing your answer.
- */
+    if ($("#demographics-container").length > 0) {
 
+        $('#interest-selection input').on('change', function() {
+            if ($('input:checked', '#interest-selection').val() == "Personal") {
+                $("#interest-options-personal").show();
+                $("#interest-options-work").hide();
+            } else {
+                $("#interest-options-personal").hide();
+                $("#interest-options-work").show();
+            }
+        });
+        $('#activity-selection input').on('change', function() {
+            if ($('input:checked', '#activity-selection').val() == "Test") {
+                $("#activity-target").show();
+            } else {
+                $("#activity-target").hide();
+                
+            }
+        });
+
+        $('#activity-target input').on('change', function() {
+            $(".target-text").hide();
+            $("#"+$('input:checked', '#activity-target').data("input-id")).show();
+        });
+
+
+
+        let countryDropDowns = $('#work-country, #personal-country');
+        countryDropDowns.prepend('<option selected="true" disabled>Choose country</option>');
+        countryDropDowns.prop('selectedIndex', 0);
+        countryDropDowns.change(function(e) {
+            $.ajax({
+                type:'POST',
+                url:$(this).data("route"),
+                data: {
+                    "country_id":$(this).find(":selected").data("id")  
+                },
+                beforeSend:function(){
+                },
+                error:function(data){
+                    
+                },
+                success:function(data) {
+                    populateCities(e.target.id,data);
+                }
+            });
+            //selectCity(e.target.id, $(this).find(":selected").data("id"));
+        });
+
+        $("#next-button").on("click", function(){
+            $("#interest-section").hide();
+            $("#activity-section, #activity-selection").show();
+        });
+
+
+       
+    }
+
+
+function populateCities(field, cityArray){
+
+
+    let cityDropdown;
+    if (field == "work-country") {
+        cityDropdown = $("#work-city");
+    }else{
+        cityDropdown = $("#personal-city");
+    }
+
+
+        cityDropdown.empty();
+        cityDropdown.show();
+
+        cityDropdown.append('<option selected="true" disabled>Choose city</option>');
+        cityDropdown.prop('selectedIndex', 0);
+
+
+        $.each(cityArray, function (key, entry) {
+            cityDropdown.append($('<option></option>').attr('value', entry.abbreviation).attr('city-id', entry.id).text(entry.name));
+        })
+     
+
+}
 function checkAnswer(questionId) {
     var selectedOptions = [];
     $( "input:checked" ).each(function(){
         selectedOptions.push($(this).data("option-id"));
         
     });
+    $("#information-popup").show();
+    
     $.ajax({
         type:'POST',
         url:$("#submit-answer-button").data("route"),
@@ -55,7 +129,7 @@ function checkAnswer(questionId) {
         },
         success:function(data) {
             if (data == "1") {
-                $("#information-popup").show();
+                $("#next-button").show();
             } else {
                 
             }

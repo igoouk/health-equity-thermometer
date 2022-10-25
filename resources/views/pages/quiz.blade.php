@@ -11,7 +11,7 @@ $nextQuestion = ($questionId != 6) ? $questionId + 1 : 6;
 @section('header', 'Quiz page')
 @extends('layouts.app', ['page' => __('Quiz'), 'pageSlug' => 'quiz'])
 @section('content')
-    <div class="py-12">
+    <div class="py-12" id="quiz-container">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden sm:rounded-lg object-center" id="questions-container">
                 
@@ -25,7 +25,7 @@ $nextQuestion = ($questionId != 6) ? $questionId + 1 : 6;
                         </div>
                         <div class="options-container">
                             @foreach ($question->options as $option)
-                                <input type="checkbox" data-option-id="{{$option['id']}}">{{$option["text"]}}</input>
+                                <input type="checkbox" data-option-id="{{$option['id']}}">{{$option["text"]}} - {{$option["id"]}}</input>
                             @endforeach
                         </div>
                         <div class="question-information">
