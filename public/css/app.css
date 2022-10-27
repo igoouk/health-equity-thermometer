@@ -11987,6 +11987,9 @@ select{
 #demographics-container #activity-section #activity-target, #demographics-container #activity-section #activity-selection {
   display: none;
 }
+#demographics-container #activity-section #activity-target.enabled {
+  display: block;
+}
 #demographics-container #activity-section #activity-target .target-text {
   display: none;
 }

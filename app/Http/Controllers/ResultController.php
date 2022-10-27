@@ -82,4 +82,9 @@ class ResultController extends Controller
     {
         //
     }
+
+
+    public static function getResultPerUser(){
+        return Result::where("user_id" , session()->get('user_id'))->get();
+    }
 }

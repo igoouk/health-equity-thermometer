@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\ResultController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationMailController;
 use App\Models\Question;
 use App\Models\Country;
@@ -30,8 +32,9 @@ Route::get('/', function () {
     return view('pages/welcome');
 })->name("home");
 Route::get('/demographics', function () {
-    return view('pages/demographics', ['countries' => Country::all()]);
-})->name("demographics");
+    return view('pages/demographics', ['countries' => Country::all(), 'userResults' => ResultController::getResultPerUser()]);
+})->middleware('verifiedUser')->name("demographics");
+//})->name("demographics");
 
 
 Route::get('/dashboard', function () {
@@ -42,6 +45,7 @@ Route::post('send-code', [VerificationMailController::class, 'sendCode']);
 Route::post('verify-code', [VerificationMailController::class, 'verifyCode']);
 Route::post('check-answer', [QuestionController::class, 'checkAnswer']);
 Route::post('get-cities', [CityController::class, 'getCities']);
+Route::post('save-demographics', [UserController::class, 'saveDemographics']);
 
 
 

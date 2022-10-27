@@ -8293,13 +8293,30 @@ $(document).ready(function () {
     }
   });
 
+  if ($("#login-container").length > 0) {
+    setLoginPage();
+  }
+
   if ($("#quiz-container").length > 0) {
+    setQuizPage();
+  }
+
+  ;
+
+  if ($("#demographics-container").length > 0) {
+    setDemogprahicsPage();
+  }
+
+  function setLoginPage() {
     $("#send-code-button").on("click", function () {
       sendCode($("#email-input").val());
     });
     $("#verify-code-button").on("click", function () {
       verifyCode($("#code-input").val());
     });
+  }
+
+  function setQuizPage() {
     $("#submit-answer-button").on("click", function () {
       checkAnswer($(".single-question").data("id"));
     });
@@ -8308,11 +8325,17 @@ $(document).ready(function () {
     });
   }
 
-  ;
-
-  if ($("#demographics-container").length > 0) {
+  function setDemogprahicsPage() {
+    var formValues = [];
+    var userInterest = "";
+    var userActivity = "";
     $('#interest-selection input').on('change', function () {
-      if ($('input:checked', '#interest-selection').val() == "Personal") {
+      userInterest = $('input:checked', '#interest-selection').val();
+      formValues.push({
+        "intereset": userInterest
+      });
+
+      if (userInterest == "Personal") {
         $("#interest-options-personal").show();
         $("#interest-options-work").hide();
       } else {
@@ -8321,7 +8344,12 @@ $(document).ready(function () {
       }
     });
     $('#activity-selection input').on('change', function () {
-      if ($('input:checked', '#activity-selection').val() == "Test") {
+      userActivity = $('input:checked', '#activity-selection').val();
+      formValues.push({
+        "activity": userActivity
+      });
+
+      if (userActivity == "Test") {
         $("#activity-target").show();
       } else {
         $("#activity-target").hide();
@@ -8330,6 +8358,63 @@ $(document).ready(function () {
     $('#activity-target input').on('change', function () {
       $(".target-text").hide();
       $("#" + $('input:checked', '#activity-target').data("input-id")).show();
+    });
+    $("#next-button").on("click", function () {
+      var country = "";
+      var city = "";
+      var jobRole = "";
+      var organisation = "";
+      var reason = "";
+
+      if (userInterest == "Personal") {
+        country = $("#personal-country").find(":selected").val();
+        city = $("#personal-city").find(":selected").val();
+        reason = $("#personal-reason").val();
+        formValues.push({
+          "country": country
+        }, {
+          "city": city
+        }, {
+          "reason": reason
+        });
+      } else {
+        country = $("#work-country").find(":selected").val();
+        city = $("#work-city").find(":selected").val();
+        jobRole = $("#work-role").val();
+        organisation = $("#work-organisation").val();
+        formValues.push({
+          "country": country
+        }, {
+          "city": city
+        }, {
+          "jobRole": jobRole
+        }, {
+          "organisation": organisation
+        });
+      }
+
+      console.log(formValues);
+      $("#interest-section").hide();
+      $("#activity-section, #activity-selection").show();
+    });
+    $("#back-button").on("click", function () {
+      $("#interest-section").show();
+      $("#activity-section, #activity-selection").hide();
+    });
+    $("#start-button").on("click", function () {
+      //window.location.href = $(this).data("route");
+      $.ajax({
+        type: 'POST',
+        url: $(this).data("route"),
+        data: {
+          "country_id": $(this).find(":selected").data("id")
+        },
+        beforeSend: function beforeSend() {},
+        error: function error(data) {},
+        success: function success(data) {
+          populateCities(e.target.id, data);
+        }
+      });
     });
     var countryDropDowns = $('#work-country, #personal-country');
     countryDropDowns.prepend('<option selected="true" disabled>Choose country</option>');
@@ -8346,11 +8431,7 @@ $(document).ready(function () {
         success: function success(data) {
           populateCities(e.target.id, data);
         }
-      }); //selectCity(e.target.id, $(this).find(":selected").data("id"));
-    });
-    $("#next-button").on("click", function () {
-      $("#interest-section").hide();
-      $("#activity-section, #activity-selection").show();
+      });
     });
   }
 

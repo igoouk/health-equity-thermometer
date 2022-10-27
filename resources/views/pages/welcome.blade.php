@@ -21,7 +21,7 @@ session(['user_id' => null]);
                     Explanation image
                 </div>
                 <div>
-                    <a id="start-quiz" href="{{ url('/quiz/1') }}">Start Quiz</a>
+                    <a id="start-quiz" href="{{ url('/demographics') }}">Start</a>
                 </div>
             </div>
         </div>

@@ -66,15 +66,18 @@ if (session()->get('verified') != "1") {
                     <div id="activity-section">
                         <form id="activity-selection">
                             <p>What do you want to do today?</p>
-                             <input type="radio" id="activity-test" name="activity" value="Test">
-                             <label for="activity-test">Test the health equity temperature of:</label><br>
-                               
-                             <input type="radio" id="activity-review" name="activity" value="Review">
-                             <label for="activity-review">Review your previous scores</label><br>
-
+                            
+                            @if(count($userResults)>0)  
+                                <input type="radio" id="activity-test" name="activity" value="Test">
+                                <label for="activity-test">Test the health equity temperature of:</label><br>
+                                <input type="radio" id="activity-review" name="activity" value="Review">
+                                <label for="activity-review">Review your previous scores</label><br>
+                            @else
+                                <div>Test the health equity temperature of:</div>
+                            @endif
                             
                         </form>
-                        <form id="activity-target">
+                        <form id="activity-target" @if(count($userResults)==0)  class="enabled" @endif  >
                                     <input type="radio" id="target-self" class="target-input" value="self" data-input-id="self-name" name="target">
                                     <label for="target-self">Yourself</label>
                                     <input class="target-text" type="text" id="self-name"><br>
@@ -85,8 +88,8 @@ if (session()->get('verified') != "1") {
                                     <label for="target-organisation">An organisation</label>
                                     <input class="target-text" type="text" id="organisation-name"><br>
                         </form>
-
-                        <div id="start-button">Start</div>
+                        <div id="back-button">Back</div>
+                        <div id="start-button" data-route="{{ 'save-demographics' }}">Start</div>
                     </div>
                     
  

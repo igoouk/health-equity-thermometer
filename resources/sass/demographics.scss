@@ -28,6 +28,9 @@
         }
 
         #activity-target{
+            &.enabled{
+                display: block;
+            }
             .target-text{
                 display: none;
             }
