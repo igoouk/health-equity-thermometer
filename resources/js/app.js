@@ -42,8 +42,10 @@ $(document).ready(function() {
 		var userActivity = "";
 		$('#interest-selection input').on('change', function() {
 			userInterest = $('input:checked', '#interest-selection').val();
+            formValues = removeItem("interest", formValues);
 			formValues.push({
-				"intereset": userInterest
+				"name": "interest",
+				"value": userInterest
 			});
 			if (userInterest == "Personal") {
 				$("#interest-options-personal").show();
@@ -52,11 +54,14 @@ $(document).ready(function() {
 				$("#interest-options-personal").hide();
 				$("#interest-options-work").show();
 			}
+            console.log(formValues)  ;
 		});
 		$('#activity-selection input').on('change', function() {
 			userActivity = $('input:checked', '#activity-selection').val();
+            formValues = removeItem("activity", formValues);
 			formValues.push({
-				"activity": userActivity
+				"name": "activity",
+				"value": userActivity
 			});
 			if (userActivity == "Test") {
 				$("#activity-target").show();
@@ -74,14 +79,19 @@ $(document).ready(function() {
 			var jobRole = "";
 			var organisation = "";
 			var reason = "";
+            formValues = removeItem("country", formValues);
+            formValues = removeItem("city", formValues);
+            formValues = removeItem("reason", formValues);
+            formValues = removeItem("jobRole", formValues);
+            formValues = removeItem("organisation", formValues);
 			if (userInterest == "Personal") {
 				country = $("#personal-country").find(":selected").val();
 				city = $("#personal-city").find(":selected").val();
 				reason = $("#personal-reason").val();
                 formValues.push(
-                    {"country":country},
-                    {"city" : city},
-                    {"reason" : reason}
+                    {"name": "country", "value":country},
+                    {"name": "city", "value" : city},
+                    {"name": "reason", "value" : reason}
                 );
 			} else {
                 country = $("#work-country").find(":selected").val();
@@ -89,14 +99,13 @@ $(document).ready(function() {
 				jobRole = $("#work-role").val();
 				organisation = $("#work-organisation").val();
                 formValues.push(
-                    {"country":country},
-                    {"city" : city},
-                    {"jobRole" : jobRole},
-                    {"organisation" : organisation}
+                    {"name": "country", "value":country},
+                    {"name": "city", "value": city},
+                    {"name": "jobRole", "value": jobRole},
+                    {"name": "organisation", "value": organisation}
                     
                 );
             }
-			console.log(formValues);
 			$("#interest-section").hide();
 			$("#activity-section, #activity-selection").show();
 		});
@@ -105,17 +114,24 @@ $(document).ready(function() {
 			$("#activity-section, #activity-selection").hide();
 		});
 		$("#start-button").on("click", function() {
-			//window.location.href = $(this).data("route");
+            var inputName = $('input:checked', '#activity-target').val();
+            formValues = removeItem(inputName, formValues);
+			formValues.push({"name" : inputName, "value": $('.target-text:visible').val()})
 			$.ajax({
 				type: 'POST',
 				url: $(this).data("route"),
 				data: {
-					"country_id": $(this).find(":selected").data("id")
+					"formValues":formValues
 				},
 				beforeSend: function() {},
 				error: function(data) {},
 				success: function(data) {
-					populateCities(e.target.id, data);
+                    if (data != "0") {
+                        window.location.href = data;
+                    }else{
+                        alert("Please fill all the fields.")
+                    }
+					
 				}
 			});
 		});
@@ -138,48 +154,55 @@ $(document).ready(function() {
 		});
 	}
 
-	function populateCities(field, cityArray) {
-		let cityDropdown;
-		if (field == "work-country") {
-			cityDropdown = $("#work-city");
-		} else {
-			cityDropdown = $("#personal-city");
-		}
-		cityDropdown.empty();
-		cityDropdown.show();
-		cityDropdown.append('<option selected="true" disabled>Choose city</option>');
-		cityDropdown.prop('selectedIndex', 0);
-		$.each(cityArray, function(key, entry) {
-			cityDropdown.append($('<option></option>').attr('value', entry.abbreviation).attr('city-id', entry.id).text(entry.name));
-		})
-	}
-
-	function checkAnswer(questionId) {
-		var selectedOptions = [];
-		$("input:checked").each(function() {
-			selectedOptions.push($(this).data("option-id"));
-		});
-		$("#information-popup").show();
-		$.ajax({
-			type: 'POST',
-			url: $("#submit-answer-button").data("route"),
-			data: {
-				"questionId": questionId,
-				"selectedOptions": selectedOptions
-			},
-			beforeSend: function() {},
-			error: function(data) {
-				console.log(data);
-			},
-			success: function(data) {
-				if (data == "1") {
-					$("#next-button").show();
-				} else {}
-			}
-		});
-	}
+	
 });
+function removeItem(itemName, array) {
+    const newArr = array.filter(object => {
+        return object.name !== itemName;
+      });
+    return newArr;
+}
 
+function populateCities(field, cityArray) {
+    let cityDropdown;
+    if (field == "work-country") {
+        cityDropdown = $("#work-city");
+    } else {
+        cityDropdown = $("#personal-city");
+    }
+    cityDropdown.empty();
+    cityDropdown.show();
+    cityDropdown.append('<option selected="true" disabled>Choose city</option>');
+    cityDropdown.prop('selectedIndex', 0);
+    $.each(cityArray, function(key, entry) {
+        cityDropdown.append($('<option></option>').attr('value', entry.abbreviation).attr('city-id', entry.id).text(entry.name));
+    })
+}
+
+function checkAnswer(questionId) {
+    var selectedOptions = [];
+    $("input:checked").each(function() {
+        selectedOptions.push($(this).data("option-id"));
+    });
+    $("#information-popup").show();
+    $.ajax({
+        type: 'POST',
+        url: $("#submit-answer-button").data("route"),
+        data: {
+            "questionId": questionId,
+            "selectedOptions": selectedOptions
+        },
+        beforeSend: function() {},
+        error: function(data) {
+            console.log(data);
+        },
+        success: function(data) {
+            if (data == "1") {
+                $("#next-button").show();
+            } else {}
+        }
+    });
+}
 function sendCode(email) {
 	$.ajax({
 		type: 'POST',

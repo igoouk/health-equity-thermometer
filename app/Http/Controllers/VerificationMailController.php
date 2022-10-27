@@ -49,12 +49,8 @@ class VerificationMailController extends Controller
         //if ($request->code == $mostRecentRequestedCode->code) {
         if (true) {
             session(['verified' => "1"]);
-            $previousResult = Result::where("user_id", session()->get('user_id'))->first();
-            if ($previousResult == null) {
-                return "/quiz/1";
-            }else{
-                return "/quiz/2";
-            }
+            return "/demographics";
+           
             
         }else{
             return "0";

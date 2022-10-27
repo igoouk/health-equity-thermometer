@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Result;
+use App\Models\UserSession;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -37,6 +38,10 @@ class QuestionController extends Controller
                     'selected_options' => session()->get('selectedOptions'),
                     'level' => ($request->questionId)-1
                 ]);
+  
+                $userSession = UserSession::where("user_id" , session()->get('user_id'))->orderByDesc('created_at')->get()->first();
+                $userSession->result_id = $result->id;
+                $userSession->save();
                 session(['selectedOptions' => null]);
             } catch (\Throwable $th) {
                 return $th;
