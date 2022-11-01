@@ -37,21 +37,21 @@ $nextQuestion = ($questionId != 6) ? $questionId + 1 : 6;
                     
                 
             </div>
-            @if ($questionId != 6)
-            <div id="submit-answer-button" data-route="{{url('check-answer')}}">Submit answer</div>
+            
+                <div id="submit-answer-button" data-route="{{url('check-answer')}}">Submit answer</div>
            
-            @else
-
-            @endif
+            
         </div>
-    @if ($questionId != 6)
+    
         <div id="information-popup" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             {{$question["information"]}}
+            @if ($questionId != 6)
             <div id="next-button" data-route="{{url('/quiz/')}}/<?php echo $nextQuestion ?>">Next question</div>
+            @else
+            <a href="{{url('/result/')}}" id="result-button" >Show my results</div>
+            @endif
         </div>
-    @else
-
-    @endif
+  
     </div>
 @endsection
 

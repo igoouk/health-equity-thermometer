@@ -28,11 +28,14 @@ Route::get('/quiz/{id}', function (Request $request, $id) {
 //})->middleware('verifiedUser')->name("quiz");
 })->name("quiz");
 
+Route::get('/result', function () {
+    return view('pages/result',['latestResult' => ResultController::getLatestResultPerUser()]);
+})->name("home");
 Route::get('/', function () {
     return view('pages/welcome');
 })->name("home");
 Route::get('/demographics', function () {
-    return view('pages/demographics', ['countries' => Country::all(), 'userResults' => ResultController::getResultPerUser()]);
+    return view('pages/demographics', ['countries' => Country::all(), 'userResults' => ResultController::getAllResultsPerUser()]);
 })->middleware('verifiedUser')->name("demographics");
 //})->name("demographics");
 

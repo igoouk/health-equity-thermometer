@@ -37,12 +37,13 @@ class UserController extends Controller
                 'user_id' => session()->get('user_id'),
                 'session_values' => json_encode($uservalues)
             ]);
-            $previousResult = Result::where("user_id", session()->get('user_id'))->first();
+            /*$previousResult = Result::where("user_id", session()->get('user_id'))->first();
             if ($previousResult == null) {
                 return "/quiz/1";
             }else{
                 return "/quiz/2";
-            }
+            }*/
+            return "/quiz/1";
         }
         
 

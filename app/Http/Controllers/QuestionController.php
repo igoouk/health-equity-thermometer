@@ -35,7 +35,7 @@ class QuestionController extends Controller
         $selectedOptionsString = json_encode($tempOptions);
         session(['selectedOptions' => $selectedOptionsString]);
         
-        if ($arraysAreEqual) {
+        if ($arraysAreEqual && $request->questionId != 6) {
             return "1";
         }else{
             try {
@@ -49,6 +49,7 @@ class QuestionController extends Controller
                 $userSession->result_id = $result->id;
                 $userSession->save();
                 session(['selectedOptions' => null]);
+               
             } catch (\Throwable $th) {
                 return $th;
             }

@@ -1,7 +1,6 @@
 <?php
 use App\Models\Result;
 
-
 ?>
 
 @extends('layouts.app', ['page' => __('User List'), 'pageSlug' => 'user-list'])
@@ -36,7 +35,14 @@ use App\Models\Result;
                   <a href="/userdetail/{{$user['id']}}">{{$user["email"]}}</a>
                 </td>
                 <td>
-                  {{Result::where('user_id', $user["id"])->get()}}
+                  @php
+                    $result = Result::where('user_id', $user['id'])->orderByDesc('created_at')->limit(1)->first();
+                  @endphp
+                  @if($result)
+                    {{$result->level}}
+                  @endif
+                  
+                  
                 </td>
                 
               </tr>

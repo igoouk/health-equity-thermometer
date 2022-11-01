@@ -83,8 +83,10 @@ class ResultController extends Controller
         //
     }
 
-
-    public static function getResultPerUser(){
+    public static function getLatestResultPerUser(){
+        return Result::where("user_id" , session()->get('user_id'))->orderByDesc('created_at')->limit(1)->first();
+    }
+    public static function getAllResultsPerUser(){
         return Result::where("user_id" , session()->get('user_id'))->get();
     }
 }

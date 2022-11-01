@@ -1,11 +1,23 @@
-<x-app-layout>
+
+@extends('layouts.app', ['page' => __('Result'), 'pageSlug' => 'result'])
+@section('header', 'Result Page')
+@section('content')
+<?php
+
+?>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
+            <div class="bg-white overflow-hidden sm:rounded-lg">
+                <div id="login-container">
+                    
+                </div>
+                <div class="p-6 bg-white border-gray-200" id="instruction-image">
+                    {{$latestResult}}
+                </div>
+                <div>
+                    
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

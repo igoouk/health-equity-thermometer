@@ -199,7 +199,7 @@ function checkAnswer(questionId) {
         success: function(data) {
             if (data == "1") {
                 $("#next-button").show();
-            } else {}
+            } 
         }
     });
 }
