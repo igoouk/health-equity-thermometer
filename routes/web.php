@@ -65,6 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('typography', ['as' => 'pages.typography', 'uses' => 'App\Http\Controllers\PageController@typography']);
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'App\Http\Controllers\PageController@upgrade']);
 		Route::get('userlist', ['as' => 'pages.user-list', 'uses' => 'App\Http\Controllers\PageController@userlist']);
+		Route::get('userdetail/{id}', ['as' => 'pages.user-detail', 'uses' => 'App\Http\Controllers\PageController@userdetail']);
 });
 
 Route::group(['middleware' => 'auth'], function () {

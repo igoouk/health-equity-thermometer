@@ -33,7 +33,7 @@ use App\Models\Result;
                     
               <tr>
                 <td>
-                  {{$user["email"]}}
+                  <a href="/userdetail/{{$user['id']}}">{{$user["email"]}}</a>
                 </td>
                 <td>
                   {{Result::where('user_id', $user["id"])->get()}}

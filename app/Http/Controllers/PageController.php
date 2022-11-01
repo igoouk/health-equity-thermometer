@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -84,5 +85,15 @@ class PageController extends Controller
     public function userlist()
     {
         return view('pages.user-list',['users' => User::all()]);
+    }
+
+    /**
+     * Display user details page
+     *
+     * @return \Illuminate\View\View
+     */
+    public function userdetail(Request $request, $id)
+    {
+        return view('pages.user-detail',['user' => User::find($id)]);
     }
 }

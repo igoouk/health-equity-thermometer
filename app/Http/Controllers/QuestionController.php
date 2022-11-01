@@ -21,21 +21,27 @@ class QuestionController extends Controller
     {
         $correctAnswer = explode(",", Question::where('id', $request->questionId)->first()->correct_answer);
         $arraysAreEqual = ($correctAnswer == $request->selectedOptions);
-        $previouslySelectedOptions = session()->get('selectedOptions');
+        $previouslySelectedOptions = json_decode(session()->get('selectedOptions'));
+        $selectedAnswerObject = json_encode(array("id"=>$request->questionId, "answers" => $request->selectedOptions));
+        $tempOptions = [];
         if ($previouslySelectedOptions) {
-            $tempOptions = strval(implode(",",$request->selectedOptions)).",". strval($previouslySelectedOptions);
-        }else{
-            $tempOptions = strval(implode(",",$request->selectedOptions));
+            $tempOptions = $previouslySelectedOptions; 
         }
+
+        array_push($tempOptions, $selectedAnswerObject);
         
-        session(['selectedOptions' => $tempOptions]);
+
+
+        $selectedOptionsString = json_encode($tempOptions);
+        session(['selectedOptions' => $selectedOptionsString]);
+        
         if ($arraysAreEqual) {
             return "1";
         }else{
             try {
                 $result = Result::create([
                     'user_id' => session()->get('user_id'),
-                    'selected_options' => session()->get('selectedOptions'),
+                    'selected_options' => $selectedOptionsString,
                     'level' => ($request->questionId)-1
                 ]);
   
