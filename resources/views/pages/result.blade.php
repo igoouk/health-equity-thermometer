@@ -12,7 +12,7 @@
                     
                 </div>
                 <div class="p-6 bg-white border-gray-200" id="instruction-image">
-                    {{$latestResult}}
+                    Your level: {{$latestResult->level}}
                 </div>
                 <div>
                     
