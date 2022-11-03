@@ -1,7 +1,7 @@
 # health-equity-thermometer
 
 A quiz application.
-User verification is via verification codes. User requests a code to their email, inputs the code again in the page to proceed to the quiz.
+User verification is via verification e-mail codes. User requests a code to their email, inputs the code again in the page to proceed to the quiz.
 Quiz works mostly on jQuery. All data including questions and their options are located in the db. 
 
 # Structure:
@@ -16,7 +16,7 @@ Admin template: Black Dashboard
 
 # Requirements:
 Composer
-npm  (version 16.13.2)   (If using nvm, use command "nvm use 16.13.2")
+npm  (version 16.13.2)   (If using nvm, download the verion and use command "nvm use 16.13.2")
 
 # Local installation:
 1)Clone the project to your local

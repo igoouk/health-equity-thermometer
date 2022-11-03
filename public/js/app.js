@@ -8293,7 +8293,8 @@ $(document).ready(function () {
     }
   });
 
-  if ($("#login-container").length > 0) {
+  if ($("#welcome-container").length > 0) {
+    setWelcomePage();
     setLoginPage();
   }
 
@@ -8306,161 +8307,168 @@ $(document).ready(function () {
   if ($("#demographics-container").length > 0) {
     setDemogprahicsPage();
   }
-
-  function setLoginPage() {
-    $("#send-code-button").on("click", function () {
-      sendCode($("#email-input").val());
-    });
-    $("#verify-code-button").on("click", function () {
-      verifyCode($("#code-input").val());
-    });
-  }
-
-  function setQuizPage() {
-    $("#submit-answer-button").on("click", function () {
-      checkAnswer($(".single-question").data("id"));
-    });
-    $("#next-button").on("click", function () {
-      window.location.href = $(this).data("route");
-    });
-  }
-
-  function setDemogprahicsPage() {
-    var formValues = [];
-    var userInterest = "";
-    var userActivity = "";
-    $('#interest-selection input').on('change', function () {
-      userInterest = $('input:checked', '#interest-selection').val();
-      formValues = removeItem("interest", formValues);
-      formValues.push({
-        "name": "interest",
-        "value": userInterest
-      });
-
-      if (userInterest == "Personal") {
-        $("#interest-options-personal").show();
-        $("#interest-options-work").hide();
-      } else {
-        $("#interest-options-personal").hide();
-        $("#interest-options-work").show();
-      }
-
-      console.log(formValues);
-    });
-    $('#activity-selection input').on('change', function () {
-      userActivity = $('input:checked', '#activity-selection').val();
-      formValues = removeItem("activity", formValues);
-      formValues.push({
-        "name": "activity",
-        "value": userActivity
-      });
-
-      if (userActivity == "Test") {
-        $("#activity-target").show();
-      } else {
-        $("#activity-target").hide();
-      }
-    });
-    $('#activity-target input').on('change', function () {
-      $(".target-text").hide();
-      $("#" + $('input:checked', '#activity-target').data("input-id")).show();
-    });
-    $("#next-button").on("click", function () {
-      var country = "";
-      var city = "";
-      var jobRole = "";
-      var organisation = "";
-      var reason = "";
-      formValues = removeItem("country", formValues);
-      formValues = removeItem("city", formValues);
-      formValues = removeItem("reason", formValues);
-      formValues = removeItem("jobRole", formValues);
-      formValues = removeItem("organisation", formValues);
-
-      if (userInterest == "Personal") {
-        country = $("#personal-country").find(":selected").val();
-        city = $("#personal-city").find(":selected").val();
-        reason = $("#personal-reason").val();
-        formValues.push({
-          "name": "country",
-          "value": country
-        }, {
-          "name": "city",
-          "value": city
-        }, {
-          "name": "reason",
-          "value": reason
-        });
-      } else {
-        country = $("#work-country").find(":selected").val();
-        city = $("#work-city").find(":selected").val();
-        jobRole = $("#work-role").val();
-        organisation = $("#work-organisation").val();
-        formValues.push({
-          "name": "country",
-          "value": country
-        }, {
-          "name": "city",
-          "value": city
-        }, {
-          "name": "jobRole",
-          "value": jobRole
-        }, {
-          "name": "organisation",
-          "value": organisation
-        });
-      }
-
-      $("#interest-section").hide();
-      $("#activity-section, #activity-selection").show();
-    });
-    $("#back-button").on("click", function () {
-      $("#interest-section").show();
-      $("#activity-section, #activity-selection").hide();
-    });
-    $("#start-button").on("click", function () {
-      var inputName = $('input:checked', '#activity-target').val();
-      formValues = removeItem(inputName, formValues);
-      formValues.push({
-        "name": inputName,
-        "value": $('.target-text:visible').val()
-      });
-      $.ajax({
-        type: 'POST',
-        url: $(this).data("route"),
-        data: {
-          "formValues": formValues
-        },
-        beforeSend: function beforeSend() {},
-        error: function error(data) {},
-        success: function success(data) {
-          if (data != "0") {
-            window.location.href = data;
-          } else {
-            alert("Please fill all the fields.");
-          }
-        }
-      });
-    });
-    var countryDropDowns = $('#work-country, #personal-country');
-    countryDropDowns.prepend('<option selected="true" disabled>Choose country</option>');
-    countryDropDowns.prop('selectedIndex', 0);
-    countryDropDowns.change(function (e) {
-      $.ajax({
-        type: 'POST',
-        url: $(this).data("route"),
-        data: {
-          "country_id": $(this).find(":selected").data("id")
-        },
-        beforeSend: function beforeSend() {},
-        error: function error(data) {},
-        success: function success(data) {
-          populateCities(e.target.id, data);
-        }
-      });
-    });
-  }
 });
+
+function setWelcomePage() {
+  $("#get-started-button").on("click", function () {
+    $("#welcome-container").fadeOut();
+    $("#login-container").fadeIn();
+  });
+}
+
+function setLoginPage() {
+  $("#send-code-button").on("click", function () {
+    sendCode($("#email-input").val());
+  });
+  $("#verify-code-button").on("click", function () {
+    verifyCode($("#code-input").val());
+  });
+}
+
+function setQuizPage() {
+  $("#submit-answer-button").on("click", function () {
+    checkAnswer($(".single-question").data("id"));
+  });
+  $("#next-button").on("click", function () {
+    window.location.href = $(this).data("route");
+  });
+}
+
+function setDemogprahicsPage() {
+  var formValues = [];
+  var userInterest = "";
+  var userActivity = "";
+  $('#interest-selection input').on('change', function () {
+    userInterest = $('input:checked', '#interest-selection').val();
+    formValues = removeItem("interest", formValues);
+    formValues.push({
+      "name": "interest",
+      "value": userInterest
+    });
+
+    if (userInterest == "Personal") {
+      $("#interest-options-personal").show();
+      $("#interest-options-work").hide();
+    } else {
+      $("#interest-options-personal").hide();
+      $("#interest-options-work").show();
+    }
+
+    console.log(formValues);
+  });
+  $('#activity-selection input').on('change', function () {
+    userActivity = $('input:checked', '#activity-selection').val();
+    formValues = removeItem("activity", formValues);
+    formValues.push({
+      "name": "activity",
+      "value": userActivity
+    });
+
+    if (userActivity == "Test") {
+      $("#activity-target").show();
+    } else {
+      $("#activity-target").hide();
+    }
+  });
+  $('#activity-target input').on('change', function () {
+    $(".target-text").hide();
+    $("#" + $('input:checked', '#activity-target').data("input-id")).show();
+  });
+  $("#next-button").on("click", function () {
+    var country = "";
+    var city = "";
+    var jobRole = "";
+    var organisation = "";
+    var reason = "";
+    formValues = removeItem("country", formValues);
+    formValues = removeItem("city", formValues);
+    formValues = removeItem("reason", formValues);
+    formValues = removeItem("jobRole", formValues);
+    formValues = removeItem("organisation", formValues);
+
+    if (userInterest == "Personal") {
+      country = $("#personal-country").find(":selected").val();
+      city = $("#personal-city").find(":selected").val();
+      reason = $("#personal-reason").val();
+      formValues.push({
+        "name": "country",
+        "value": country
+      }, {
+        "name": "city",
+        "value": city
+      }, {
+        "name": "reason",
+        "value": reason
+      });
+    } else {
+      country = $("#work-country").find(":selected").val();
+      city = $("#work-city").find(":selected").val();
+      jobRole = $("#work-role").val();
+      organisation = $("#work-organisation").val();
+      formValues.push({
+        "name": "country",
+        "value": country
+      }, {
+        "name": "city",
+        "value": city
+      }, {
+        "name": "jobRole",
+        "value": jobRole
+      }, {
+        "name": "organisation",
+        "value": organisation
+      });
+    }
+
+    $("#interest-section").hide();
+    $("#activity-section, #activity-selection").show();
+  });
+  $("#back-button").on("click", function () {
+    $("#interest-section").show();
+    $("#activity-section, #activity-selection").hide();
+  });
+  $("#start-button").on("click", function () {
+    var inputName = $('input:checked', '#activity-target').val();
+    formValues = removeItem(inputName, formValues);
+    formValues.push({
+      "name": inputName,
+      "value": $('.target-text:visible').val()
+    });
+    $.ajax({
+      type: 'POST',
+      url: $(this).data("route"),
+      data: {
+        "formValues": formValues
+      },
+      beforeSend: function beforeSend() {},
+      error: function error(data) {},
+      success: function success(data) {
+        if (data != "0") {
+          window.location.href = data;
+        } else {
+          alert("Please fill all the fields.");
+        }
+      }
+    });
+  });
+  var countryDropDowns = $('#work-country, #personal-country');
+  countryDropDowns.prepend('<option selected="true" disabled>Choose country</option>');
+  countryDropDowns.prop('selectedIndex', 0);
+  countryDropDowns.change(function (e) {
+    $.ajax({
+      type: 'POST',
+      url: $(this).data("route"),
+      data: {
+        "country_id": $(this).find(":selected").data("id")
+      },
+      beforeSend: function beforeSend() {},
+      error: function error(data) {},
+      success: function success(data) {
+        populateCities(e.target.id, data);
+      }
+    });
+  });
+}
 
 function removeItem(itemName, array) {
   var newArr = array.filter(function (object) {

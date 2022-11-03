@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Poppins');
 
 // Variables
 @import 'variables';
@@ -313,3 +313,38 @@ video{
     }
 }
  
+//Custom global additions
+.generic-container{
+    margin-left: auto;
+    max-width: 800px;
+    margin-right: auto;
+    flex-direction: column;
+    display: flex;
+}
+.container-header{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 58px;
+    line-height: 72px;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 50px;
+}
+
+.container-text{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #000000;
+}
+
+.btn-primary{
+    background-color: #722DDB !important;
+    border-radius: 16px;
+    color: #fff;
+    padding: 16px 30px 16px 30px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
