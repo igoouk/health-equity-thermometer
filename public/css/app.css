@@ -12034,16 +12034,25 @@ body,
   display: flex;
   flex-direction: column;
 }
+#result-container .container-header {
+  margin-bottom: 25px;
+}
 #result-container #result-content {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
+  justify-content: center;
 }
 #result-container #result-content #information-container {
-  width: 100%;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+@media only screen and (max-width: 600px) {
+  #result-container #result-content #information-container {
+    max-width: 100%;
+  }
 }
 #result-container #result-content #information-container .level-info {
   font-size: 1.8vh;
@@ -12052,18 +12061,31 @@ body,
   flex-direction: row;
   position: relative;
 }
+#result-container #result-content #information-container .level-info:nth-child(even).disabled .level-indicator {
+  background: rgb(129, 129, 129);
+}
+#result-container #result-content #information-container .level-info:nth-child(odd).disabled .level-indicator {
+  background: rgb(53, 53, 53);
+}
 #result-container #result-content #information-container .level-info.enabled:before {
   content: "";
   position: absolute;
-  border-left: 5px solid #f8f2f2;
+  border-left: 8px solid #f8f2f2;
   width: 100%;
   height: 100%;
   left: 3%;
+  box-shadow: -2px 0px 0px rgba(125, 124, 124, 0.75);
+}
+@media only screen and (max-width: 600px) {
+  #result-container #result-content #information-container .level-info.enabled:before {
+    border-left: 6px solid #f8f2f2;
+  }
 }
 #result-container #result-content #information-container .level-info .level-text {
-  width: 90%;
   padding: 18px;
   font-size: 18px;
+  width: 100%;
+  padding-right: 5px;
 }
 #result-container #result-content #information-container .level-info.level {
   color: black !important;
@@ -12072,12 +12094,7 @@ body,
   color: red;
 }
 #result-container #result-content #information-container .level-info.level--0.enabled:before {
-  content: "";
-  position: absolute;
-  border-left: 5px solid #f8f2f2;
-  width: 100%;
   height: 40%;
-  left: 3%;
 }
 #result-container #result-content #information-container .level-info.level--0 .level-indicator {
   background-color: red;
@@ -12133,12 +12150,6 @@ body,
   width: 8%;
   border-right: 3px solid #5C5C5C;
   border-left: 3px solid #5C5C5C;
-}
-#result-container #result-content #information-container .level-info .level-indicator .disabled:nth-child(n+1) {
-  background: rgb(170, 169, 170);
-}
-#result-container #result-content #information-container .level-info .level-indicator .disabled:nth-child(n+2) {
-  background: rgb(85, 84, 85);
 }
 
 @media only screen and (max-width: 600px) {
