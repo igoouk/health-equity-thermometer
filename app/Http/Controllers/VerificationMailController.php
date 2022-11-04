@@ -36,7 +36,7 @@ class VerificationMailController extends Controller
             'user_id' => $userFound->id,
             'code' => $tempCode,
         ]);
-        session(['user_id' => $userFound->id]);
+        session(['user-id' => $userFound->id]);
         $result = Mail::to($request->email)->send(new VerificationMail($verificationCode));
 
         echo $result;

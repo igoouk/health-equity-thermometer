@@ -11938,9 +11938,6 @@ select{
 .ease-in{
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
-#questions-container {
-  background-color: red;
-}
 #questions-container .single-question {
   display: none;
 }
@@ -11959,7 +11956,7 @@ select{
   top: 0;
   display: none;
   height: 100%;
-  background-color: red;
+  background-color: rgb(196, 196, 196);
 }
 #information-popup #next-button {
   display: none;
@@ -11967,6 +11964,7 @@ select{
 
 #login-container {
   display: none;
+  align-items: center;
 }
 #login-container #verify-code-button, #login-container #code-input {
   display: none;
@@ -11978,8 +11976,28 @@ select{
   display: block;
 }
 
-#demographics-container {
-  background-color: red;
+#send-code-container {
+  display: none;
+}
+
+#verify-code-container {
+  display: none;
+}
+#verify-code-container .container-text {
+  text-align: center;
+  max-width: 450px;
+  align-self: center;
+}
+#verify-code-container .input-container {
+  max-width: 450px;
+}
+#verify-code-container .input-container label {
+  align-self: left;
+}
+
+#demographics-container .container-header {
+  font-size: 38px;
+  line-height: 42px;
 }
 #demographics-container #interest-section #interest-options-work, #demographics-container #interest-section #interest-options-personal {
   display: none;
@@ -11997,6 +12015,138 @@ select{
   display: none;
 }
 
+html,
+body,
+.wrapper,
+.wrapper-full-page,
+.full-page,
+.content,
+.container,
+#result-container {
+  height: 100%;
+}
+
+.container {
+  position: relative;
+}
+
+#result-container {
+  display: flex;
+  flex-direction: column;
+}
+#result-container #result-content {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+#result-container #result-content #information-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+#result-container #result-content #information-container .level-info {
+  font-size: 1.8vh;
+  line-height: 2.5vh;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+#result-container #result-content #information-container .level-info.enabled:before {
+  content: "";
+  position: absolute;
+  border-left: 5px solid #f8f2f2;
+  width: 100%;
+  height: 100%;
+  left: 3%;
+}
+#result-container #result-content #information-container .level-info .level-text {
+  width: 90%;
+  padding: 18px;
+  font-size: 18px;
+}
+#result-container #result-content #information-container .level-info.level {
+  color: black !important;
+}
+#result-container #result-content #information-container .level-info.level--0 {
+  color: red;
+}
+#result-container #result-content #information-container .level-info.level--0.enabled:before {
+  content: "";
+  position: absolute;
+  border-left: 5px solid #f8f2f2;
+  width: 100%;
+  height: 40%;
+  left: 3%;
+}
+#result-container #result-content #information-container .level-info.level--0 .level-indicator {
+  background-color: red;
+  border-radius: 40px 40px 40px 40px;
+  width: 12%;
+  border: 3px solid #5C5C5C;
+  top: -13%;
+  position: relative;
+  height: 0;
+  padding-bottom: 10%;
+  left: -2%;
+  z-index: -1;
+}
+#result-container #result-content #information-container .level-info.level--1 {
+  color: red;
+}
+#result-container #result-content #information-container .level-info.level--1 .level-indicator {
+  background-color: red;
+}
+#result-container #result-content #information-container .level-info.level--2 {
+  color: orange;
+}
+#result-container #result-content #information-container .level-info.level--2 .level-indicator {
+  background-color: orange;
+}
+#result-container #result-content #information-container .level-info.level--3 {
+  color: yellow;
+}
+#result-container #result-content #information-container .level-info.level--3 .level-indicator {
+  background-color: yellow;
+}
+#result-container #result-content #information-container .level-info.level--4 {
+  color: green;
+}
+#result-container #result-content #information-container .level-info.level--4 .level-indicator {
+  background-color: green;
+}
+#result-container #result-content #information-container .level-info.level--5 {
+  color: blue;
+}
+#result-container #result-content #information-container .level-info.level--5 .level-indicator {
+  background-color: blue;
+}
+#result-container #result-content #information-container .level-info.level--6 {
+  color: purple;
+}
+#result-container #result-content #information-container .level-info.level--6 .level-indicator {
+  background-color: purple;
+  border-top: 3px solid #5C5C5C;
+  border-radius: 40px 40px 0px 0px;
+}
+#result-container #result-content #information-container .level-info .level-indicator {
+  width: 8%;
+  border-right: 3px solid #5C5C5C;
+  border-left: 3px solid #5C5C5C;
+}
+#result-container #result-content #information-container .level-info .level-indicator .disabled:nth-child(n+1) {
+  background: rgb(170, 169, 170);
+}
+#result-container #result-content #information-container .level-info .level-indicator .disabled:nth-child(n+2) {
+  background: rgb(85, 84, 85);
+}
+
+@media only screen and (max-width: 600px) {
+  .container-header {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
@@ -12361,6 +12511,8 @@ video {
   margin-right: auto;
   flex-direction: column;
   display: flex;
+  min-height: 500px;
+  margin-bottom: 150px;
 }
 
 .container-header {
@@ -12379,16 +12531,44 @@ video {
   font-size: 16px;
   line-height: 22px;
   color: #000000;
+  margin-bottom: 60px;
 }
 
-.btn-primary {
+.button {
   background-color: #722DDB !important;
   border-radius: 16px;
   color: #fff;
   padding: 16px 30px 16px 30px;
-  margin-bottom: 50px;
   margin-left: auto;
   margin-right: auto;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #9871d1 !important;
+}
+.button.disable {
+  background-color: #9871d1 !important;
+}
+
+#footer-container {
+  align-items: center;
+  min-height: 50px;
+}
+#footer-container img {
+  max-width: 325px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  align-self: center;
+}
+
+input[type=text] {
+  border-radius: 10px;
+  border-color: #d2d2d2;
+  margin-bottom: 25px;
 }
 
 .hover\:border-gray-300:hover{

@@ -1,8 +1,5 @@
 #questions-container{
-    background-color: red;
-
-
-    .single-question{
+  .single-question{
         display: none;
 
         &.enabled{
@@ -22,7 +19,7 @@
     top: 0;
     display: none;
     height: 100%;
-    background-color: red;
+    background-color: rgb(196, 196, 196);
     #next-button{
         display: none;
     }

@@ -19,42 +19,48 @@ class QuestionController extends Controller
      */
     public function checkAnswer(Request $request)
     {
-        $correctAnswer = explode(",", Question::where('id', $request->questionId)->first()->correct_answer);
-        $arraysAreEqual = ($correctAnswer == $request->selectedOptions);
-        $previouslySelectedOptions = json_decode(session()->get('selectedOptions'));
-        $selectedAnswerObject = json_encode(array("id"=>$request->questionId, "answers" => $request->selectedOptions));
-        $tempOptions = [];
-        if ($previouslySelectedOptions) {
-            $tempOptions = $previouslySelectedOptions; 
-        }
+        if(session()->get('quiz-completed') != true){
 
-        array_push($tempOptions, $selectedAnswerObject);
-        
-
-
-        $selectedOptionsString = json_encode($tempOptions);
-        session(['selectedOptions' => $selectedOptionsString]);
-        
-        if ($arraysAreEqual && $request->questionId != 6) {
-            return "1";
-        }else{
-            try {
-                $result = Result::create([
-                    'user_id' => session()->get('user_id'),
-                    'selected_options' => $selectedOptionsString,
-                    'level' => ($request->questionId)-1
-                ]);
-  
-                $userSession = UserSession::where("user_id" , session()->get('user_id'))->orderByDesc('created_at')->get()->first();
-                $userSession->result_id = $result->id;
-                $userSession->save();
-                session(['selectedOptions' => null]);
-               
-            } catch (\Throwable $th) {
-                return $th;
+            $correctAnswer = explode(",", Question::where('id', $request->questionId)->first()->correct_answer);
+            $arraysAreEqual = ($correctAnswer == $request->selectedOptions);
+            $previouslySelectedOptions = json_decode(session()->get('selected-options'));
+            $selectedAnswerObject = json_encode(array("id"=>$request->questionId, "answers" => $request->selectedOptions));
+            $tempOptions = [];
+            if ($previouslySelectedOptions) {
+                $tempOptions = $previouslySelectedOptions; 
             }
-            return "1";
-        }
+
+            array_push($tempOptions, $selectedAnswerObject);
+            
+
+
+            $selectedOptionsString = json_encode($tempOptions);
+            session(['selected-options' => $selectedOptionsString]);
+            
+            if ($arraysAreEqual && $request->questionId != 6) {
+                return "1";
+            }else{
+                try {
+                    $result = Result::create([
+                        'user_id' => session()->get('user_id'),
+                        'selected_options' => $selectedOptionsString,
+                        'level' => ($request->questionId)-1
+                    ]);
+    
+                    $userSession = UserSession::where("user_id" , session()->get('user_id'))->orderByDesc('created_at')->get()->first();
+                    $userSession->result_id = $result->id;
+                    $userSession->save();
+                    session(['selected-options' => null]);
+                    session(['quiz-completed' => true]);
+                
+                } catch (\Throwable $th) {
+                    return $th;
+                }
+                return "1";
+            }
+    }else{
+        return "1";
+    }
         
     }
     /**

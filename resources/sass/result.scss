@@ -1,0 +1,153 @@
+html, 
+body,
+.wrapper,
+.wrapper-full-page,
+.full-page,
+.content,
+.container,
+#result-container {
+    height: 100%;
+}
+.container{
+    position: relative;
+}
+#result-container{
+    display: flex;
+    flex-direction: column;
+    #result-content{
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+       
+        #information-container{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            .level-info{
+                font-size: 1.8vh;
+                line-height: 2.5vh;
+                display: flex;
+                flex-direction: row;
+                position: relative;
+               
+                &.enabled{
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        border-left: 5px solid #f8f2f2;
+                        width: 100%;
+                        height: 100%;
+                        left: 3%;
+                      }
+                }
+                .level-text{
+                    width: 90%;
+                    padding: 18px;
+                    font-size: 18px;
+                }
+                
+                &.level{
+                    color: black !important;
+                }
+                &.level{
+                    
+                    &--0{
+                        &.enabled{
+                            &:before {
+                                content: "";
+                                position: absolute;
+                                border-left: 5px solid #f8f2f2;
+                                width: 100%;
+                                height: 40%;
+                                left: 3%;
+                              }
+                        }
+                        color: red;
+                        .level-indicator{
+                            background-color: red;
+                            border-radius: 40px 40px 40px 40px;
+                            width: 12%;
+                            border: 3px solid #5C5C5C;
+                            top: -13%;
+                            position: relative;
+                            height: 0;
+                            padding-bottom: 10%;
+                            left: -2%;
+                            z-index: -1;
+                        }
+                    }
+                    &--1{
+                        color: red;
+                        .level-indicator{
+                            background-color: red;
+                        }
+                    }
+                    &--2{
+                        color: orange;
+                        .level-indicator{
+                            background-color: orange;
+                        }
+                    }
+                    &--3{
+                        color: yellow;
+                        .level-indicator{
+                            background-color: yellow;
+                        }
+                    }
+                    &--4{
+                        color: green;
+                        .level-indicator{
+                            background-color: green;
+                        }
+                    }
+                    &--5{
+                        color: blue;
+                        .level-indicator{
+                            background-color: blue;
+                        }
+                    }
+                    &--6{
+                        color: purple; 
+                        
+                        .level-indicator{
+                            background-color: purple;
+                            border-top: 3px solid #5C5C5C;
+                            border-radius: 40px 40px 0px 0px;  
+                        }
+                    }
+                }
+                .level-indicator{
+                    width: 8%;                    
+                    border-right: 3px solid #5C5C5C;
+                    border-left: 3px solid #5C5C5C;
+                    .disabled{
+                        &:nth-child(n+1)
+                        {
+                            background:rgb(170, 169, 170);
+                        }
+                        &:nth-child(n+2)
+                        {
+                            background:rgb(85, 84, 85);
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+
+   
+
+    
+}
+
+@media only screen and (max-width: 600px) {
+        
+    .container-header{
+        font-size: 24px !important;
+        line-height: 28px !important;
+    }
+    
+  
+}

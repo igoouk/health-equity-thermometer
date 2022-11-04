@@ -32,6 +32,9 @@ Route::get('/result', function () {
     return view('pages/result',['latestResult' => ResultController::getLatestResultPerUser()]);
 })->name("home");
 Route::get('/', function () {
+	session(['selected-options' => null]);
+	session(['user-id' => null]);
+	session(['quiz-completed' => null]);
     return view('pages/welcome');
 })->name("home");
 Route::get('/demographics', function () {

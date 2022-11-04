@@ -1,5 +1,6 @@
 #login-container{
     display: none;
+    align-items: center;
 
     #verify-code-button, #code-input{
         display: none;
@@ -9,6 +10,26 @@
 
         &.enabled{
             display: block;
+        }
+    }
+}
+
+#send-code-container{
+    display: none;
+    
+}
+
+#verify-code-container{
+    display: none;
+    .container-text{
+        text-align: center;
+        max-width: 450px;
+        align-self: center;
+    }
+    .input-container{
+        max-width: 450px;
+        label{
+            align-self: left;
         }
     }
 }

@@ -8311,8 +8311,8 @@ $(document).ready(function () {
 
 function setWelcomePage() {
   $("#get-started-button").on("click", function () {
-    $("#welcome-container").fadeOut();
-    $("#login-container").fadeIn();
+    $("#welcome-container").hide();
+    $("#send-code-container").css("display", "flex");
   });
 }
 
@@ -8528,16 +8528,16 @@ function sendCode(email) {
       "email": email
     },
     beforeSend: function beforeSend() {
-      $("#send-code-button").hide();
+      $("#send-code-button").addClass("disable");
+      $("#send-code-button").attr("disabled", true);
       $("#email-input").append("<h2>Please wait..</h2>");
     },
     error: function error(data) {
       console.log(data);
     },
     success: function success(data) {
-      $("#verify-code-button").show();
-      $("#code-input").show();
-      $("#email-input").hide();
+      $("#send-code-container").hide();
+      $("#verify-code-container").css("display", "flex");
     }
   });
 }
