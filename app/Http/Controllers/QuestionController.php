@@ -42,12 +42,12 @@ class QuestionController extends Controller
             }else{
                 try {
                     $result = Result::create([
-                        'user_id' => session()->get('user_id'),
+                        'user_id' => session()->get('user-id'),
                         'selected_options' => $selectedOptionsString,
                         'level' => ($request->questionId)-1
                     ]);
     
-                    $userSession = UserSession::where("user_id" , session()->get('user_id'))->orderByDesc('created_at')->get()->first();
+                    $userSession = UserSession::where("user_id" , session()->get('user-id'))->orderByDesc('created_at')->get()->first();
                     $userSession->result_id = $result->id;
                     $userSession->save();
                     session(['selected-options' => null]);

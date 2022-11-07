@@ -18,7 +18,7 @@ class CheckIfInitialAttempt
     public function handle(Request $request, Closure $next)
     {
 
-        $previousResult = Result::where("user_id", session()->get('user_id'))->first();
+        $previousResult = Result::where("user_id", session()->get('user-id'))->first();
 
         if($request->id == 1 && $previousResult != null) {
             return redirect(url('/quiz/2'));

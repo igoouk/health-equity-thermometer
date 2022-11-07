@@ -34,10 +34,10 @@ class UserController extends Controller
 
         if ($valid != "0") {
             $userSession = UserSession::create([
-                'user_id' => session()->get('user_id'),
+                'user_id' => session()->get('user-id'),
                 'session_values' => json_encode($uservalues)
             ]);
-            /*$previousResult = Result::where("user_id", session()->get('user_id'))->first();
+            /*$previousResult = Result::where("user_id", session()->get('user-id'))->first();
             if ($previousResult == null) {
                 return "/quiz/1";
             }else{

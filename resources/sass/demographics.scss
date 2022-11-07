@@ -5,6 +5,9 @@
         line-height: 42px;
     }
     #interest-section{
+        #interest-selection{
+            margin-bottom: 20px;
+        }
         #interest-form{
             p{
                 
@@ -19,6 +22,7 @@
         }
 
         #next-button{
+            margin-top: 20px;
             //display: none;
         }
     }
@@ -28,13 +32,25 @@
         #activity-target,#activity-selection{
             display: none;
         }
-
+        #activity-button-container{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        
         #activity-target{
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-bottom: 20px;
             &.enabled{
                 display: block;
             }
             .target-text{
                 display: none;
+            }
+            label{
+                margin-bottom: 20px;
             }
         }
     }

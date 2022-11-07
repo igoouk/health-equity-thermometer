@@ -22,9 +22,9 @@ if (session()->get('verified') != "1") {
             <div class="container-header">Are you interested in the Health Equity Thermometer and Screening tool as part of your work?</div>
             <form id="interest-selection">
                 
-                    <input type="radio" id="interest-work" name="interest" value="Work">
+                    <input type="radio" class="radio-input" id="interest-work" name="interest" value="Work">
                     <label for="interest-work">Yes</label><br>
-                    <input type="radio" id="interest-personal" name="interest" value="Personal">
+                    <input type="radio" class="radio-input" id="interest-personal" name="interest" value="Personal">
                     <label for="interest-personal">No, just personal interest</label><br>
 
                 
@@ -52,7 +52,7 @@ if (session()->get('verified') != "1") {
                         <option name="{{$country->name}}" data-id="{{$country->id}}">{{$country->name}}</option>
                     @endforeach
                 </select><br>
-                <select  id="personal-city"><option>Please select a country first</option></select><br>
+                <select id="personal-city"><option>Please select a country first</option></select><br>
                 <label for="personal-reason">My interest in this is because:</label><br>
                 <input type="text" id="personal-reason"><br>
             </div>
@@ -64,12 +64,12 @@ if (session()->get('verified') != "1") {
 
         <div id="activity-section" class="generic-container">
             <form id="activity-selection">
-                <p>What do you want to do today?</p>
+                <p class="container-header">What do you want to do today?</p>
                 
                 @if(count($userResults)>0)  
-                    <input type="radio" id="activity-test" name="activity" value="Test">
+                    <input type="radio" class="radio-input" id="activity-test" name="activity" value="Test">
                     <label for="activity-test">Test the health equity temperature of:</label><br>
-                    <input type="radio" id="activity-review" name="activity" value="Review">
+                    <input type="radio" class="radio-input" id="activity-review" name="activity" value="Review">
                     <label for="activity-review">Review your previous scores</label><br>
                 @else
                     <div>Test the health equity temperature of:</div>
@@ -77,18 +77,20 @@ if (session()->get('verified') != "1") {
                 
             </form>
             <form id="activity-target" @if(count($userResults)==0)  class="enabled" @endif  >
-                        <input type="radio" id="target-self" class="target-input" value="self" data-input-id="self-name" name="target">
+                        <input type="radio" class="radio-input" id="target-self" class="target-input" value="self" data-input-id="self-name" name="target">
                         <label for="target-self">Yourself</label>
                         <input class="target-text" type="text" id="self-name"><br>
-                        <input type="radio" id="target-project" class="target-input" value="project" data-input-id="project-name" name="target">
+                        <input type="radio" class="radio-input" id="target-project" class="target-input" value="project" data-input-id="project-name" name="target">
                         <label for="target-project">A specific project team</label>
                         <input class="target-text" type="text" id="project-name"><br>
-                        <input type="radio" id="target-organisation" class="target-input" value="organisation" data-input-id="organisation-name" name="target">
+                        <input type="radio" class="radio-input" id="target-organisation" class="target-input" value="organisation" data-input-id="organisation-name" name="target">
                         <label for="target-organisation">An organisation</label>
                         <input class="target-text" type="text" id="organisation-name"><br>
             </form>
-            <button id="back-button" class="button">Back</button>
-            <button id="start-button" data-route="{{ 'save-demographics' }}" class="button">Start</button>
+            <div id="activity-button-container">
+                <button id="back-button" class="button">Back</button>
+                <button id="start-button" data-route="{{ 'save-demographics' }}" class="button">Start</button>
+            </div>
         </div>
         
 

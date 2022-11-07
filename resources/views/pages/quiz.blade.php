@@ -25,7 +25,7 @@ $nextQuestion = ($questionId != 6) ? $questionId + 1 : 6;
                         </div>
                         <div class="options-container">
                             @foreach ($question->options as $option)
-                                <input type="checkbox" data-option-id="{{$option['id']}}">{{$option["text"]}} - {{$option["id"]}}</input>
+                                <input type="checkbox" class="checkbox-input" data-option-id="{{$option['id']}}">{{$option["text"]}} - {{$option["id"]}}</input>
                             @endforeach
                         </div>
                         <div class="question-information">
