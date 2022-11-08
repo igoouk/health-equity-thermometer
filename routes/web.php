@@ -24,7 +24,7 @@ require __DIR__.'/auth.php';
 */
 
 Route::get('/quiz/{id}', function (Request $request, $id) {
-    return view('pages/quiz', ['question' => Question::find($id), 'questionId' => $id]);
+    return view('pages/quiz', ['question' => Question::getQuestion($id), 'questionId' => $id]);
 //})->middleware('verifiedUser')->name("quiz");
 })->name("quiz");
 

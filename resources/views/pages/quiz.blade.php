@@ -6,6 +6,17 @@ if (session()->get('verified') != "1") {
  }
 
 $nextQuestion = ($questionId != 6) ? $questionId + 1 : 6; 
+$linkedQuestion = null;
+if (is_array($question)) {
+    $linkedQuestion = $question[1];
+    $question = $question[0];
+    $nextQuestion ++;
+}
+
+$type = $question->type;
+if ($type == null) {
+    $type = "checkbox";
+}
 ?>
 
 @section('header', 'Quiz page')
@@ -13,42 +24,52 @@ $nextQuestion = ($questionId != 6) ? $questionId + 1 : 6;
 @section('content')
     <div class="py-12" id="quiz-container">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden sm:rounded-lg object-center" id="questions-container">
+            <div class="generic-container" id="questions-container">
                 
                     
-                    <div class="single-question @once enabled @endonce" data-id="{{$questionId}}">
-                        <div class="p-6 bg-white border-gray-200" id="question-text">
-                            Quiz here!
+                    <div class="single-question @once enabled @endonce main-question" data-id="{{$questionId}}" >
+                        <div class="p-6 bg-white border-gray-200" id="question-text" data-id="{{$questionId}}">
+                            {{$question->text}}
                         </div>
                         <div class="p-6 bg-white border-gray-200" id="question-image">
                             <img src="{{ $question['image_url'] }}">
                         </div>
                         <div class="options-container">
                             @foreach ($question->options as $option)
-                                <input type="checkbox" class="checkbox-input" data-option-id="{{$option['id']}}">{{$option["text"]}} - {{$option["id"]}}</input>
+                                <input type="{{$type}}" class="{{$type}}-input" data-question-id="{{$questionId}}" data-option-id="{{$option['id']}}" name="question-options">{{$option["text"]}} - {{$option["id"]}}</input>
                             @endforeach
                         </div>
-                        <div class="question-information">
+                    </div>
+                    @if ($linkedQuestion != null)
+                        <div class="single-question linked-question" data-id="{{$linkedQuestion->id}}" >
+                            <div class="p-6 bg-white border-gray-200" id="question-text" data-id="{{$linkedQuestion->id}}">
+                                {{$linkedQuestion->text}}
+                            </div>
+                            <div class="p-6 bg-white border-gray-200" id="question-image">
+                                <img src="{{ $linkedQuestion['image_url'] }}">
+                            </div>
+                            <div class="options-container">
+                                @foreach ($linkedQuestion->options as $option)
+                                    <input type="{{$type}}" class="{{$type}}-input" data-question-id="{{$linkedQuestion->id}}" data-option-id="{{$option['id']}}" name="linked-question-options">{{$option["text"]}} - {{$option["id"]}}</input>
+                                @endforeach
+                            </div>
                             
                         </div>
-                    </div>
-
- 
-                    
-                
+                    @endif
+                    <button id="submit-answer-button" data-route="{{url('check-answer')}}" class="button">Submit answer</button>  
             </div>
             
-                <div id="submit-answer-button" data-route="{{url('check-answer')}}">Submit answer</div>
+                
            
             
         </div>
     
         <div id="information-popup" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            {{$question["information"]}}
+            <div id="information-text">{!! $question["information"] !!}</div>
             @if ($questionId != 6)
-            <div id="next-button" data-route="{{url('/quiz/')}}/<?php echo $nextQuestion ?>">Next question</div>
+            <button id="next-button" data-route="{{url('/quiz/')}}/<?php echo $nextQuestion ?>" class="button">Next question</button>
             @else
-            <a href="{{url('/result/')}}" id="result-button" >Show my results</div>
+            <button data-route="{{url('/result/')}}" id="result-button" class="button">Show my results</button>
             @endif
         </div>
   

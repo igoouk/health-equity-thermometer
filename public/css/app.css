@@ -11362,9 +11362,6 @@ select{
 .z-50{
   z-index: 50;
 }
-.float-right{
-  float: right;
-}
 .float-left{
   float: left;
 }
@@ -11679,10 +11676,6 @@ select{
 .fill-current{
   fill: currentColor;
 }
-.object-center{
-  -o-object-position: center;
-     object-position: center;
-}
 .p-6{
   padding: 1.5rem;
 }
@@ -11940,6 +11933,7 @@ select{
 }
 #questions-container .single-question {
   display: none;
+  margin-bottom: 20px;
 }
 #questions-container .single-question.enabled {
   display: block;
@@ -11947,16 +11941,53 @@ select{
 #questions-container .single-question .question-information {
   display: none;
 }
+#questions-container .single-question #question-text {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 40px;
+  text-align: center;
+}
+#questions-container .single-question #question-text[data-id="1"] {
+  color: #DD2727;
+}
+#questions-container .single-question #question-text[data-id="2"] {
+  color: #FFAD0D;
+}
+#questions-container .single-question #question-text[data-id="3"] {
+  color: #ECCE33;
+}
+#questions-container .single-question #question-text[data-id="4"] {
+  color: #0BB07B;
+}
+#questions-container .single-question #question-text[data-id="5"] {
+  color: #722DDB;
+}
+#questions-container .single-question #question-text[data-id="6"] {
+  color: #0020d3;
+}
+#questions-container .single-question .options-container {
+  text-align: center;
+}
 
 #information-popup {
   position: absolute;
-  text-align: center;
-  width: 100%;
+  text-align: justify;
+  width: 95%;
   z-index: 9999;
   top: 0;
   display: none;
-  height: 100%;
-  background-color: rgb(196, 196, 196);
+  height: 85%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  top: 4%;
+  padding: 20px;
+  border-color: rgba(171, 171, 171, 0.7019607843);
+  border-width: 1px;
+  box-shadow: 0px 0px 7px -1px rgb(153, 153, 153);
+}
+#information-popup #information-text {
+  margin-bottom: 20px;
 }
 #information-popup #next-button {
   display: none;
@@ -12634,7 +12665,7 @@ select {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  background-color: #000;
+  background-color: #fff;
   margin: 0;
   font: inherit;
   color: #722DDB;
@@ -12642,6 +12673,11 @@ select {
   height: 1.15em;
   border: 0.15em solid #E0D5F2;
   border-radius: 25%;
+}
+
+a {
+  color: #722DDB;
+  text-decoration: underline;
 }
 
 .hover\:border-gray-300:hover{

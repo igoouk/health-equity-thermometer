@@ -15,5 +15,17 @@ class Question extends Model
         return $this->hasMany('App\Models\QuestionOption');
     }
 
+    public static function getQuestion(int $id)
+    {
+        $question = Question::find($id);
+
+        if ($question->linked_question != null) {
+            $linked_question = Question::find($question->linked_question);
+            $questions = [$question, $linked_question];
+            return $questions;
+        }
+        return $question;
+    }
+
 
 }

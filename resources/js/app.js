@@ -45,9 +45,20 @@ function setQuizPage() {
 	$("#submit-answer-button").on("click", function() {
 		checkAnswer($(".single-question").data("id"));
 	});
-	$("#next-button").on("click", function() {
+	$("#next-button,#result-button").on("click", function() {
 		window.location.href = $(this).data("route");
 	});
+
+	if ($(".linked-question").length > 0 ) {
+		$("#submit-answer-button").hide();
+		$('.linked-question input').on('change', function() {
+			$("#submit-answer-button").show();
+		});
+		$('.main-question input').on('change', function() {
+			$(".linked-question").show();
+		});
+	}
+
 }
 
 function setDemogprahicsPage() {
@@ -191,16 +202,22 @@ function populateCities(field, cityArray) {
 }
 
 function checkAnswer(questionId) {
+    var questionIDs = [];
     var selectedOptions = [];
+
+	
+	$(".single-question").each(function() {
+		questionIDs.push($(this).data("id"))
+    });
     $("input:checked").each(function() {
-        selectedOptions.push($(this).data("option-id"));
+        selectedOptions.push({"id":$(this).data("question-id"), "option":$(this).data("option-id")});
     });
     $("#information-popup").show();
     $.ajax({
         type: 'POST',
         url: $("#submit-answer-button").data("route"),
         data: {
-            "questionId": questionId,
+            "questionIds": questionIDs,
             "selectedOptions": selectedOptions
         },
         beforeSend: function() {},
@@ -209,7 +226,7 @@ function checkAnswer(questionId) {
         },
         success: function(data) {
             if (data == "1") {
-                $("#next-button").show();
+                $("#next-button").css("display","flex");
             } 
         }
     });

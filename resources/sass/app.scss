@@ -403,7 +403,7 @@ select{
 }
 .checkbox-input{
     appearance: none;
-    background-color: #000;
+    background-color: #fff;
     margin: 0;
     font: inherit;
     color: #722DDB;
@@ -411,4 +411,9 @@ select{
     height: 1.15em;
     border: 0.15em solid #E0D5F2;
     border-radius: 25%;
+}
+
+a{
+    color:  #722DDB;
+    text-decoration: underline;
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Question;
@@ -10,7 +9,6 @@ use Illuminate\Http\Request;
 class QuestionController extends Controller
 {
 
-
     /**
      * Send verification code to user
      *
@@ -19,49 +17,82 @@ class QuestionController extends Controller
      */
     public function checkAnswer(Request $request)
     {
-        if(session()->get('quiz-completed') != true){
+        if (session()->get('quiz-completed') != true)
+        {
 
-            $correctAnswer = explode(",", Question::where('id', $request->questionId)->first()->correct_answer);
-            $arraysAreEqual = ($correctAnswer == $request->selectedOptions);
-            $previouslySelectedOptions = json_decode(session()->get('selected-options'));
-            $selectedAnswerObject = json_encode(array("id"=>$request->questionId, "answers" => $request->selectedOptions));
-            $tempOptions = [];
-            if ($previouslySelectedOptions) {
-                $tempOptions = $previouslySelectedOptions; 
-            }
+            $arraysAreEqual = false;
 
-            array_push($tempOptions, $selectedAnswerObject);
-            
+            $questionCount = 0;
+            foreach ($request->questionIds as $key => $questionID)
+            {
+                $correctAnswer = explode(",", Question::where('id', $questionID)->first()
+                    ->correct_answer);
+                $selectedOptions = [];
+                foreach ($request->selectedOptions as $key => $option)
+                {
+                    if ($option["id"] == $questionID)
+                    {
+                        array_push($selectedOptions, $option["option"]);
+                    }
 
-
-            $selectedOptionsString = json_encode($tempOptions);
-            session(['selected-options' => $selectedOptionsString]);
-            
-            if ($arraysAreEqual && $request->questionId != 6) {
-                return "1";
-            }else{
-                try {
-                    $result = Result::create([
-                        'user_id' => session()->get('user-id'),
-                        'selected_options' => $selectedOptionsString,
-                        'level' => ($request->questionId)-1
-                    ]);
-    
-                    $userSession = UserSession::where("user_id" , session()->get('user-id'))->orderByDesc('created_at')->get()->first();
-                    $userSession->result_id = $result->id;
-                    $userSession->save();
-                    session(['selected-options' => null]);
-                    session(['quiz-completed' => true]);
-                
-                } catch (\Throwable $th) {
-                    return $th;
                 }
-                return "1";
+
+                $arraysAreEqual = !array_diff($correctAnswer, $selectedOptions);
+                $previouslySelectedOptions = json_decode(session()->get('selected-options'));
+                $selectedAnswerObject = json_encode(array(
+                    "id" => $questionID,
+                    "answers" => array_values($selectedOptions)
+                ));
+                $tempOptions = [];
+                if ($previouslySelectedOptions)
+                {
+                    $tempOptions = $previouslySelectedOptions;
+                }
+
+                array_push($tempOptions, $selectedAnswerObject);
+
+                $selectedOptionsString = json_encode($tempOptions);
+                session(['selected-options' => $selectedOptionsString]);
+                $questionCount++;
+
+                if ($arraysAreEqual && $questionID != 7)
+                {
+                    if ($questionCount == count($request->questionIds))
+                    {
+                        return "1";
+                    }
+
+                }
+                else
+                {
+                    try
+                    {
+                        $result = Result::create(['user_id' => session()->get('user-id') , 'selected_options' => $selectedOptionsString, 'level' => $questionID - 1]);
+
+                        $userSession = UserSession::where("user_id", session()->get('user-id'))
+                            ->orderByDesc('created_at')
+                            ->get()
+                            ->first();
+                        $userSession->result_id = $result->id;
+                        $userSession->save();
+                        session(['selected-options' => null]);
+                        session(['quiz-completed' => true]);
+
+                    }
+                    catch(\Throwable $th)
+                    {
+                        return $th;
+                    }
+                    return "1";
+                }
             }
-    }else{
-        return "1";
-    }
-        
+
+        }
+        else
+        {
+            return "1";
+        }
+
     }
     /**
      * Display a listing of the resource.
@@ -71,6 +102,7 @@ class QuestionController extends Controller
     public function index()
     {
         //
+        
     }
 
     /**
@@ -81,6 +113,7 @@ class QuestionController extends Controller
     public function create()
     {
         //
+        
     }
 
     /**
@@ -92,6 +125,7 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         //
+        
     }
 
     /**
@@ -103,6 +137,7 @@ class QuestionController extends Controller
     public function show(Question $question)
     {
         //
+        
     }
 
     /**
@@ -114,6 +149,7 @@ class QuestionController extends Controller
     public function edit(Question $question)
     {
         //
+        
     }
 
     /**
@@ -126,6 +162,7 @@ class QuestionController extends Controller
     public function update(Request $request, Question $question)
     {
         //
+        
     }
 
     /**
@@ -137,5 +174,7 @@ class QuestionController extends Controller
     public function destroy(Question $question)
     {
         //
+        
     }
 }
+
