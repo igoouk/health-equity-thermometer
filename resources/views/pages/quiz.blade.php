@@ -36,14 +36,23 @@ if ($type == null) {
                         </div>
                         <div class="options-container">
                             @foreach ($question->options as $option)
-                            <div class="single-option">
-                                <div class="input-holder">
-                                    <input type="{{$type}}" id="option-{{$option['id']}}" class="{{$type}}-input" data-question-id="{{$questionId}}" data-option-id="{{$option['id']}}" name="question-options">                            </input>
-                                </div>
-                                <div class="label-holder">
-                                    <label for="option-{{$option['id']}}">{{$option["text"]}} - {{$option["id"]}}</label>
-                                </div>
-                            </div>    
+                                @if ($type == "dropdown")
+                                <select>
+                                    @foreach ($question->options as $option)
+                                    <option type="{{$type}}" id="option-{{$option['id']}}" class="{{$type}}-input" data-question-id="{{$questionId}}" data-option-id="{{$option['id']}}" name="question-options">{{$option["text"]}} - {{$option["id"]}}</option>
+                                    @endforeach 
+                                </select>  
+                                @else
+                                <div class="single-option">
+                                    <div class="input-holder">
+                                        <input type="{{$type}}" id="option-{{$option['id']}}" class="{{$type}}-input" data-question-id="{{$questionId}}" data-option-id="{{$option['id']}}" name="question-options">                            </input>
+                                    </div>
+                                    <div class="label-holder">
+                                        <label for="option-{{$option['id']}}">{{$option["text"]}} - {{$option["id"]}}</label>
+                                    </div>
+                                </div>  
+                                @endif
+                               
                             @endforeach
                         </div>
                     </div>

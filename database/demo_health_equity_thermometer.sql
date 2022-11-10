@@ -5397,7 +5397,7 @@ CREATE TABLE `questions` (
   `text` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image_url` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   `information` varchar(5000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `correct_answer` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `answer` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -5406,7 +5406,7 @@ CREATE TABLE `questions` (
 -- Dumping data for table `questions`
 --
 
-INSERT INTO `questions` (`id`, `text`, `image_url`, `information`, `correct_answer`, `created_at`, `updated_at`) VALUES
+INSERT INTO `questions` (`id`, `text`, `image_url`, `information`, `answer`, `created_at`, `updated_at`) VALUES
 (1, 'Colour of the sky?', 'https://cdn.hswstatic.com/gif/why-is-sky-blue.jpg', 'Maybe blue?', '1,2', NULL, NULL),
 (2, 'Is water wet?', 'https://cdn.hswstatic.com/gif/water-update.jpg', 'Yes!', '4', NULL, NULL),
 (3, 'Is Sun hot?', 'https://i.natgeofe.com/n/2f169ccb-e943-4772-8bd1-c92e79db64ab/gsfc_20171208_archive_e000922_orig_square.jpg', 'Not sure?', '6,7', NULL, NULL),

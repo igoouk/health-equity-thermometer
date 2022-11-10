@@ -24,6 +24,11 @@ require __DIR__.'/auth.php';
 */
 
 Route::get('/quiz/{id}', function (Request $request, $id) {
+	if ($id == 1) { //TEST
+		session(['selected-options' => null]);
+		session(['user-id' => 4]);
+		session(['quiz-completed' => null]);
+	}
     return view('pages/quiz', ['question' => Question::getQuestion($id), 'questionId' => $id]);
 //})->middleware('verifiedUser')->name("quiz");
 })->name("quiz");

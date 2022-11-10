@@ -20,13 +20,12 @@ class QuestionController extends Controller
         if (session()->get('quiz-completed') != true)
         {
 
-            $arraysAreEqual = false;
-
+            $answeredCorrect = false;
             $questionCount = 0;
             foreach ($request->questionIds as $key => $questionID)
             {
-                $correctAnswer = explode(",", Question::where('id', $questionID)->first()
-                    ->correct_answer);
+                $question = Question::where('id', $questionID)->first();
+                $answer = explode(",", $question->answer);
                 $selectedOptions = [];
                 foreach ($request->selectedOptions as $key => $option)
                 {
@@ -36,8 +35,19 @@ class QuestionController extends Controller
                     }
 
                 }
-
-                $arraysAreEqual = !array_diff($correctAnswer, $selectedOptions);
+                if ($question->answer_type == "exclude") {
+                    $answeredCorrect = true;
+                    foreach ($selectedOptions as $key => $value) {
+                        if ($value == $answer[0]) {
+                            $answeredCorrect = false;
+                        }
+                    }
+                }else if(strlen($answer[0]) > 0){
+                    $answeredCorrect = $answer === $selectedOptions;
+                }else{
+                    $answeredCorrect = true;
+                }
+                
                 $previouslySelectedOptions = json_decode(session()->get('selected-options'));
                 $selectedAnswerObject = json_encode(array(
                     "id" => $questionID,
@@ -55,7 +65,7 @@ class QuestionController extends Controller
                 session(['selected-options' => $selectedOptionsString]);
                 $questionCount++;
 
-                if ($arraysAreEqual && $questionID != 7)
+                if ($answeredCorrect && $questionID != 7)
                 {
                     if ($questionCount == count($request->questionIds))
                     {

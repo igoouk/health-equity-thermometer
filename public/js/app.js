@@ -8521,7 +8521,7 @@ function checkAnswer(questionId) {
   $(".single-question").each(function () {
     questionIDs.push($(this).data("id"));
   });
-  $("input:checked").each(function () {
+  $("input:checked,option:selected").each(function () {
     selectedOptions.push({
       "id": $(this).data("question-id"),
       "option": $(this).data("option-id")
