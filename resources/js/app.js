@@ -19,12 +19,23 @@ $(document).ready(function() {
 	if ($("#demographics-container").length > 0) {
 		setDemogprahicsPage();
 	}
+	if ($("#result-container").length > 0) {
+		setResultPage();
+	}
 
+
+	
 	
 
 	
 });
 
+function setResultPage(params) {
+
+	$("#save-pdf-button").on("click", function() {
+		html2pdf(document.body);
+	});
+}
 function setWelcomePage() {
 	$("#get-started-button").on("click", function() {
 		$("#welcome-container").hide();
@@ -212,6 +223,7 @@ function checkAnswer(questionId) {
     $("input:checked").each(function() {
         selectedOptions.push({"id":$(this).data("question-id"), "option":$(this).data("option-id")});
     });
+    $("#questions-container").hide();
     $("#information-popup").show();
     $.ajax({
         type: 'POST',

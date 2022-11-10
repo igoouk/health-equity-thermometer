@@ -326,11 +326,7 @@
             </a>
         </li>
     </ul>
-    <div class="copyright">
-        © 2020 made with <i class="tim-icons icon-heart-2"></i> by
-        <a href="https://creative-tim.com" target="_blank">Creative Tim</a> &amp;
-        <a href="https://updivision.com" target="_blank">Updivision</a> for a better web.
-    </div>
+   
 </div>
 </footer>
             </div>

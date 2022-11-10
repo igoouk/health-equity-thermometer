@@ -17,11 +17,18 @@ body,
     .container-header{
         margin-bottom: 25px;
     }
+    #save-pdf-button{
+        margin-bottom: 50px;
+    }
+    #note{
+        text-align: center;
+    }
     #result-content{
         display: flex;
         flex-direction: row;
         flex-grow: 1;
         justify-content: center;
+        margin-bottom: 25px;
         #information-container{
             @media only screen and (max-width: 600px) {
                 max-width: 100%;
@@ -58,13 +65,12 @@ body,
                     &:before {
                         content: "";
                         position: absolute;
-                        border-left: 8px solid #f8f2f2;
+                        border-left: 6px solid #B70802;
                         width: 100%;
                         height: 100%;
-                        left: 3%;
-                        box-shadow: -2px 0px 0px rgba(125, 124, 124, 0.75);
+                        left: 5%;
                         @media only screen and (max-width: 600px) {
-                            border-left: 6px solid #f8f2f2;
+                            border-left: 6px solid #B70802;
                         }
                       }
                     &.top{
@@ -79,6 +85,20 @@ body,
                     font-size: 18px;
                     width: 100%;
                     padding-right: 5px;
+                    color: black;
+                    &::before{
+                        height: 15px;
+                        width: 15px;
+                        border-radius: 50%;
+                        display: inline-block;
+                        content:"";
+                        position: absolute;
+                        top: 20px;  
+                    }
+                    div{
+                        margin-left: 25px;
+                    }   
+                    
                 }
                 
                 &.level{
@@ -97,64 +117,119 @@ body,
                                 }
                             }
                         }
-                        color: red;
+                        color: $red;
+                        .level-text{
+                            &::before{
+                                display: none;
+                            }
+                            span{
+                                color: $red; 
+                            }
+                        }
                         .level-indicator{
-                            background-color: red;
+                            background-color: #E7514C;
                             border-radius: 40px 40px 40px 40px;
-                            width: 15%;
-                            border: 3px solid #5C5C5C;
-                            top: -12%;
+                            width: 20%;
+                            border: 10px solid #F3F3F3;
+                            top: -19%;
                             position: relative;
                             height: 0;
-                            padding-bottom: 10%;
+                            padding-bottom: 12%;
                             left: -3%;
                             z-index: -1;
                         }
                     }
                     &--1{
-                        color: red;
+                        color: $red;
+                        .level-text{
+                            &::before{
+                                background-color: $red;
+                            }
+                            span{
+                                color: $red; 
+                            }
+                        }
                         .level-indicator{
-                            background-color: red;
+                            background-color: $red;
                         }
                     }
                     &--2{
-                        color: orange;
+                        color: $orange;
+                        .level-text{
+                            &::before{
+                                background-color: $orange;
+                            }
+                            span{
+                                color: $orange; 
+                            }
+                        }
                         .level-indicator{
-                            background-color: orange;
+                            background-color: $orange;
                         }
                     }
                     &--3{
-                        color: yellow;
+                        color: $yellow;
+                        .level-text{
+                            &::before{
+                                background-color: $yellow;
+                            }
+                            span{
+                                color: $yellow; 
+                            }
+                        }
                         .level-indicator{
-                            background-color: yellow;
+                            background-color: $yellow;;
                         }
                     }
                     &--4{
-                        color: green;
+                        color: $green;
+                        .level-text{
+                            &::before{
+                                background-color: $green;
+                            }
+                            span{
+                                color: $green; 
+                            }
+                        }
                         .level-indicator{
-                            background-color: green;
+                            background-color: $green;
                         }
                     }
                     &--5{
-                        color: blue;
+                        color: $blue;
+                        .level-text{
+                            &::before{
+                                background-color: $blue;
+                            }
+                            span{
+                                color: $blue; 
+                            }
+                        }
                         .level-indicator{
-                            background-color: blue;
+                            background-color: $blue;
                         }
                     }
                     &--6{
-                        color: purple; 
-                        
+                        color: $purple; 
+                        .level-text{
+                            &::before{
+                                background-color: $purple;
+                            }
+                            span{
+                                color: $purple; 
+                            }
+                        }
                         .level-indicator{
-                            background-color: purple;
-                            border-top: 3px solid #5C5C5C;
+                            background-color: $purple;
+                            border-top: 10px solid #F3F3F3;
                             border-radius: 40px 40px 0px 0px;  
                         }
                     }
                 }
                 .level-indicator{
-                    width: 8%;                    
-                    border-right: 3px solid #5C5C5C;
-                    border-left: 3px solid #5C5C5C;
+                    width: 12%;                    
+                    border-right: 10px solid #F3F3F3;
+                    border-left: 10px solid #F3F3F3;
                    
                     
                     

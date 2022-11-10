@@ -22,7 +22,7 @@ if ($type == null) {
 @section('header', 'Quiz page')
 @extends('layouts.app', ['page' => __('Quiz'), 'pageSlug' => 'quiz'])
 @section('content')
-    <div class="py-12" id="quiz-container">
+    <div class="" id="quiz-container">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="generic-container" id="questions-container">
                 
@@ -36,7 +36,14 @@ if ($type == null) {
                         </div>
                         <div class="options-container">
                             @foreach ($question->options as $option)
-                                <input type="{{$type}}" class="{{$type}}-input" data-question-id="{{$questionId}}" data-option-id="{{$option['id']}}" name="question-options">{{$option["text"]}} - {{$option["id"]}}</input>
+                            <div class="single-option">
+                                <div class="input-holder">
+                                    <input type="{{$type}}" id="option-{{$option['id']}}" class="{{$type}}-input" data-question-id="{{$questionId}}" data-option-id="{{$option['id']}}" name="question-options">                            </input>
+                                </div>
+                                <div class="label-holder">
+                                    <label for="option-{{$option['id']}}">{{$option["text"]}} - {{$option["id"]}}</label>
+                                </div>
+                            </div>    
                             @endforeach
                         </div>
                     </div>
@@ -50,7 +57,14 @@ if ($type == null) {
                             </div>
                             <div class="options-container">
                                 @foreach ($linkedQuestion->options as $option)
-                                    <input type="{{$type}}" class="{{$type}}-input" data-question-id="{{$linkedQuestion->id}}" data-option-id="{{$option['id']}}" name="linked-question-options">{{$option["text"]}} - {{$option["id"]}}</input>
+                                    <div class="single-option">
+                                        <div class="input-holder">
+                                            <input type="{{$type}}"  id="option-{{$option['id']}}" class="{{$type}}-input" data-question-id="{{$linkedQuestion->id}}" data-option-id="{{$option['id']}}" name="linked-question-options"></input>
+                                        </div>
+                                        <div class="label-holder">
+                                            <label for="option-{{$option['id']}}">{{$option["text"]}} - {{$option["id"]}}</label>
+                                        </div>
+                                    </div>
                                 @endforeach
                             </div>
                             
@@ -60,18 +74,18 @@ if ($type == null) {
             </div>
             
                 
-           
+            <div id="information-popup" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div id="information-text">{!! $question["information"] !!}</div>
+                @if ($questionId != 6)
+                <button id="next-button" data-route="{{url('/quiz/')}}/<?php echo $nextQuestion ?>" class="button">Next question</button>
+                @else
+                <button data-route="{{url('/result/')}}" id="result-button" class="button">Show my results</button>
+                @endif
+            </div>
             
         </div>
     
-        <div id="information-popup" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div id="information-text">{!! $question["information"] !!}</div>
-            @if ($questionId != 6)
-            <button id="next-button" data-route="{{url('/quiz/')}}/<?php echo $nextQuestion ?>" class="button">Next question</button>
-            @else
-            <button data-route="{{url('/result/')}}" id="result-button" class="button">Show my results</button>
-            @endif
-        </div>
+       
   
     </div>
 @endsection

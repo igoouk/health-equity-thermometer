@@ -59,6 +59,7 @@
         <script src="{{ asset('black') }}/js/core/popper.min.js"></script>
         <script src="{{ asset('black') }}/js/core/bootstrap.min.js"></script>
         <script src="{{ asset('black') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+        
         <!--  Google Maps Plugin    -->
         <!-- Chart JS -->
         {{-- <script src="{{ asset('black') }}/js/plugins/chartjs.min.js"></script> --}}
@@ -68,6 +69,7 @@
         <script src="{{ asset('black') }}/js/black-dashboard.min.js?v=1.0.0"></script>
         <script src="{{ asset('black') }}/js/theme.js"></script>
         <script src="{{ URL::asset('js/app.js') }}"></script>
+        <script src="{{ URL::asset("js/html2pdf.bundle.min.js")}}"></script>
 
         @stack('js')
 

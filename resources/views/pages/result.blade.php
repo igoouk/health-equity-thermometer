@@ -5,12 +5,12 @@
 <?php
 $levelTexts = [
     "",
-    "Health equity and health inequalities are confusing concepts",
-    "Health equity is important, but there is uncertainty about its relevance to a given piece of work",
-    "Identification of health inequalities is straightforward, but application of an equity lens in practice is challenging",
-    "Some policies, practices are applied through an equity lens. Additional support to apply that more widely would be welcomed.",
-    "All policies, systems, and practices are applied through an equity lens",
-    "Patients and the public are involved and engaged at all stages of research. Their contribution is valued and its impact is recorded."]
+    "Health equity and health inequalities are <span>confusing</span> concepts",
+    "Health equity is important, but there is <span>uncertainty about its relevance</span> to a given piece of work",
+    "Identification of health inequalities is straightforward, but application of an equity lens in <span>practice is challenging</span>",
+    "Some policies, practices are applied through an equity lens. Additional support to <span>apply that more widely</span> would be welcomed.",
+    "<span>All policies, systems, and practices</span> are applied through an equity lens",
+    "<span>Patients and the public</span> are involved and engaged at all stages of research. Their contribution is valued and its impact is recorded."]
 ?>
 
     <div id="result-container" class="level level--{{$latestResult->level}}">
@@ -41,7 +41,7 @@ $levelTexts = [
                     @endphp
                     <div class="level-info level--{{$i}} {{$levelClass}}" >
                         <div class="level-indicator"></div>
-                        <div class="level-text">{{$levelTexts[$i]}}</div>
+                        <div class="level-text"><div>{!!$levelTexts[$i]!!}</div></div>
                     </div>
                 @endfor
                 
@@ -49,7 +49,9 @@ $levelTexts = [
             </div>
             
         </div>
-        
+        <button id="save-pdf-button" class="button">Save the result as PDF</button>
+        <div id="note">Written by Panagaki, K. and the NIHR ARC NWC HEMS PAs Group, Copyright © Lancaster University and the University of Liverpool, 2022
+        </div>
     </div>
     
               
