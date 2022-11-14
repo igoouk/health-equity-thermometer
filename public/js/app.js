@@ -8343,13 +8343,13 @@ function setQuizPage() {
     window.location.href = $(this).data("route");
   });
 
-  if ($(".linked-question").length > 0) {
+  if ($(".second-question").length > 0) {
     $("#submit-answer-button").hide();
-    $('.linked-question input').on('change', function () {
+    $('.second-question input').on('change', function () {
       $("#submit-answer-button").show();
     });
     $('.main-question input').on('change', function () {
-      $(".linked-question").show();
+      $(".second-question").show();
     });
   }
 }
@@ -8543,6 +8543,8 @@ function checkAnswer(questionId) {
     success: function success(data) {
       if (data == "1") {
         $("#next-button").css("display", "flex");
+      } else if (data == "exit") {
+        alert("You don't need to complete the test.");
       }
     }
   });

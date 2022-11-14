@@ -21,6 +21,7 @@ class QuestionController extends Controller
         {
 
             $answeredCorrect = false;
+            $exitQuiz = false;
             $questionCount = 0;
             foreach ($request->questionIds as $key => $questionID)
             {
@@ -40,6 +41,7 @@ class QuestionController extends Controller
                     foreach ($selectedOptions as $key => $value) {
                         if ($value == $answer[0]) {
                             $answeredCorrect = false;
+                            $exitQuiz = true;
                         }
                     }
                 }else if(strlen($answer[0]) > 0){
@@ -77,7 +79,7 @@ class QuestionController extends Controller
                 {
                     try
                     {
-                        $result = Result::create(['user_id' => session()->get('user-id') , 'selected_options' => $selectedOptionsString, 'level' => $questionID - 1]);
+                        $result = Result::create(['user_id' => session()->get('user-id') , 'selected_options' => $selectedOptionsString, 'level' => ($question->level)-1]);
 
                         $userSession = UserSession::where("user_id", session()->get('user-id'))
                             ->orderByDesc('created_at')
@@ -93,7 +95,12 @@ class QuestionController extends Controller
                     {
                         return $th;
                     }
-                    return "1";
+                    if ($exitQuiz) {
+                        return "exit";
+                    }else{
+                        return "1";
+                    }
+                    
                 }
             }
 

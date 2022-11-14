@@ -23,13 +23,13 @@ require __DIR__.'/auth.php';
 |
 */
 
-Route::get('/quiz/{id}', function (Request $request, $id) {
-	if ($id == 1) { //TEST
+Route::get('/quiz/{level}', function (Request $request, $level) {
+	if ($level == 1) { //TEST
 		session(['selected-options' => null]);
 		session(['user-id' => 4]);
 		session(['quiz-completed' => null]);
 	}
-    return view('pages/quiz', ['question' => Question::getQuestion($id), 'questionId' => $id]);
+    return view('pages/quiz', ['questions' => Question::getQuestion($level), 'currentLevel' => $level]);
 //})->middleware('verifiedUser')->name("quiz");
 })->name("quiz");
 

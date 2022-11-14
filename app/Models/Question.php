@@ -15,15 +15,11 @@ class Question extends Model
         return $this->hasMany('App\Models\QuestionOption');
     }
 
-    public static function getQuestion(int $id)
+    public static function getQuestion(int $level)
     {
-        $question = Question::find($id);
+        $question = Question::where("level", $level)->get();
 
-        if ($question->linked_question != null) {
-            $linked_question = Question::find($question->linked_question);
-            $questions = [$question, $linked_question];
-            return $questions;
-        }
+
         return $question;
     }
 

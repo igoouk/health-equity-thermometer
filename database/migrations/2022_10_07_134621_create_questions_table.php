@@ -16,8 +16,10 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id'); // autoincrement id field
             $table->string('text', 500);   // string field
+            $table->integer('level');   
             $table->string('image_url', 500);   // string field
             $table->string('information', 5000);   // string field
+            $table->string('type', 100);   // string field
             $table->string('answer', 100);   // string field
             $table->string('answer_type', 15);   // string field
             $table->timestamps();
