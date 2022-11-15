@@ -48,7 +48,7 @@ body,
                     {
                         &.disabled{
                             .level-indicator{
-                                background:rgb(129, 129, 129);
+                                background:#DDDDDD;
                             }
                         }
                     }
@@ -56,7 +56,7 @@ body,
                     {
                         &.disabled{
                             .level-indicator{
-                                background:rgb(53, 53, 53);
+                                background: #CDCDCD;
                             }
                         }
                         
@@ -127,7 +127,7 @@ body,
                             }
                         }
                         .level-indicator{
-                            background-color: #E7514C;
+                            background-color: $red;
                             border-radius: 40px 40px 40px 40px;
                             width: 20%;
                             border: 10px solid #F3F3F3;

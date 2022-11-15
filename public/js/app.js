@@ -8311,11 +8311,21 @@ $(document).ready(function () {
   if ($("#result-container").length > 0) {
     setResultPage();
   }
+
+  if ($("#previous-results-container").length > 0) {
+    setPreviousResultsPage();
+  }
 });
 
 function setResultPage(params) {
   $("#save-pdf-button").on("click", function () {
     html2pdf(document.body);
+  });
+}
+
+function setPreviousResultsPage(params) {
+  $(".button").on("click", function () {
+    window.location.href = $(this).data("route");
   });
 }
 

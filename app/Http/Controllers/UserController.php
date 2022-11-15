@@ -26,9 +26,13 @@ class UserController extends Controller
     {
         $uservalues = $request->formValues;
         $valid = "1";
+        $getPreviousResults = false;
         foreach ($uservalues as $key => $item) {
            if (!isset($item["value"]) || $item["value"] == null || $item["value"] == "" ||  $item["value"] == "Choose country" ||  $item["value"] == "Choose city" ) {
                 $valid = "0";
+           }
+           if ($item["value"] == "Review") {
+               $getPreviousResults = true;
            }
         }
 
@@ -43,7 +47,12 @@ class UserController extends Controller
             }else{
                 return "/quiz/2";
             }*/
-            return "/quiz/1";
+            if ($getPreviousResults) {
+                return "/previous-results";
+            }else{
+                return "/quiz/1";
+            }
+            
         }
         
 

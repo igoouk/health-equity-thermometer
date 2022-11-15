@@ -8,7 +8,6 @@ if (session()->get('verified') != "1") {
 
 $nextLevel = ($currentLevel != 6) ? $currentLevel+ 1 : 6; 
 $questionCount = 0;
-
 ?>
 
 @section('header', 'Quiz page')
@@ -20,7 +19,7 @@ $questionCount = 0;
                 
                     @foreach ($questions as $question)
                         <div class="single-question @once enabled main-question @endonce @if ($questionCount > 0 ) second-question @endif " data-id="{{$question->id}}" >
-                            <div class="p-6 bg-white border-gray-200" id="question-text" data-id="{{$question->id}}">
+                            <div class="p-6 bg-white border-gray-200" id="question-text" data-id="{{$question->level}}">
                                 {{$question->text}}
                             </div>
                             <div class="p-6 bg-white border-gray-200" id="question-image">
@@ -59,7 +58,7 @@ $questionCount = 0;
             
                 
             <div id="information-popup" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div id="information-text">{!! $question["information"] !!}</div>
+                <div id="information-text">{!! $questions[0]["information"] !!}</div>
                 @if ($currentLevel != 6)
                 <button id="next-button" data-route="{{url('/quiz/')}}/<?php echo $nextLevel ?>" class="button">Next question</button>
                 @else

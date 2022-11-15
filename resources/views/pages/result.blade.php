@@ -13,8 +13,8 @@ $levelTexts = [
     "<span>Patients and the public</span> are involved and engaged at all stages of research. Their contribution is valued and its impact is recorded."]
 ?>
 
-    <div id="result-container" class="level level--{{$latestResult->level}}">
-        Your level : {{$latestResult->level}}
+    <div id="result-container" class="level level--{{$result->level}}">
+        Your level : {{$result->level}}
         <div class="container-header">What is your health equity temperature?</div>
         <div id="result-content">
 
@@ -26,14 +26,14 @@ $levelTexts = [
                     @php
                         $levelClass = "";
 
-                    if ($latestResult->level >= $i)
+                    if ($result->level >= $i)
                         {
                             $levelClass .= " enabled";
                         }else{
                             $levelClass .= " disabled";
                         }
                     
-                    if ($latestResult->level == $i)
+                    if ($result->level == $i)
                         {
                             $levelClass .= " top";
                         }

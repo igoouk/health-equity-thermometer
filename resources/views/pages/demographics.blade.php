@@ -66,7 +66,7 @@ if (session()->get('verified') != "1") {
             <form id="activity-selection">
                 <p class="container-header">What do you want to do today?</p>
                 
-                @if(count($userResults)>0)  
+                @if($resultCount > 0)  
                     <input type="radio" class="radio-input" id="activity-test" name="activity" value="Test">
                     <label for="activity-test">Test the health equity temperature of:</label><br>
                     <input type="radio" class="radio-input" id="activity-review" name="activity" value="Review">
@@ -76,7 +76,7 @@ if (session()->get('verified') != "1") {
                 @endif
                 
             </form>
-            <form id="activity-target" @if(count($userResults)==0)  class="enabled" @endif  >
+            <form id="activity-target" @if($resultCount == 0)  class="enabled" @endif  >
                         <input type="radio" class="radio-input" id="target-self" class="target-input" value="self" data-input-id="self-name" name="target">
                         <label for="target-self">Yourself</label>
                         <input class="target-text" type="text" id="self-name"><br>

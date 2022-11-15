@@ -67,7 +67,7 @@ class QuestionController extends Controller
                 session(['selected-options' => $selectedOptionsString]);
                 $questionCount++;
 
-                if ($answeredCorrect && $questionID != 7)
+                if ($answeredCorrect && $questionID != 8)
                 {
                     if ($questionCount == count($request->questionIds))
                     {
@@ -77,9 +77,13 @@ class QuestionController extends Controller
                 }
                 else
                 {
+                    $level = ($question->level)-1;
+                    if ($answeredCorrect && $questionID == 8) {
+                        $level = $question->level;
+                    }
                     try
                     {
-                        $result = Result::create(['user_id' => session()->get('user-id') , 'selected_options' => $selectedOptionsString, 'level' => ($question->level)-1]);
+                        $result = Result::create(['user_id' => session()->get('user-id') , 'selected_options' => $selectedOptionsString, 'level' => $level]);
 
                         $userSession = UserSession::where("user_id", session()->get('user-id'))
                             ->orderByDesc('created_at')

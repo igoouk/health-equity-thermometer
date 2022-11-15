@@ -19,22 +19,22 @@
             line-height: 40px;
             text-align: center;
             &[data-id="1"]{
-                color: #DD2727;
+                color: $red;
             }
             &[data-id="2"]{
-                color: #FFAD0D;
+                color: $orange
             }
             &[data-id="3"]{
-                color: #ECCE33;
+                color: $yellow;
             }
             &[data-id="4"]{
-                color: #0BB07B;
+                color: $green;
             }
             &[data-id="5"]{
-                color: #722DDB;
+                color: $blue;
             }
             &[data-id="6"]{
-                color: #0020d3;
+                color: $purple;
             }
         }
         .options-container{

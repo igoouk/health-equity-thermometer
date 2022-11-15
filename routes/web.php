@@ -33,8 +33,11 @@ Route::get('/quiz/{level}', function (Request $request, $level) {
 //})->middleware('verifiedUser')->name("quiz");
 })->name("quiz");
 
-Route::get('/result', function () {
-    return view('pages/result',['latestResult' => ResultController::getLatestResultPerUser()]);
+Route::get('/result/{resultID?}', function (Request $request, $resultID = null) {
+    return view('pages/result',['result' => ResultController::getLatestResultPerUser($resultID)]);
+})->name("home");
+Route::get('/previous-results', function () {
+    return view('pages/previous-results',['previousResults' => ResultController::getPreviousResults()]);
 })->name("home");
 Route::get('/', function () {
 	session(['selected-options' => null]);
@@ -43,7 +46,7 @@ Route::get('/', function () {
     return view('pages/welcome');
 })->name("home");
 Route::get('/demographics', function () {
-    return view('pages/demographics', ['countries' => Country::all(), 'userResults' => ResultController::getAllResultsPerUser()]);
+    return view('pages/demographics', ['countries' => Country::all(), 'resultCount' => ResultController::getResultCount()]);
 })->middleware('verifiedUser')->name("demographics");
 //})->name("demographics");
 
