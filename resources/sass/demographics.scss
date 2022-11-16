@@ -28,8 +28,7 @@
     }
 
     #activity-section{
-        display: none;
-        #activity-target,#activity-selection{
+        #activity-target{
             display: none;
         }
         #activity-button-container{
@@ -53,6 +52,10 @@
                 margin-bottom: 20px;
             }
         }
+    }
+
+    #information-section{
+        //display: none;
     }
    
 }

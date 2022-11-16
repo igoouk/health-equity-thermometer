@@ -12071,10 +12071,7 @@ select{
 #demographics-container #interest-section #next-button {
   margin-top: 20px;
 }
-#demographics-container #activity-section {
-  display: none;
-}
-#demographics-container #activity-section #activity-target, #demographics-container #activity-section #activity-selection {
+#demographics-container #activity-section #activity-target {
   display: none;
 }
 #demographics-container #activity-section #activity-button-container {
@@ -12097,7 +12094,6 @@ select{
 #demographics-container #activity-section #activity-target label {
   margin-bottom: 20px;
 }
-
 html,
 body,
 .wrapper,
@@ -12676,6 +12672,10 @@ video {
   min-height: 500px;
   margin-bottom: 150px;
   padding: 15px;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .container-header {

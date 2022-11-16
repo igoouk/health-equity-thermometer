@@ -35,16 +35,19 @@ Route::get('/quiz/{level}', function (Request $request, $level) {
 
 Route::get('/result/{resultID?}', function (Request $request, $resultID = null) {
     return view('pages/result',['result' => ResultController::getLatestResultPerUser($resultID)]);
-})->name("home");
+})->name("result");
+
 Route::get('/previous-results', function () {
     return view('pages/previous-results',['previousResults' => ResultController::getPreviousResults()]);
-})->name("home");
+})->name("previous-results");
+
 Route::get('/', function () {
 	session(['selected-options' => null]);
 	session(['user-id' => null]);
 	session(['quiz-completed' => null]);
     return view('pages/welcome');
 })->name("home");
+
 Route::get('/demographics', function () {
     return view('pages/demographics', ['countries' => Country::all(), 'resultCount' => ResultController::getResultCount()]);
 })->middleware('verifiedUser')->name("demographics");

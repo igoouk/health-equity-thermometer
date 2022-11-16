@@ -21,7 +21,10 @@ class UserController extends Controller
     {
         return view('users.index', ['users' => $model->paginate(15)]);
     }
-
+    public static function getDemographics($id)
+    {
+        return UserSession::where("user_id", $id)->orderByDesc('created_at')->limit(1)->first();
+    }
     public function saveDemographics(Request $request)
     {
         $uservalues = $request->formValues;
@@ -31,7 +34,7 @@ class UserController extends Controller
            if (!isset($item["value"]) || $item["value"] == null || $item["value"] == "" ||  $item["value"] == "Choose country" ||  $item["value"] == "Choose city" ) {
                 $valid = "0";
            }
-           if ($item["value"] == "Review") {
+           if (isset($item["value"]) && $item["value"] == "Review") {
                $getPreviousResults = true;
            }
         }

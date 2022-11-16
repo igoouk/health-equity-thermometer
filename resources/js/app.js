@@ -119,7 +119,7 @@ function setDemogprahicsPage() {
 		$(".target-text").hide();
 		$("#" + $('input:checked', '#activity-target').data("input-id")).show();
 	});
-	$("#next-button").on("click", function() {
+	$("#interest-section #next-button").on("click", function() {
 		var country = "";
 		var city = "";
 		var jobRole = "";
@@ -152,17 +152,28 @@ function setDemogprahicsPage() {
 				
 			);
 		}
-		$("#interest-section").hide();
-		$("#activity-section, #activity-selection").show();
+		$("#interest-section").addClass("hidden");
+		$("#activity-section, #activity-selection").removeClass("hidden");
 	});
-	$("#back-button").on("click", function() {
-		$("#interest-section").show();
-		$("#activity-section, #activity-selection").hide();
+	$("#activity-button-container #back-button").on("click", function() {
+		$("#interest-section").removeClass("hidden");
+		$("#activity-section, #activity-selection").addClass("hidden");
 	});
-	$("#start-button").on("click", function() {
+	$("#activity-button-container #next-button").on("click", function() {
 		var inputName = $('input:checked', '#activity-target').val();
 		formValues = removeItem(inputName, formValues);
-		formValues.push({"name" : inputName, "value": $('.target-text:visible').val()})
+		formValues.push({"name" : inputName, "value": $('.target-text:visible').val()});
+		$("#information-section").removeClass("hidden");
+		$("#activity-section, #activity-selection").addClass("hidden");
+		
+	});
+	$("#information-button-container #back-button").on("click", function() {
+		$("#information-section").addClass("hidden");
+		$("#activity-section, #activity-selection").removeClass("hidden");
+	});
+
+	$("#start-button").on("click", function() {
+		
 		$.ajax({
 			type: 'POST',
 			url: $(this).data("route"),

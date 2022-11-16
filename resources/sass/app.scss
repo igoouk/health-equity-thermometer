@@ -316,6 +316,7 @@ video{
  
 //Custom global additions
 .generic-container{
+    
     margin-left: auto;
     max-width: 800px;
     margin-right: auto;
@@ -324,6 +325,11 @@ video{
     min-height: 500px;
     margin-bottom: 150px;
     padding: 15px;
+    
+   
+}
+.hidden{
+    display: none !important;
 }
 .container-header{
     font-style: normal;

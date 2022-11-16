@@ -4,11 +4,21 @@
 use App\Models\Country;
 use App\Models\City;
 use App\Models\Question;
+use App\Http\Controllers\UserController;
 if (session()->get('verified') != "1") {
     redirect('/home');
  }
 
-
+if ($resultCount > 0 ) {
+    $userSession = UserController::getDemographics(session()->get('user-id'));
+    $resultDemographics = json_decode($userSession["session_values"]);
+    $interest       =   $resultDemographics[0]->value;
+    $countryName    =   $resultDemographics[1]->value;
+    $cityName       =   $resultDemographics[2]->value;
+    $jobRole        =   $resultDemographics[3]->value;
+    $organisation   =   $resultDemographics[4]->value;
+}
+echo $userSession;
 ?>
 
 @section('header', 'Demographics Page')
@@ -18,13 +28,13 @@ if (session()->get('verified') != "1") {
 
 <div id="demographics-container">
 
-        <div id="interest-section" class="generic-container">
+        <div id="interest-section" class="generic-container @if($resultCount > 0) hidden @endif">
             <div class="container-header">Are you interested in the Health Equity Thermometer and Screening tool as part of your work?</div>
             <form id="interest-selection">
                 
-                    <input type="radio" class="radio-input" id="interest-work" name="interest" value="Work">
+                    <input type="radio" class="radio-input" id="interest-work" name="interest" value="Work" @if ($interest == "Work") checked @endif>
                     <label for="interest-work">Yes</label><br>
-                    <input type="radio" class="radio-input" id="interest-personal" name="interest" value="Personal">
+                    <input type="radio" class="radio-input" id="interest-personal" name="interest" value="Personal" @if ($interest == "Personal") checked @endif >
                     <label for="interest-personal">No, just personal interest</label><br>
 
                 
@@ -34,10 +44,10 @@ if (session()->get('verified') != "1") {
                 <input type="text" id="work-role" ><br>
                 <label for="work-organisation">Organisation:</label><br>
                 <input type="text" id="work-organisation"><br>
-                <label for="work-country">Country:</label><br>
+                <label for="work-country">Country: {{$countryName}}</label><br>
                 <select id="work-country" data-route="{{url('get-cities')}}">
                     @foreach ($countries as $country)
-                        <option name="{{$country->name}}" data-id="{{$country->country_id}}">{{$country->name}}</option>
+                        <option name="{{$country->name}}" data-id="{{$country->country_id}}" @if ($country->name == $countryName) selected @endif>{{$country->name}}</option>
                     @endforeach
                 </select><br>
                 <label for="work-city">City:</label><br>
@@ -62,7 +72,7 @@ if (session()->get('verified') != "1") {
 
 
 
-        <div id="activity-section" class="generic-container">
+        <div id="activity-section" class="generic-container @if($resultCount > 0) hidden @endif">
             <form id="activity-selection">
                 <p class="container-header">What do you want to do today?</p>
                 
@@ -89,10 +99,16 @@ if (session()->get('verified') != "1") {
             </form>
             <div id="activity-button-container">
                 <button id="back-button" class="button">Back</button>
+                <button id="next-button" class="button">Next</button>
+            </div>
+        </div>
+        <div id="information-section" class="generic-container">
+            <div class="container-header">There are only 7 questions until you find out your health equity temperature… For each of them tick as many as you think are applicable to you or your team</div>
+            <div id="information-button-container">
+                <button id="back-button" class="button">Back</button>
                 <button id="start-button" data-route="{{ 'save-demographics' }}" class="button">Start</button>
             </div>
         </div>
-        
 
         
     
