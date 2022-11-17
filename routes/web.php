@@ -23,15 +23,22 @@ require __DIR__.'/auth.php';
 |
 */
 
+Route::get('/', function () {
+	session(['selected-options' => null]);
+	session(['user-id' => null]);
+	session(['quiz-completed' => null]);
+    return view('pages/welcome');
+})->name("home");
+
 Route::get('/quiz/{level}', function (Request $request, $level) {
 	if ($level == 1) { //TEST
-		session(['selected-options' => null]);
-		session(['user-id' => 4]);
-		session(['quiz-completed' => null]);
+		//session(['selected-options' => null]);
+		//session(['user-id' => 4]);
+		//session(['quiz-completed' => null]);
 	}
     return view('pages/quiz', ['questions' => Question::getQuestion($level), 'currentLevel' => $level]);
-//})->middleware('verifiedUser')->name("quiz");
-})->name("quiz");
+})->middleware('verifiedUser')->name("quiz");
+//TEST})->name("quiz");
 
 Route::get('/result/{resultID?}', function (Request $request, $resultID = null) {
     return view('pages/result',['result' => ResultController::getLatestResultPerUser($resultID)]);
@@ -41,17 +48,12 @@ Route::get('/previous-results', function () {
     return view('pages/previous-results',['previousResults' => ResultController::getPreviousResults()]);
 })->name("previous-results");
 
-Route::get('/', function () {
-	session(['selected-options' => null]);
-	session(['user-id' => null]);
-	session(['quiz-completed' => null]);
-    return view('pages/welcome');
-})->name("home");
+
 
 Route::get('/demographics', function () {
     return view('pages/demographics', ['countries' => Country::all(), 'resultCount' => ResultController::getResultCount()]);
 })->middleware('verifiedUser')->name("demographics");
-//})->name("demographics");
+//TEST})->name("demographics");
 
 
 Route::get('/dashboard', function () {
@@ -63,6 +65,7 @@ Route::post('verify-code', [VerificationMailController::class, 'verifyCode']);
 Route::post('check-answer', [QuestionController::class, 'checkAnswer']);
 Route::post('get-cities', [CityController::class, 'getCities']);
 Route::post('save-demographics', [UserController::class, 'saveDemographics']);
+Route::post('use-previous-demographics', [UserController::class, 'usePreviousDemographics']);
 
 
 

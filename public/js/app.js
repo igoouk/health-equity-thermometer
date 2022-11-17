@@ -8471,6 +8471,28 @@ function setDemogprahicsPage() {
     $("#information-section").addClass("hidden");
     $("#activity-section, #activity-selection").removeClass("hidden");
   });
+  $("#start-new-button").on("click", function () {
+    $("#information-section").addClass("hidden");
+    $("#interest-section").removeClass("hidden");
+  });
+  $("#previous-results-button").on("click", function () {
+    window.location.href = $(this).data("route");
+  });
+  $("#start-previous-button").on("click", function () {
+    $.ajax({
+      type: 'POST',
+      url: $(this).data("route"),
+      beforeSend: function beforeSend() {},
+      error: function error(data) {},
+      success: function success(data) {
+        if (data != "0") {
+          window.location.href = data;
+        } else {
+          alert("There has been an errror, please try again later: " + data);
+        }
+      }
+    });
+  });
   $("#start-button").on("click", function () {
     $.ajax({
       type: 'POST',
@@ -8600,11 +8622,11 @@ function verifyCode(code) {
     beforeSend: function beforeSend() {},
     success: function success(data) {
       if (data == "0") {
-        console.log("Wrong verification code. Please try again. ");
-        $("#verify-code-button").hide();
-        $("#code-input").hide();
-        $("#email-input").show();
-        $("#send-code-button").show();
+        alert("Wrong verification code. Please try again. ");
+        $("#verify-code-container").css("display", "none");
+        $("#send-code-container").show();
+        $("#send-code-button").removeClass("disable");
+        $("#send-code-button").attr("disabled", false);
       } else {
         window.location.href = data;
       }

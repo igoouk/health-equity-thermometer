@@ -28,7 +28,7 @@
     </div>
     <div class="input-container">
         <label for="email-input">Email</label>
-        <input type="text" id="email-input" name="email-input" placeholder="Enter email" value="yasin@igoo.co.uk"></input>
+        <input type="text" id="email-input" name="email-input" placeholder="Enter email" value=""></input>
         <button id="send-code-button" class="button" data-route="{{url('send-code')}}">Submit</button>
     </div>
 </div>

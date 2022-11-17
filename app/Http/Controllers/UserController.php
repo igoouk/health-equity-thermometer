@@ -8,6 +8,7 @@ use App\Models\UserSession;
 use App\Models\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Carbon;
 
 class UserController extends Controller
 {
@@ -25,6 +26,21 @@ class UserController extends Controller
     {
         return UserSession::where("user_id", $id)->orderByDesc('created_at')->limit(1)->first();
     }
+    public function usePreviousDemographics()
+    {
+        $previousSession = UserSession::where("user_id" , session()->get('user-id'))->orderByDesc('created_at')->limit(1)->first();
+        $newSession = $previousSession->replicate();
+        $newSession->created_at = Carbon::now();
+        try {
+            $newSession->save();
+            return "/quiz/1";
+        } catch (\Throwable $th) {
+            return $th;
+        }
+        
+        
+    }
+
     public function saveDemographics(Request $request)
     {
         $uservalues = $request->formValues;

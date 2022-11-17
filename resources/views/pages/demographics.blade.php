@@ -105,8 +105,11 @@ echo $userSession;
         <div id="information-section" class="generic-container">
             <div class="container-header">There are only 7 questions until you find out your health equity temperature… For each of them tick as many as you think are applicable to you or your team</div>
             <div id="information-button-container">
-                <button id="back-button" class="button">Back</button>
-                <button id="start-button" data-route="{{ 'save-demographics' }}" class="button">Start</button>
+                <button id="back-button" class="button @if ($resultCount > 0) hidden @endif">Back</button>
+                <button id="start-button" data-route="{{ 'save-demographics' }}" class="button @if ($resultCount > 0) hidden @endif">Start</button>
+                <button id="start-new-button" class="button @if ($resultCount = 0) hidden @endif">Start with new session data</button>
+                <button id="previous-results-button" data-route="{{ 'previous-results' }}" class="button @if ($resultCount = 0) hidden @endif">See Previous Results</button>
+                <button id="start-previous-button" data-route="{{ 'use-previous-demographics' }}" class="button @if ($resultCount = 0) hidden @endif">Start with previous session data</button>
             </div>
         </div>
 

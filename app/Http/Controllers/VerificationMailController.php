@@ -44,10 +44,10 @@ class VerificationMailController extends Controller
 
     public function verifyCode(Request $request)
     {
-        $user_id = session()->get('user_id', 'default');
+        $user_id = session()->get('user-id');
         $mostRecentRequestedCode = VerificationCode::where('user_id', $user_id)->orderByDesc('created_at')->limit(1)->first();
-        //if ($request->code == $mostRecentRequestedCode->code) {
-        if (true) {
+        if($request->code == $mostRecentRequestedCode->code) {
+        //if (true) {
             session(['verified' => "1"]);
             return "/demographics";
            

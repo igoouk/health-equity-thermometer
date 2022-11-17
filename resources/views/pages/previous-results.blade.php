@@ -34,7 +34,9 @@ xdebug_break();
                 <th>Job Role</th>
                 <th>Organisation/Person</th>
                 <th>Project/Self Assessed</th>
+                <th>Date</th>
                 <th>Result</th>
+                
               </tr>
              
             </thead>
@@ -55,6 +57,7 @@ xdebug_break();
                 <td>{{$resultDemographics[3]->value}}</td>
                 <td>{{$resultDemographics[4]->value}}</td>
                 <td>{{$resultDemographics[6]->value}}</td>
+                <td>{{$userSession["created_at"]}}</td>
                 <td><button class="button" data-route="{{url('/result/')}}/<?php echo $result->id?>">View Result</button></td> 
               </tr>
             @endforeach
