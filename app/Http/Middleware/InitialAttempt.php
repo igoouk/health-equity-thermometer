@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Models\Result;
 
-class CheckIfInitialAttempt
+class InitialAttempt
 {
     /**
      * Handle an incoming request.
