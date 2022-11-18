@@ -17,6 +17,12 @@ if ($resultCount > 0 ) {
     $cityName       =   $resultDemographics[2]->value;
     $jobRole        =   $resultDemographics[3]->value;
     $organisation   =   $resultDemographics[4]->value;
+}else{
+    $interest       =   "";
+    $countryName    =   "";
+    $cityName       =   "";
+    $jobRole        =   "";
+    $organisation   =   "";
 }
 //echo $userSession;
 ?>
