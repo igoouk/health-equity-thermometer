@@ -18,7 +18,7 @@ if ($resultCount > 0 ) {
     $jobRole        =   $resultDemographics[3]->value;
     $organisation   =   $resultDemographics[4]->value;
 }
-echo $userSession;
+//echo $userSession;
 ?>
 
 @section('header', 'Demographics Page')
