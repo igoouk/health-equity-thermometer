@@ -331,6 +331,9 @@ video{
 .hidden{
     display: none !important;
 }
+.show{
+    display: flex;
+}
 .container-header{
     font-style: normal;
     font-weight: 700;

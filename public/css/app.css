@@ -12094,6 +12094,10 @@ select{
 #demographics-container #activity-section #activity-target label {
   margin-bottom: 20px;
 }
+#demographics-container #information-section #information-button-container {
+  display: flex;
+}
+
 html,
 body,
 .wrapper,
@@ -12676,6 +12680,10 @@ video {
 
 .hidden {
   display: none !important;
+}
+
+.show {
+  display: flex;
 }
 
 .container-header {
