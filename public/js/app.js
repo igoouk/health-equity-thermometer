@@ -8410,6 +8410,7 @@ function setDemogprahicsPage() {
     var jobRole = "";
     var organisation = "";
     var reason = "";
+    var proceed = true;
     formValues = removeItem("country", formValues);
     formValues = removeItem("city", formValues);
     formValues = removeItem("reason", formValues);
@@ -8420,6 +8421,11 @@ function setDemogprahicsPage() {
       country = $("#personal-country").find(":selected").val();
       city = $("#personal-city").find(":selected").val();
       reason = $("#personal-reason").val();
+
+      if (reason == "") {
+        proceed = false;
+      }
+
       formValues.push({
         "name": "country",
         "value": country
@@ -8435,6 +8441,11 @@ function setDemogprahicsPage() {
       city = $("#work-city").find(":selected").val();
       jobRole = $("#work-role").val();
       organisation = $("#work-organisation").val();
+
+      if (organisation == "" || jobRole == "") {
+        proceed = false;
+      }
+
       formValues.push({
         "name": "country",
         "value": country
@@ -8450,22 +8461,40 @@ function setDemogprahicsPage() {
       });
     }
 
-    $("#interest-section").addClass("hidden");
-    $("#activity-section, #activity-selection").removeClass("hidden");
+    if (country == "" || country == "Choose country" || city == "" || city == "Choose city") {
+      proceed = false;
+    }
+
+    if (proceed) {
+      $("#interest-section").addClass("hidden");
+      $("#activity-section, #activity-selection").removeClass("hidden");
+    } else {
+      alert("Please fill all the fields.");
+    }
   });
   $("#activity-button-container #back-button").on("click", function () {
     $("#interest-section").removeClass("hidden");
     $("#activity-section, #activity-selection").addClass("hidden");
   });
   $("#activity-button-container #next-button").on("click", function () {
-    var inputName = $('input:checked', '#activity-target').val();
-    formValues = removeItem(inputName, formValues);
-    formValues.push({
-      "name": inputName,
-      "value": $('.target-text:visible').val()
-    });
-    $("#information-section").removeClass("hidden");
-    $("#activity-section, #activity-selection").addClass("hidden");
+    if ($('input:checked', '#activity-target').val() == undefined) {
+      alert("Please select one option.");
+    } else {
+      var inputName = $('input:checked', '#activity-target').val();
+      var proceed = true;
+      formValues = removeItem(inputName, formValues);
+      formValues.push({
+        "name": inputName,
+        "value": $('.target-text:visible').val()
+      });
+
+      if ($('.target-text:visible').val() == "") {
+        alert("Please fill all the fields.");
+      } else {
+        $("#information-section").removeClass("hidden");
+        $("#activity-section, #activity-selection").addClass("hidden");
+      }
+    }
   });
   $("#information-button-container #back-button").on("click", function () {
     $("#information-section").addClass("hidden");
