@@ -8338,7 +8338,11 @@ function setWelcomePage() {
 
 function setLoginPage() {
   $("#send-code-button").on("click", function () {
-    sendCode($("#email-input").val());
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($("#email-input").val())) {
+      sendCode($("#email-input").val());
+    } else {
+      alert("You have entered an invalid email address!");
+    }
   });
   $("#verify-code-button").on("click", function () {
     verifyCode($("#code-input").val());
