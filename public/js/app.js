@@ -8316,6 +8316,7 @@ $(document).ready(function () {
     setPreviousResultsPage();
   }
 });
+var formValues = [];
 
 function setResultPage(params) {
   $("#save-pdf-button").on("click", function () {
@@ -8369,9 +8370,9 @@ function setQuizPage() {
 }
 
 function setDemogprahicsPage() {
-  var formValues = [];
   var userInterest = "";
   var userActivity = "";
+  var startWithNewSessionData = false;
   $('#interest-selection input').on('change', function () {
     userInterest = $('input:checked', '#interest-selection').val();
     formValues = removeItem("interest", formValues);
@@ -8495,7 +8496,12 @@ function setDemogprahicsPage() {
       if ($('.target-text:visible').val() == "") {
         alert("Please fill all the fields.");
       } else {
-        $("#information-section").removeClass("hidden");
+        if (startWithNewSessionData) {
+          sendFormValues($("#start-button").data("route"));
+        } else {
+          $("#information-section").removeClass("hidden");
+        }
+
         $("#activity-section, #activity-selection").addClass("hidden");
       }
     }
@@ -8507,6 +8513,7 @@ function setDemogprahicsPage() {
   $("#start-new-button").on("click", function () {
     $("#information-section").addClass("hidden");
     $("#interest-section").removeClass("hidden");
+    startWithNewSessionData = true;
   });
   $("#previous-results-button").on("click", function () {
     window.location.href = $(this).data("route");
@@ -8560,6 +8567,25 @@ function setDemogprahicsPage() {
         populateCities(e.target.id, data);
       }
     });
+  });
+}
+
+function sendFormValues(route) {
+  $.ajax({
+    type: 'POST',
+    url: route,
+    data: {
+      "formValues": formValues
+    },
+    beforeSend: function beforeSend() {},
+    error: function error(data) {},
+    success: function success(data) {
+      if (data != "0") {
+        window.location.href = data;
+      } else {
+        alert("Please fill all the fields.");
+      }
+    }
   });
 }
 

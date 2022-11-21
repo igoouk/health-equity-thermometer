@@ -46,6 +46,7 @@ use App\Models\UserSession;
                         
                 $userSession = UserSession::where("result_id", $result->id)->first();
                 $resultDemographics = json_decode($userSession["session_values"]);
+                echo $userSession["session_values"];
               @endphp  
               <tr>
                 <td>
