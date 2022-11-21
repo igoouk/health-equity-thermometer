@@ -28,7 +28,7 @@ class UserController extends Controller
     }
     public function usePreviousDemographics()
     {
-        $previousSession = UserSession::where("user_id" , session()->get('user-id'))->orderByDesc('created_at')->limit(1)->first();
+        $previousSession = UserSession::where('result_id', '!=', null)->where("user_id" , session()->get('user-id'))->orderByDesc('created_at')->limit(1)->first();
         $newSession = $previousSession->replicate();
         $newSession->created_at = Carbon::now();
         try {
@@ -47,10 +47,10 @@ class UserController extends Controller
         $valid = "1";
         $getPreviousResults = false;
         foreach ($uservalues as $key => $item) {
-           if (!isset($item["value"]) || $item["value"] == null || $item["value"] == "" ||  $item["value"] == "Choose country" ||  $item["value"] == "Choose city" ) {
+           if (!isset($item) || $item == null || $item == "" ||  $item == "Choose country" ||  $item == "Choose city" ) {
                 $valid = "0";
            }
-           if (isset($item["value"]) && $item["value"] == "Review") {
+           if (isset($item) && $item == "Review") {
                $getPreviousResults = true;
            }
         }

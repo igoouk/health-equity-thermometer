@@ -34,7 +34,7 @@ $(document).ready(function() {
 	
 });
 
-var formValues = [];
+var formValues = {};
 
 function setResultPage(params) {
 
@@ -98,11 +98,9 @@ function setDemogprahicsPage() {
 	var startWithNewSessionData = false;
 	$('#interest-selection input').on('change', function() {
 		userInterest = $('input:checked', '#interest-selection').val();
-		formValues = removeItem("interest", formValues);
-		formValues.push({
-			"name": "interest",
-			"value": userInterest
-		});
+		//formValues = removeItem("interest", formValues);
+		formValues.interest = userInterest;
+		
 		if (userInterest == "Personal") {
 			$("#interest-options-personal").show();
 			$("#interest-options-work").hide();
@@ -114,11 +112,9 @@ function setDemogprahicsPage() {
 	});
 	$('#activity-selection input').on('change', function() {
 		userActivity = $('input:checked', '#activity-selection').val();
-		formValues = removeItem("activity", formValues);
-		formValues.push({
-			"name": "activity",
-			"value": userActivity
-		});
+		//formValues = removeItem("activity", formValues);
+		formValues.activity = userActivity;
+		
 		if (userActivity == "Test") {
 			$("#activity-target").show();
 		} else {
@@ -136,11 +132,12 @@ function setDemogprahicsPage() {
 		var organisation = "";
 		var reason = "";
 		var proceed = true;
+		/*
 		formValues = removeItem("country", formValues);
 		formValues = removeItem("city", formValues);
 		formValues = removeItem("reason", formValues);
 		formValues = removeItem("jobRole", formValues);
-		formValues = removeItem("organisation", formValues);
+		formValues = removeItem("organisation", formValues);*/
 		if (userInterest == "Personal") {
 			country = $("#personal-country").find(":selected").val();
 			city = $("#personal-city").find(":selected").val();
@@ -148,11 +145,10 @@ function setDemogprahicsPage() {
 			if (reason == "") {
 				proceed = false;
 			}
-			formValues.push(
-				{"name": "country", "value":country},
-				{"name": "city", "value" : city},
-				{"name": "reason", "value" : reason}
-			);
+			formValues.country = country;
+			formValues.city = city;
+			formValues.reason = reason;
+			
 		} else {
 			country = $("#work-country").find(":selected").val();
 			city = $("#work-city").find(":selected").val();
@@ -161,13 +157,11 @@ function setDemogprahicsPage() {
 			if (organisation == "" || jobRole == "") {
 				proceed = false;
 			}
-			formValues.push(
-				{"name": "country", "value":country},
-				{"name": "city", "value": city},
-				{"name": "jobRole", "value": jobRole},
-				{"name": "organisation", "value": organisation}
-				
-			);
+			formValues.country = country;
+			formValues.city = city;
+			formValues.jobRole = jobRole;
+			formValues.organisation = organisation;
+		
 		}
 		if (country == "" || country == "Choose country" || city == "" || city == "Choose city") {
 			proceed = false;
@@ -190,8 +184,8 @@ function setDemogprahicsPage() {
 		}else{
 			var inputName = $('input:checked', '#activity-target').val();
 			var proceed = true;
-			formValues = removeItem(inputName, formValues);
-			formValues.push({"name" : inputName, "value": $('.target-text:visible').val()});
+			//formValues = removeItem("target", formValues);
+			formValues.target = $('.target-text:visible').val();
 	
 			if ($('.target-text:visible').val() == "") {
 				alert("Please fill all the fields.");

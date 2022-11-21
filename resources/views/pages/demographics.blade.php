@@ -8,21 +8,44 @@ use App\Http\Controllers\UserController;
 if (session()->get('verified') != "1") {
     redirect('/home');
  }
-
+//xdebug_break();
 if ($resultCount > 0 ) {
     $userSession = UserController::getDemographics(session()->get('user-id'));
     $resultDemographics = json_decode($userSession["session_values"]);
-    $interest       =   $resultDemographics[0]->value;
-    $countryName    =   $resultDemographics[1]->value;
-    $cityName       =   $resultDemographics[2]->value;
-    $jobRole        =   $resultDemographics[3]->value;
-    $organisation   =   $resultDemographics[4]->value;
+   
+    foreach ($resultDemographics as $key => $value) {
+        switch ($key) {
+            case 'interest':
+                $interest   = $value;
+                break;
+            case 'country':
+                $countryName   = $value;
+                break;
+            case 'city':
+                $cityName   = $value;
+                break;
+            case 'jobRole':
+                $jobRole   = $value;
+                break;
+            case 'organisation':
+                $organisation   = $value;
+                break;
+            case 'target':
+                $target   = $value;
+                break;
+            default:
+                # code...
+                break;
+        }
+    }
+
 }else{
     $interest       =   "";
     $countryName    =   "";
     $cityName       =   "";
     $jobRole        =   "";
     $organisation   =   "";
+    $target   =   "";
 }
 //echo $userSession;
 ?>
@@ -83,16 +106,16 @@ if ($resultCount > 0 ) {
                 <p class="container-header">What do you want to do today?</p>
                 
                 @if($resultCount > 0)  
-                    <input type="radio" class="radio-input" id="activity-test" name="activity" value="Test">
+                    <input type="radio" class="radio-input" id="activity-test" name="activity" value="Test" selected>
                     <label for="activity-test">Test the health equity temperature of:</label><br>
-                    <input type="radio" class="radio-input" id="activity-review" name="activity" value="Review">
-                    <label for="activity-review">Review your previous scores</label><br>
+                    <!--<input type="radio" class="radio-input" id="activity-review" name="activity" value="Review">
+                    <label for="activity-review">Review your previous scores</label><br>-->
                 @else
                     <div>Test the health equity temperature of:</div>
                 @endif
                 
             </form>
-            <form id="activity-target" @if($resultCount == 0)  class="enabled" @endif  >
+            <form id="activity-target" class="enabled"   >
                         <input type="radio" class="radio-input" id="target-self" class="target-input" value="self" data-input-id="self-name" name="target">
                         <label for="target-self">Yourself</label>
                         <input class="target-text" type="text" id="self-name"><br>

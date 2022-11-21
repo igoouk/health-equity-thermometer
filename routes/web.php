@@ -24,9 +24,7 @@ require __DIR__.'/auth.php';
 */
 
 Route::get('/', function () {
-	session(['selected-options' => null]);
 	session(['user-id' => null]);
-	session(['quiz-completed' => null]);
     return view('pages/welcome');
 })->name("home");
 
@@ -51,6 +49,8 @@ Route::get('/previous-results', function () {
 
 
 Route::get('/demographics', function () {
+	session(['selected-options' => null]);
+	session(['quiz-completed' => null]);
     return view('pages/demographics', ['countries' => Country::all(), 'resultCount' => ResultController::getResultCount()]);
 })->middleware('verifiedUser')->name("demographics");
 //TEST})->name("demographics");

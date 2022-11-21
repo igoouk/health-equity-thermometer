@@ -33,7 +33,7 @@ use App\Models\UserSession;
                 <th>City</th>
                 <th>Job Role</th>
                 <th>Organisation/Person</th>
-                <th>Project/Self Assessed</th>
+                <th>Target</th>
                 <th>Date</th>
                 <th>Result</th>
                 
@@ -46,18 +46,17 @@ use App\Models\UserSession;
                         
                 $userSession = UserSession::where("result_id", $result->id)->first();
                 $resultDemographics = json_decode($userSession["session_values"]);
-                echo $userSession["session_values"];
               @endphp  
               <tr>
                 <td>
                   Level: {{$result["level"]}}
                 </td>    
-                <td>{{$resultDemographics[0]->value}}</td>
-                <td>{{$resultDemographics[1]->value}}</td>
-                <td>{{$resultDemographics[2]->value}}</td>
-                <td>{{$resultDemographics[3]->value}}</td>
-                <td>{{$resultDemographics[4]->value}}</td>
-                <td>{{$resultDemographics[6]->value}}</td>
+                <td>{{$resultDemographics->interest}}</td>
+                <td>{{$resultDemographics->country}}</td>
+                <td>{{$resultDemographics->city}}</td>
+                <td>{{$resultDemographics->jobRole}}</td>
+                <td>{{$resultDemographics->organisation}}</td>
+                <td>{{$resultDemographics->target}}</td>
                 <td>{{$userSession["created_at"]}}</td>
                 <td><button class="button" data-route="{{url('/result/')}}/<?php echo $result->id?>">View Result</button></td> 
               </tr>
