@@ -3,7 +3,7 @@ use App\Models\QuestionOption;
 use App\Models\Result;
 use App\Models\UserSession;
 
-xdebug_break();
+//xdebug_break();
 ?>
 
 @extends('layouts.app', ['page' => __('Previous Results'), 'pageSlug' => 'previous-results'])
