@@ -3,7 +3,7 @@ use App\Models\QuestionOption;
 use App\Models\Result;
 use App\Models\UserSession;
 
-//xdebug_break();
+xdebug_break();
 ?>
 
 @extends('layouts.app', ['page' => __('Previous Results'), 'pageSlug' => 'previous-results'])
@@ -54,8 +54,8 @@ use App\Models\UserSession;
                 <td>{{$resultDemographics->interest}}</td>
                 <td>{{$resultDemographics->country}}</td>
                 <td>{{$resultDemographics->city}}</td>
-                <td>{{$resultDemographics->jobRole}}</td>
-                <td>{{$resultDemographics->organisation}}</td>
+                <td>{{($resultDemographics->jobRole)?$resultDemographics->jobRole:"-"}}</td>
+                <td>{{($resultDemographics->organisation)?$resultDemographics->organisation:"-"}}</td>
                 <td>{{$resultDemographics->target}}</td>
                 <td>{{$userSession["created_at"]}}</td>
                 <td><button class="button" data-route="{{url('/result/')}}/<?php echo $result->id?>">View Result</button></td> 
