@@ -19,6 +19,7 @@ class CreateQuestionOptionsTable extends Migration
             $table->string('text', 500);   // string field
             $table->string('image', 500);   // string field
             $table->string('optional_text', 500);   // string field
+            $table->string('optional_type', 50);   // string field
             $table->timestamps();
         });
     }

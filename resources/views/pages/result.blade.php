@@ -14,7 +14,6 @@ $levelTexts = [
 ?>
 
     <div id="result-container" class="level level--{{$result->level}}">
-        Your level : {{$result->level}}
         <div class="container-header">What is your health equity temperature?</div>
         <div id="result-content">
 
@@ -54,7 +53,10 @@ $levelTexts = [
         </div>
     </div>
     
-              
+    <div id="footer-container" class="generic-container">
+        <img src="/img/funded-by-nihr-logo.png">
+    </div>
+               
 
    
 @endsection

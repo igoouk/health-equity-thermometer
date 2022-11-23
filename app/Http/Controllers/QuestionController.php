@@ -28,11 +28,13 @@ class QuestionController extends Controller
                 $question = Question::where('id', $questionID)->first();
                 $answer = explode(",", $question->answer);
                 $selectedOptions = [];
+                $enteredValues = [];
                 foreach ($request->selectedOptions as $key => $option)
                 {
                     if ($option["id"] == $questionID)
                     {
                         array_push($selectedOptions, $option["option"]);
+                        array_push($enteredValues, $option["value"]);
                     }
 
                 }
@@ -53,7 +55,8 @@ class QuestionController extends Controller
                 $previouslySelectedOptions = json_decode(session()->get('selected-options'));
                 $selectedAnswerObject = json_encode(array(
                     "id" => $questionID,
-                    "answers" => array_values($selectedOptions)
+                    "answers" => array_values($selectedOptions),
+                    "values" => array_values($enteredValues)
                 ));
                 $tempOptions = [];
                 if ($previouslySelectedOptions)

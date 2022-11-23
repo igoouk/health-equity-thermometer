@@ -52,8 +52,14 @@
                 margin-right: auto;
               
                 .input-holder{
+                    
                     input{
                         margin-right: 15px;
+                    }
+                    &-text{
+                        input{
+                            display: none;
+                        }
                     }
                 }
                 .label-holder{
@@ -61,8 +67,13 @@
                         text-align: left;
                     }
                 }
-                
+               &.text-option{
+                .input-holder{
+                    order:2;    
+                }
+                } 
             }
+            
         }
     }
 
@@ -83,6 +94,9 @@
         left: 10%;
         width: 80%;
     }
+    #exit-text{
+        display: none;
+    }
     #information-text{
         margin-bottom: 20px;
         li{
@@ -92,6 +106,24 @@
         }
         img{
             margin: auto;
+        }
+        .quote-container{
+            margin-left: auto;
+            margin-right: auto;
+            width: 70%;
+            text-align: center;
+            margin-bottom: 20px;
+            color: green;
+            .quote{
+                display: block;
+                font-size: 32px;
+                font-weight: bold;
+                line-height: 31px;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 20px;
+            }
         }
     }
     #next-button{

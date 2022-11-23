@@ -89,13 +89,29 @@ function setQuizPage() {
 		});
 	}
 
-}
+	$("input").on("change", function() {
+		if ($(this).is(':checked')  && $("#"+$(this).attr("id")+"-text").length > 0) {
+			$("#"+$(this).attr("id")+"-text").show();
+		}else{
+			$(".input-holder-text input").hide();
+		}
+	});
 
+}
+function showFieldsForVisibleInputs() {
+	//Show fields for checked options
+	$("input:checked").delay(1500).each(function(){
+			$(this).change();
+	})
+}
 function setDemogprahicsPage() {
 	
 	var userInterest = "";
 	var userActivity = "";
 	var startWithNewSessionData = false;
+
+	
+	showFieldsForVisibleInputs();
 	$('#interest-selection input').on('change', function() {
 		userInterest = $('input:checked', '#interest-selection').val();
 		//formValues = removeItem("interest", formValues);
@@ -138,6 +154,11 @@ function setDemogprahicsPage() {
 		formValues = removeItem("reason", formValues);
 		formValues = removeItem("jobRole", formValues);
 		formValues = removeItem("organisation", formValues);*/
+		delete formValues.country;
+		delete formValues.city;
+		delete formValues.jobRole;
+		delete formValues.organisation;
+		delete formValues.reason;
 		if (userInterest == "Personal") {
 			country = $("#personal-country").find(":selected").val();
 			city = $("#personal-city").find(":selected").val();
@@ -169,6 +190,7 @@ function setDemogprahicsPage() {
 		if (proceed) {
 			$("#interest-section").addClass("hidden");
 			$("#activity-section, #activity-selection").removeClass("hidden");
+			showFieldsForVisibleInputs();
 		}else{
 			alert("Please fill all the fields.");
 		}
@@ -193,7 +215,9 @@ function setDemogprahicsPage() {
 				if (startWithNewSessionData) {
 					sendFormValues($("#start-button").data("route"));
 				}else{
+					
 					$("#information-section").removeClass("hidden");
+					showFieldsForVisibleInputs();
 				}
 				
 				$("#activity-section, #activity-selection").addClass("hidden");
@@ -209,6 +233,7 @@ function setDemogprahicsPage() {
 	});
 	$("#start-new-button").on("click", function() {
 		$("#information-section").addClass("hidden");
+		showFieldsForVisibleInputs();
 		$("#interest-section").removeClass("hidden");
 		startWithNewSessionData = true;
 	});
@@ -322,10 +347,18 @@ function checkAnswer(questionId) {
 		questionIDs.push($(this).data("id"))
     });
     $("input:checked,option:selected").each(function() {
-        selectedOptions.push({"id":$(this).data("question-id"), "option":$(this).data("option-id")});
+		var optionValue = "";
+		if ($(this).data("additional-field") == "") {
+			optionValue = $(this).val();	
+		}else{
+			optionValue = $("#"+$(this).attr("id")+"-text").val();		
+		}
+		selectedOptions.push({"id":$(this).data("question-id"), "option":$(this).data("option-id"), "value":optionValue});
+        
     });
     $("#questions-container").hide();
-    $("#information-popup").show();
+
+    
     $.ajax({
         type: 'POST',
         url: $("#submit-answer-button").data("route"),
@@ -333,15 +366,22 @@ function checkAnswer(questionId) {
             "questionIds": questionIDs,
             "selectedOptions": selectedOptions
         },
-        beforeSend: function() {},
+        beforeSend: function() {
+			
+		},
         error: function(data) {
             console.log(data);
         },
         success: function(data) {
             if (data == "1") {
+				$("#information-popup").show();
                 $("#next-button").css("display","flex");
             } else if(data == "exit"){
-				alert("You don't need to complete the test.");
+				$("#next-button").attr("data-route", "/");
+				$("#information-text").hide();
+				$("#exit-text").show();
+				$("#next-button").css("display","flex");
+				$("#information-popup").show();
 			}
         }
     });

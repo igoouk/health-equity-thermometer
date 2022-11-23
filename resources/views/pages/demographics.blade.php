@@ -106,14 +106,14 @@ if ($resultCount > 0 ) {
                 <p class="container-header">What do you want to do today?</p>
                 
                 @if($resultCount > 0)  
-                    <input type="radio" class="radio-input" id="activity-test" name="activity" value="Test" selected>
+                    <!--<input type="radio" class="radio-input" id="activity-test" name="activity" value="Test" selected>
                     <label for="activity-test">Test the health equity temperature of:</label><br>
-                    <!--<input type="radio" class="radio-input" id="activity-review" name="activity" value="Review">
+                    <input type="radio" class="radio-input" id="activity-review" name="activity" value="Review">
                     <label for="activity-review">Review your previous scores</label><br>-->
                 @else
-                    <div>Test the health equity temperature of:</div>
+                    
                 @endif
-                
+                <div>Test the health equity temperature of:</div>
             </form>
             <form id="activity-target" class="enabled"   >
                         <input type="radio" class="radio-input" id="target-self" class="target-input" value="self" data-input-id="self-name" name="target">
@@ -132,7 +132,7 @@ if ($resultCount > 0 ) {
             </div>
         </div>
         <div id="information-section" class="generic-container @if($resultCount > 0) show @else hidden @endif">
-            <div class="container-header">There are only 7 questions until you find out your health equity temperature… For each of them tick as many as you think are applicable to you or your team</div>
+            <div class="container-header">There are only 7 questions until you find out your health equity temperature… <br><br>For each of them tick as many as you think are applicable to you or your team</div>
             <div id="information-button-container">
                 <button id="back-button" class="button @if($resultCount > 0) hidden @else show @endif">Back</button>
                 <button id="start-button" data-route="{{ 'save-demographics' }}" class="button @if($resultCount > 0) hidden @else show @endif">Start</button>
