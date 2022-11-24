@@ -378,6 +378,7 @@ function checkAnswer(questionId) {
                 $("#next-button").css("display","flex");
             } else if(data == "exit"){
 				$("#next-button").attr("data-route", "/");
+				$("#next-button").text("Start again");
 				$("#information-text").hide();
 				$("#exit-text").show();
 				$("#next-button").css("display","flex");

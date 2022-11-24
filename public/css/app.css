@@ -12049,6 +12049,7 @@ select{
 }
 #information-popup #next-button {
   display: none;
+  margin-top: 50px;
 }
 #information-popup #result-button {
   display: block;
@@ -12759,6 +12760,7 @@ video {
 #footer-container {
   align-items: center;
   min-height: 50px;
+  margin-top: 50px;
 }
 #footer-container img {
   max-width: 325px;
