@@ -11991,6 +11991,10 @@ select{
 }
 #questions-container .single-question .options-container .single-option .input-holder-text input {
   display: none;
+  margin-bottom: 0px;
+  height: 31px;
+  margin-left: 15px;
+  margin-top: -4px;
 }
 #questions-container .single-question .options-container .single-option .label-holder label {
   text-align: left;
@@ -12134,17 +12138,6 @@ ul {
   display: flex;
 }
 
-html,
-body,
-.wrapper,
-.wrapper-full-page,
-.full-page,
-.content,
-.container,
-#result-container {
-  height: 100%;
-}
-
 .container {
   position: relative;
 }
@@ -12155,6 +12148,9 @@ body,
 }
 #result-container .container-header {
   margin-bottom: 25px;
+  margin-top: 10px;
+  font-size: 42px;
+  line-height: 44px;
 }
 #result-container #save-pdf-button {
   margin-bottom: 50px;
@@ -12233,9 +12229,11 @@ body,
   color: black !important;
 }
 #result-container #result-content #information-container .level-info.level--0 {
+  margin-top: -15px;
   color: #DD2727;
 }
 #result-container #result-content #information-container .level-info.level--0.enabled:before {
+  border: none;
   height: 40%;
 }
 #result-container #result-content #information-container .level-info.level--0.enabled.top:before {
@@ -12257,10 +12255,13 @@ body,
   height: 0;
   padding-bottom: 12%;
   left: -3%;
-  z-index: -1;
+  z-index: 0;
 }
 #result-container #result-content #information-container .level-info.level--1 {
   color: #DD2727;
+}
+#result-container #result-content #information-container .level-info.level--1::before {
+  z-index: 2;
 }
 #result-container #result-content #information-container .level-info.level--1 .level-text::before {
   background-color: #DD2727;
@@ -12270,6 +12271,7 @@ body,
 }
 #result-container #result-content #information-container .level-info.level--1 .level-indicator {
   background-color: #DD2727;
+  z-index: 1;
 }
 #result-container #result-content #information-container .level-info.level--2 {
   color: #FFAD0D;

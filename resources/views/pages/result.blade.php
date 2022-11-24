@@ -38,17 +38,17 @@ $levelTexts = [
                         }
                     
                     @endphp
-                    <div class="level-info level--{{$i}} {{$levelClass}}" >
+                    <div class="level-info level--{{$i}} {{$levelClass}}" id="level--{{$i}}">
                         <div class="level-indicator"></div>
                         <div class="level-text"><div>{!!$levelTexts[$i]!!}</div></div>
                     </div>
                 @endfor
-                
+              
                 
             </div>
             
         </div>
-        <button id="save-pdf-button" class="button">Save the result as PDF</button>
+        <button id="save-pdf-button" class="button" data-route="{{url('/result-pdf/')}}" data-result-id="{{$result->id}}">Save the result as PDF</button>
         <div id="note">Written by Panagaki, K. and the NIHR ARC NWC HEMS PAs Group, Copyright © Lancaster University and the University of Liverpool, 2022
         </div>
     </div>

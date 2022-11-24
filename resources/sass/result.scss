@@ -6,7 +6,7 @@ body,
 .content,
 .container,
 #result-container {
-    height: 100%;
+    //height: 100%;
 }
 .container{
     position: relative;
@@ -16,6 +16,9 @@ body,
     flex-direction: column;
     .container-header{
         margin-bottom: 25px;
+        margin-top: 10px;
+        font-size: 42px;
+        line-height: 44px;
     }
     #save-pdf-button{
         margin-bottom: 50px;
@@ -107,8 +110,10 @@ body,
                 &.level{
                     
                     &--0{
+                        margin-top: -15px;
                         &.enabled{
                             &:before {
+                                border: none;
                                 height: 40%;
                               }
                               &.top{
@@ -136,11 +141,14 @@ body,
                             height: 0;
                             padding-bottom: 12%;
                             left: -3%;
-                            z-index: -1;
+                            z-index: 0;
                         }
                     }
                     &--1{
                         color: $red;
+                        &::before{
+                            z-index: 2;
+                        }
                         .level-text{
                             &::before{
                                 background-color: $red;
@@ -151,6 +159,7 @@ body,
                         }
                         .level-indicator{
                             background-color: $red;
+                            z-index: 1;
                         }
                     }
                     &--2{

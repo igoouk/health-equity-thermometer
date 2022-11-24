@@ -1,5 +1,6 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
+
 window.Alpine = Alpine;
 Alpine.start();
 $(document).ready(function() {
@@ -39,7 +40,24 @@ var formValues = {};
 function setResultPage(params) {
 
 	$("#save-pdf-button").on("click", function() {
-		html2pdf(document.body);
+		$("#result-container .container-header").css({"font-size": "21px", "line-height":"22px"});
+		$(this).delay(1500).hide(0, function(){
+			var opt = {
+				margin:       0,
+				filename:     'myfile.pdf',
+				image:        { type: 'png', quality: 1 },
+				html2canvas:  { scale: 1 },
+				jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+				};
+		
+				// New Promise-based usage:
+				html2pdf().set(opt).from(document.body).save();
+				console.log("done");
+					$("#result-container .container-header").css({"font-size": "42px", "line-height":"44px"});
+					$(this).delay(500).show();
+		});
+		
+
 	});
 }
 function setPreviousResultsPage(params) {

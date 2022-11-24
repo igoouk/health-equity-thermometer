@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Result;
 use Illuminate\Http\Request;
+use Mpdf\Mpdf;
+use Mpdf\Output\Destination;
 
 class ResultController extends Controller
 {
@@ -99,5 +101,23 @@ class ResultController extends Controller
     public static function getPreviousResults()
     {
         return Result::where("user_id" , session()->get('user-id'))->get();
+    }
+
+    public function generatePDF(Request $request)
+    {
+        
+        $data = [];
+        $data[] = $this->getLatestResultPerUser($request->resultID);
+        $mpdf = new Mpdf();
+
+      
+
+        //write content
+        $mpdf->WriteHTML($request->get('html'));
+
+        //return the PDF for download
+        return $mpdf->Output('test.pdf', Destination::DOWNLOAD);
+        //$pdf = PDF::loadView('pages/result-pdf', $data)->setOption('defaultFont', 'sans-serif');
+    
     }
 }
