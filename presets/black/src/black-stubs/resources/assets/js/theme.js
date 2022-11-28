@@ -358,7 +358,7 @@ demo = {
     gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
 
     var data = {
-      labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+      labels: ['Level 0', 'Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5','Level 6'],
       datasets: [{
         label: "Data",
         fill: true,

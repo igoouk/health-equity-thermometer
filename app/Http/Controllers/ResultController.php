@@ -103,21 +103,5 @@ class ResultController extends Controller
         return Result::where("user_id" , session()->get('user-id'))->get();
     }
 
-    public function generatePDF(Request $request)
-    {
-        
-        $data = [];
-        $data[] = $this->getLatestResultPerUser($request->resultID);
-        $mpdf = new Mpdf();
-
-      
-
-        //write content
-        $mpdf->WriteHTML($request->get('html'));
-
-        //return the PDF for download
-        return $mpdf->Output('test.pdf', Destination::DOWNLOAD);
-        //$pdf = PDF::loadView('pages/result-pdf', $data)->setOption('defaultFont', 'sans-serif');
-    
-    }
+   
 }

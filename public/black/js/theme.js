@@ -1,6 +1,6 @@
 type = ['primary', 'info', 'success', 'warning', 'danger'];
 
-demo = {
+charts = {
   initPickColor: function() {
     $('.pick-class-label').click(function() {
       var new_class = $(this).attr('new-class');
@@ -349,7 +349,7 @@ demo = {
       }
     };
 
-    var ctx = document.getElementById("chartLinePurple").getContext("2d");
+    /*var ctx = document.getElementById("chartLinePurple").getContext("2d");
 
     var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
@@ -383,9 +383,9 @@ demo = {
       data: data,
       options: gradientChartOptionsConfigurationWithTooltipPurple
     });
+*/
 
-
-    var ctxGreen = document.getElementById("chartLineGreen").getContext("2d");
+    /*var ctxGreen = document.getElementById("chartLineGreen").getContext("2d");
 
     var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
@@ -419,11 +419,11 @@ demo = {
       data: data,
       options: gradientChartOptionsConfigurationWithTooltipGreen
 
-    });
+    });*/
 
 
-
-    var chart_labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+/*
+    var chart_labels = ['Level 0', 'Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5', 'Level 6'];
     var chart_data = [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100];
 
 
@@ -458,7 +458,7 @@ demo = {
       },
       options: gradientChartOptionsConfigurationWithTooltipPurple
     };
-    var myChartData = new Chart(ctx, config);
+    var myChartData = new Chart(ctx, config);*/
     $("#0").click(function() {
       var data = myChartData.config.data;
       data.datasets[0].data = chart_data;
@@ -481,7 +481,7 @@ demo = {
       myChartData.update();
     });
 
-
+/*
     var ctx = document.getElementById("CountryChart").getContext("2d");
 
     var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -513,7 +513,7 @@ demo = {
       },
       options: gradientBarChartConfiguration
     });
-
+*/
   },
 
   initGoogleMaps: function() {

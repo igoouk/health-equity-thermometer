@@ -1,6 +1,6 @@
 type = ['primary', 'info', 'success', 'warning', 'danger'];
 
-demo = {
+charts2 = {
   initPickColor: function() {
     $('.pick-class-label').click(function() {
       var new_class = $(this).attr('new-class');

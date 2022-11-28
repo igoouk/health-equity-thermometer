@@ -15,6 +15,7 @@ $levelTexts = [
 
     <div id="result-container" class="level level--{{$result->level}}">
         <div class="container-header">What is your health equity temperature?</div>
+        <div class="container-text">The indicated health equity temperature is based on the first question of the screening tool you didn’t tick all applicable options for, even if you correctly did so for following questions</div>
         <div id="result-content">
 
             <div id="information-container">

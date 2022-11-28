@@ -27,7 +27,9 @@ Route::get('/', function () {
 	session(['user-id' => null]);
     return view('pages/welcome');
 })->name("home");
-
+Route::get('/no-access', function () {
+    return view('pages/no-access');
+})->name("no-access");
 Route::get('/quiz/{level}', function (Request $request, $level) {
 	if ($level == 1) { //TEST
 		//session(['selected-options' => null]);
@@ -40,13 +42,13 @@ Route::get('/quiz/{level}', function (Request $request, $level) {
 
 Route::get('/result/{resultID?}', function (Request $request, $resultID = null) {
     return view('pages/result',['result' => ResultController::getLatestResultPerUser($resultID)]);
-})->name("result");
+})->middleware('verifiedUser')->middleware('validateUserResult')->name("result");
 
 
 
 Route::get('/previous-results', function () {
     return view('pages/previous-results',['previousResults' => ResultController::getPreviousResults()]);
-})->name("previous-results");
+})->middleware('verifiedUser')->middleware('validateUserResult')->name("previous-results");
 
 
 
