@@ -41,61 +41,10 @@ $chart_data = DB::table('results')
         $(document).ready(function() {
             //charts.initDashboardPageCharts();
         });
-        var options = {
-            maintainAspectRatio: true,
-            legend: {
-                display: true
-            },
-
-            tooltips: {
-                enabled:true,
-                backgroundColor: '#f5f5f5',
-                titleFontColor: '#333',
-                bodyFontColor: '#666',
-                bodySpacing: 4,
-                xPadding: 12,
-                mode: "nearest",
-                intersect: 0,
-                position: "nearest"
-            }
-            ,
-            responsive: true
-            /*plugins: {
-                datalabels: {
-                    formatter: (value, ctx) => {
-                    
-                    let sum = 0;
-                    let dataArr = ctx.chart.data.datasets[0].data;
-                    dataArr.map(data => {
-                        sum += data;
-                    });
-                    let percentage = (value*100 / sum).toFixed(2)+"%";
-                    return percentage;
-
-                
-                    },
-                    color: '#fff',
-                        }
-            },*/
-           
-            };
-        var chart_labels = ['Level 0', 'Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5', 'Level 6'];
-        var chart_data = [0,0,0,0,0,0,0];
-            @foreach ($chart_data as $data)
-                chart_data[{{ $data->level }}] = {{$data->total}};
-            @endforeach
-        var ctx = document.getElementById("chartBig1").getContext('2d');
-
-
-        var config = {
-            type: 'pie',
-            data: {
-                labels: chart_labels,
-                datasets: [{
-                    label: "Results",
-                    fill: true,
-                    data: chart_data,
-                    backgroundColor: [
+       
+        var chart_data = [];
+        var chart_labels = []
+        var baseBackgroundColors = [
                     '#FFF',
                     '#E7514C',
                     '#EB9A3F',
@@ -104,10 +53,50 @@ $chart_data = DB::table('results')
                     '#5D748D',
                     '#8D22C4',
                     ]
+        var backgroundColorsToUse = [];
+            @foreach ($chart_data as $data)
+                chart_data.push({{$data->total}});
+                chart_labels.push("Level "+ "{{ $data->level }} - Total: {{$data->total}}");
+                backgroundColorsToUse.push(baseBackgroundColors[{{ $data->level }}])
+            @endforeach
+        var ctx = document.getElementById("chartBig1").getContext('2d');
+
+
+        var config = {
+            type: 'pie',
+            
+            data: {
+                labels: chart_labels,
+                datasets: [{
+                    label: "Results",
+                    fill: true,
+                    data: chart_data,
+                    backgroundColor: backgroundColorsToUse
                     
                 }]
             },
-            options: options
+            options: {
+                maintainAspectRatio: true,
+                legend: {
+                    display: true
+                },
+
+                tooltips: {
+                    enabled:true,
+                    backgroundColor: '#f5f5f5',
+                    titleFontColor: '#333',
+                    bodyFontColor: '#666',
+                    bodySpacing: 4,
+                    xPadding: 12,
+                    mode: "nearest",
+                    intersect: 0,
+                    position: "nearest"
+                }
+                ,
+                responsive: true
+                
+            
+            }
         };
         var myChartData = new Chart(ctx, config);
     </script>
