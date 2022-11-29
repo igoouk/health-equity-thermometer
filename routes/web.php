@@ -4,6 +4,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserSessionController;
 use App\Http\Controllers\VerificationMailController;
 use App\Models\Question;
 use App\Models\Country;
@@ -41,7 +42,7 @@ Route::get('/quiz/{level}', function (Request $request, $level) {
 //TEST})->name("quiz");
 
 Route::get('/result/{resultID?}', function (Request $request, $resultID = null) {
-    return view('pages/result',['result' => ResultController::getLatestResultPerUser($resultID)]);
+    return view('pages/result',['result' => ResultController::getLatestResultPerUser($resultID), 'userSession' => UserSessionController::getLatestUserSession()]);
 })->middleware('verifiedUser')->middleware('validateUserResult')->name("result");
 
 

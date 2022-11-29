@@ -68,6 +68,7 @@ $chart_data = DB::table('results')
             data: {
                 labels: chart_labels,
                 datasets: [{
+                    
                     label: "Results",
                     fill: true,
                     data: chart_data,

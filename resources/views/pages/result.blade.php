@@ -3,6 +3,7 @@
 @section('header', 'Result Page')
 @section('content')
 <?php
+//xdebug_break();
 $levelTexts = [
     "",
     "Health equity and health inequalities are <span>confusing</span> concepts",
@@ -15,7 +16,20 @@ $levelTexts = [
 
     <div id="result-container" class="level level--{{$result->level}}">
         <div class="container-header">What is your health equity temperature?</div>
-        <div class="container-text">The indicated health equity temperature is based on the first question of the screening tool you didn’t tick all applicable options for, even if you correctly did so for following questions</div>
+   
+        <div class="container-text" id="result-info">
+            <span>The indicated health equity temperature is based on the first question of the screening tool you didn’t tick all applicable options for, even if you correctly did so for following questions</span><br>
+            <span>According to the answers you provided {{$userSession->target}} appear to on level {{$result->level}}. </span><br><span>We have compiled a list of resources that we thought you might find useful: <a href="/pdf/Further-Resources.pdf" target="_blank">Download Further Resources</a> </span>
+            <span>Was this what you expected to get or did the scoring surprise you? </span><br>
+            
+            <span>To find out about research in health inequalities conducted by NIHR ARC NWC and how you can be involved check our website: https://arc-nwc.nihr.ac.uk/</span><br>
+            
+            <span>If you want to find out more about the Health Equity Mainstreaming Strategy and actions NIHR ARC NWC has planned visit our dedicated part of the website: https://arc-nwc.nihr.ac.uk/midas/overview/health-equity-mainstreaming-strategy-2020-2024/ </span><br>
+            
+            <span>To discuss how NIHR ARC NWC can support you in implementing an equity lens contact: k.panagaki@lancaster.ac.uk</span><br>
+            
+            <span>You can also find us on social media <a href="https://twitter.com/arc_nwc" target="_blank">@arc_nwc</a> <a href="https://twitter.com/search?q=%23ImplementEquity&src=typed_query" target="_blank">#ImplementEquity</a></span>
+            </div>
         <div id="result-content">
 
             <div id="information-container">
@@ -50,6 +64,8 @@ $levelTexts = [
             
         </div>
         <button id="save-pdf-button" class="button" data-route="{{url('/result-pdf/')}}" data-result-id="{{$result->id}}">Save the result as PDF</button>
+        <button id="read-more-button" class="button">Read more here</button>
+        <button id="download-thermometer-button" class="button">Download blank thermometer</button>
         <div id="note">Written by Panagaki, K. and the NIHR ARC NWC HEMS PAs Group, Copyright © Lancaster University and the University of Liverpool, 2022
         </div>
     </div>

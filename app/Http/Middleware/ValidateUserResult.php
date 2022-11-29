@@ -17,12 +17,14 @@ class ValidateUserResult
      */
     public function handle(Request $request, Closure $next)
     {
+        if ($request->route("resultID") != null) {
+            $requestedResult = Result::where("id", $request->route("resultID"))->first();
 
-        $requestedResult = Result::where("id", $request->route("resultID"))->first();
-
-        if($requestedResult->user_id  != session()->get('user-id')) {
-            return redirect(url('/no-access'));
+            if($requestedResult->user_id  != session()->get('user-id')) {
+                return redirect(url('/no-access'));
+            }
         }
+        
 
 
         return $next($request);

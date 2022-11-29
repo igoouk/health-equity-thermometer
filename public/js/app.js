@@ -8351,6 +8351,12 @@ function setResultPage(params) {
       $(this).delay(500).show();
     });
   });
+  $("#read-more-button").on("click", function (params) {
+    window.open("/pdf/Further-Resources.pdf", '_blank');
+  });
+  $("#download-thermometer-button").on("click", function (params) {
+    window.open("/pdf/blank-thermometer.pdf", '_blank');
+  });
 }
 
 function setPreviousResultsPage(params) {
