@@ -44,6 +44,14 @@
                 @csrf
             </form>
         @else
+        <div class="header-decoration">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
             <div class="wrapper wrapper-full-page">
                 <div class="full-page {{ $contentClass ?? '' }}">
                     <div class="content">
@@ -53,6 +61,7 @@
                     </div>
                 </div>
             </div>
+            @include('layouts.footer')
         @endauth
         
         <script src="{{ asset('black') }}/js/core/jquery.min.js"></script>

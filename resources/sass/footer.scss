@@ -1,0 +1,24 @@
+#footer-container{
+    align-items: center;
+    min-height: 250px;
+    width: 100%;
+    max-width: 100%;
+    background-image: url("/img/footer-bg.png");
+    margin-bottom: 0;
+    padding: 0;
+    margin-top: auto;
+    img{
+        max-width: 325px;
+        margin-top: 80px;
+    }
+    div{
+        display: flex;
+        margin-top: auto;
+        background: #ECECEC;
+        width: 100%;
+        text-align: center;
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+    }
+}

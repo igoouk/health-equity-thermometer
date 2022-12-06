@@ -15,13 +15,18 @@
 @import 'welcome';
 @import 'demographics';
 @import 'result';
+@import 'header';
+@import 'footer';
 
 html{
     line-height:1.15;
     -webkit-text-size-adjust:100%
 }
 body{
-    margin:0
+    margin:0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 a{
     background-color:transparent
@@ -323,10 +328,8 @@ video{
     flex-direction: column;
     display: flex;
     min-height: 500px;
-    margin-bottom: 150px;
+    margin-bottom: 100px;
     padding: 15px;
-    
-   
 }
 .hidden{
     display: none !important;
@@ -334,20 +337,23 @@ video{
 .show{
     display: flex;
 }
+
 .container-header{
     font-style: normal;
     font-weight: 700;
-    font-size: 58px;
-    line-height: 72px;
+    font-size: 30px;
+    line-height: 34px;
     text-align: center;
     color: #000000;
-    margin-bottom: 50px;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #E2DFE7;
 }
 
 .container-text{
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 13px;
     line-height: 22px;
     color: #000000;
     margin-bottom: 60px;
@@ -357,33 +363,38 @@ video{
     background-color: #722DDB !important;
     border-radius: 16px;
     color: #fff;
-    padding: 16px 30px 16px 30px;
+    padding: 16px 42px 16px 42px;
     margin-left: auto;
     margin-right: auto;
-   
+    min-width: 175px;
     cursor: pointer;
-    
+    &.show{
+        display: block !important;
+    }
     &:hover{
         background-color: #9871d1 !important;  
     }
     &.disable{
         background-color: #9871d1 !important;  
     }
-}
-
-#footer-container{
-    align-items: center;
-    min-height: 50px;
-    margin-top: 50px;
-    img{
-        max-width: 325px;
+    &.back{
+        background-color: #000000 !important;
+        color: #fff;
+        &:hover{
+            background-color: #fff !important;
+            color: #000000;
+            border: 1px solid #000000;
+        }
     }
 }
+
+
 .input-container{
     display: flex;
     flex-direction: column;
     max-width: 450px;
     align-self: center;
+    width: 450px;
 }
 input{
 
@@ -431,4 +442,10 @@ a{
 
 .chart-area {
     height: 100% !important;
+}
+
+.break-line{
+    border-bottom: 1px dashed #E2DFE7;
+    height: 1px;
+    width: 100%;
 }

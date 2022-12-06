@@ -89,9 +89,7 @@ $questionCount = 0;
        
   
     </div>
-    <div id="footer-container" class="generic-container">
-        <img src="/img/funded-by-nihr-logo.png">
-    </div>
+
     
 @endsection
 

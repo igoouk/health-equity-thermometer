@@ -56,9 +56,6 @@ This project is supported by the National Institute for Health and Care Research
     
 </div>
 
-<div id="footer-container" class="generic-container">
-    <img src="/img/funded-by-nihr-logo.png">
-</div>
 
 
 @endsection
