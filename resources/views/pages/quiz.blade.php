@@ -18,6 +18,9 @@ $questionCount = 0;
             <div class="generic-container" id="questions-container">
                 
                     @foreach ($questions as $question)
+                        @php
+                        $questionType = $question->type;
+                        @endphp
                         <div class="single-question @once enabled main-question @endonce @if ($questionCount > 0 ) second-question @endif " data-id="{{$question->id}}" >
                             <div class="p-6 bg-white border-gray-200" id="question-text" data-id="{{$question->level}}">
                                 {{$question->text}}
@@ -28,15 +31,18 @@ $questionCount = 0;
                             <div class="options-container">
                                 @foreach ($question->options as $option)
                                     @if ($question->type == "dropdown")
-                                    <select>
-                                        @foreach ($question->options as $option)
-                                        <option type="{{$question->type}}" id="option-{{$option['id']}}" class="{{$question->type}}-input" value="{{$option["text"]}}" data-question-id="{{$question->id}}" data-option-id="{{$option['id']}}" name="question-options-{{$question->id}}" data-additional-field="{{$option['optional_type']}}">{{$option["text"]}}</option>
-                                        @endforeach 
-                                    </select>  
+                                    <div class="{{$questionType}}-option">
+                                        <div class="label-holder">
+                                            <label>{{$option["optional_text"]}}</label>
+                                        </div>
+                                        <select>
+                                            @foreach ($question->options as $option)
+                                            <option type="{{$question->type}}" id="option-{{$option['id']}}" class="{{$question->type}}-input" value="{{$option["text"]}}" data-question-id="{{$question->id}}" data-option-id="{{$option['id']}}" name="question-options-{{$question->id}}" data-additional-field="{{$option['optional_type']}}">{{$option["text"]}}</option>
+                                            @endforeach 
+                                        </select>  
+                                    </div>
                                     @else
-                                        @php
-                                        $questionType = $question->type;
-                                        @endphp
+                                        
                                         <div class="single-option  {{$questionType}}-option">
                                             <div class="input-holder" >
                                                 <input type="{{$questionType}}" id="option-{{$option['id']}}" class="{{$questionType }}-input" value="{{$option["text"]}}" data-question-id="{{$question->id}}" data-option-id="{{$option['id']}}" name="question-options-{{$question->id}}" data-additional-field="{{$option['optional_type']}}">                            </input>

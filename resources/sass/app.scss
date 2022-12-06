@@ -321,9 +321,8 @@ video{
  
 //Custom global additions
 .generic-container{
-    
     margin-left: auto;
-    max-width: 800px;
+    max-width: 1000px;
     margin-right: auto;
     flex-direction: column;
     display: flex;
@@ -345,15 +344,16 @@ video{
     line-height: 34px;
     text-align: center;
     color: #000000;
-    margin-bottom: 32px;
-    padding-bottom: 20px;
-    border-bottom: 1px dashed #E2DFE7;
+    margin-top: 32px;
+    margin-bottom: 38px;
+    padding-bottom: 30px;
+    border-bottom: 1px dashed #B7B7B7;
 }
 
 .container-text{
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 22px;
     color: #000000;
     margin-bottom: 60px;
@@ -445,7 +445,7 @@ a{
 }
 
 .break-line{
-    border-bottom: 1px dashed #E2DFE7;
+    border-bottom: 1px dashed #B7B7B7;
     height: 1px;
     width: 100%;
 }
