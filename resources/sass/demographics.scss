@@ -49,10 +49,7 @@
             display: none;
         }
         #activity-button-container{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            margin-top: 20px;
+            
         }
         
         #activity-target{
@@ -76,6 +73,9 @@
             label{
                 margin-bottom: 20px;
             }
+            @media only screen and (max-width: 800px) {
+                min-width: 100%;
+            }
         }
         .container-text{
             text-align: center;
@@ -94,6 +94,7 @@
                 flex-direction: column;
                 .button{
                     margin-bottom: 20px;
+                    width: 100%;
                 }
             }
             

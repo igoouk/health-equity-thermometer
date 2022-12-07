@@ -358,7 +358,19 @@ video{
     color: #000000;
     margin-bottom: 60px;
 }
-
+.button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
+    @media only screen and (max-width: 800px) {
+        flex-direction: column;
+        .button{
+            margin-bottom: 20px;
+            width: 100%;
+        }
+    }
+}
 .button{
     background-color: #722DDB !important;
     border-radius: 16px;
@@ -386,6 +398,9 @@ video{
             border: 1px solid #000000;
         }
     }
+    @media only screen and (max-width: 800px) {
+        width: 100%;
+    }
 }
 
 
@@ -395,6 +410,12 @@ video{
     max-width: 450px;
     align-self: center;
     width: 450px;
+    @media only screen and (max-width: 800px) {
+        width: 100%;
+        select,input[type="text"]{
+            width: 100% !important;
+        }
+    }
 }
 input{
 
@@ -405,11 +426,13 @@ input{
 
     }
 
+
 }
 select{
     border-radius: 10px;
     border-color: #d2d2d2;
     margin-bottom: 25px;
+
 }
 
 .radio-input{

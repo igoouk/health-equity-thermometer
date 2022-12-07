@@ -79,6 +79,7 @@
         <script src="{{ asset('black') }}/js/theme.js"></script>
         <script src="{{ URL::asset('js/app.js') }}"></script>
         <script src="{{ URL::asset("js/html2pdf.bundle.min.js")}}"></script>
+        
 
         @stack('js')
 

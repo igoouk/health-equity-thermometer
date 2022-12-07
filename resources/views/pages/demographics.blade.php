@@ -70,7 +70,7 @@ if ($resultCount > 0 ) {
                     </div>
             </form>
             <div class="break-line"></div>
-            <div id="interest-options-work">
+            <div id="interest-options-work" class="input-container">
                 <div>
                   <label for="work-role">Job Role:</label>
                   <input type="text" id="work-role">
@@ -90,7 +90,7 @@ if ($resultCount > 0 ) {
                   </select>
                 </div>
             </div>
-            <div id="interest-options-personal">
+            <div id="interest-options-personal" class="input-container">
                 <div>
                     <label for="personal-country">I am based in:</label>
                     <select id="personal-country" data-route="{{url('get-cities')}}"> @foreach ($countries as $country) <option name="{{$country->name}}" data-id="{{$country->id}}">{{$country->name}}</option> @endforeach </select>
@@ -126,7 +126,7 @@ if ($resultCount > 0 ) {
                 
             </form>
             <p class="container-text">Test the health equity temperature of:</p>
-            <form id="activity-target" class="enabled"   >
+            <form id="activity-target" class="enabled input-container"   >
                         <div>
                             <input type="radio" class="radio-input" id="target-self" class="target-input" value="self" data-input-id="self-name" name="target">
                             <label for="target-self">Yourself</label>
@@ -143,7 +143,7 @@ if ($resultCount > 0 ) {
                         </div>
                         <input class="target-text" type="text" id="organisation-name">
             </form>
-            <div id="activity-button-container">
+            <div id="activity-button-container" class="button-container">
                 <button id="back-button" class="button back">Back</button>
                 <button id="next-button" class="button next">Next</button>
             </div>
@@ -151,7 +151,7 @@ if ($resultCount > 0 ) {
         <div id="information-section" class="generic-container @if($resultCount > 0) show @else hidden @endif">
             <div class="container-header">There are only 7 questions until you find out your health equity temperature… </div>
             <div class="container-text">For each of them <b>tick as many as you think are applicable</b> to you or your team</div>
-            <div id="information-button-container">
+            <div id="information-button-container" class="button-container">
                 <button id="back-button" class="button back @if($resultCount > 0) hidden @else show @endif">Back</button>
                 <button id="start-button" data-route="{{ 'save-demographics' }}" class="button @if($resultCount > 0) hidden @else show @endif">Start</button>
                 <button id="start-new-button" class="button @if($resultCount > 0) show @else hidden @endif">Start with new session data</button>
