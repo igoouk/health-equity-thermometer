@@ -31,7 +31,7 @@ $questionCount = 0;
                             </div>
                             <div class="options-container">
                                 @foreach ($question->options as $option)
-                                {{$option["id"]}}
+                                
                                     @if ($question->type == "dropdown")
                                     <div class="{{$questionType}}-option">
                                         <div class="label-holder">
