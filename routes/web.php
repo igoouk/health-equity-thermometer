@@ -45,7 +45,9 @@ Route::get('/result/{resultID?}', function (Request $request, $resultID = null) 
     return view('pages/result',['result' => ResultController::getLatestResultPerUser($resultID), 'userSession' => UserSessionController::getLatestUserSession()]);
 })->middleware('verifiedUser')->middleware('validateUserResult')->name("result");
 
-
+Route::get('/welcome-back', function () {
+    return view('pages/welcome-back');
+})->middleware('verifiedUser')->name("welcome-back");
 
 Route::get('/previous-results', function () {
     return view('pages/previous-results',['previousResults' => ResultController::getPreviousResults()]);

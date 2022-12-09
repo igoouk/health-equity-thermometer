@@ -51,7 +51,13 @@ class VerificationMailController extends Controller
             session(['verified' => "1"]);
             $mostRecentRequestedCode->is_used = 1;
             $mostRecentRequestedCode->save();
-            return "/demographics";
+            $hasPreviousResult = Result::where('user_id', $user_id)->count();
+            if ($hasPreviousResult) {
+                return "/welcome-back";
+            }else{
+                return "/demographics";
+            }
+            
            
             
         }else if($mostRecentRequestedCode->is_used == 1){

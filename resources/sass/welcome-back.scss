@@ -1,0 +1,32 @@
+#welcome-back-container{
+
+    .container-header{
+        font-size: 38px;
+        line-height: 42px;
+    }
+    .container-text{
+        text-align: center;
+    }
+    input[type="text"],select{
+        width: 450px;
+    }
+
+    #information-section{
+        //display: none;
+        .container-text{
+            text-align: center;
+        }
+        #information-button-container{
+            display: flex;
+            @media only screen and (max-width: 800px) {
+                flex-direction: column;
+                .button{
+                    margin-bottom: 20px;
+                    width: 100%;
+                }
+            }
+            
+        }
+    }
+   
+}

@@ -12184,6 +12184,32 @@ ul {
   }
 }
 
+#welcome-back-container .container-header {
+  font-size: 38px;
+  line-height: 42px;
+}
+#welcome-back-container .container-text {
+  text-align: center;
+}
+#welcome-back-container input[type=text], #welcome-back-container select {
+  width: 450px;
+}
+#welcome-back-container #information-section .container-text {
+  text-align: center;
+}
+#welcome-back-container #information-section #information-button-container {
+  display: flex;
+}
+@media only screen and (max-width: 800px) {
+  #welcome-back-container #information-section #information-button-container {
+    flex-direction: column;
+  }
+  #welcome-back-container #information-section #information-button-container .button {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+}
+
 .container {
   position: relative;
 }

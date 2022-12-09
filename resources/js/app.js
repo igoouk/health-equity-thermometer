@@ -28,6 +28,10 @@ $(document).ready(function() {
 		setPreviousResultsPage();
 	}
 
+	if ($("#welcome-back-container").length > 0) {
+		setWelcomeBackPage();
+	}
+
 
 	
 	
@@ -41,10 +45,14 @@ $(document).ready(function() {
 
 
 var formValues = {};
-var demographicsSaved = false;
 var userInterest = "";
 var userActivity = "";
-var startWithNewSessionData = false;
+
+function setWelcomeBackPage(params) {
+	$(".button").on("click", function(){
+		window.location.href = $(this).data("route");
+	})
+}
 
 function setResultPage(params) {
 
@@ -267,14 +275,9 @@ function setDemogprahicsPage() {
 			if (formValues.target == "") {
 				alert("Please fill all the fields.");
 			}else{
-				if (startWithNewSessionData) {
-					sendFormValues($("#start-button").data("route"));
-				}else{
-					
-					$("#information-section").removeClass("hidden");
-					showFieldsForVisibleInputs();
-				}
-				
+			
+				$("#information-section").removeClass("hidden");
+				showFieldsForVisibleInputs();
 				$("#activity-section, #activity-selection").addClass("hidden");
 			}
 		}
@@ -290,7 +293,6 @@ function setDemogprahicsPage() {
 		$("#information-section").addClass("hidden");
 		showFieldsForVisibleInputs();
 		$("#interest-section").removeClass("hidden");
-		startWithNewSessionData = true;
 	});
 
 	$("#previous-results-button").on("click", function() {
@@ -335,32 +337,26 @@ function setDemogprahicsPage() {
 	});
 }
 function sendFormValues(route) {
-	if (demographicsSaved) {
-		window.location.href = "/quiz/1";
-	}else{
-		$.ajax({
-			type: 'POST',
-			url: route,
-			data: {
-			  "formValues": formValues
-			},
-			beforeSend: function beforeSend() {},
-			error: function error(data) {},
-			success: function success(data) {
-			  if (data != "0") {
-				  if (startWithNewSessionData) {
-					$("#information-section").removeClass("hidden");
-					showFieldsForVisibleInputs();
-				  }else{
-					window.location.href = data;
-				  }
-				  demographicsSaved = true;
-			  } else {
-				alert("Please fill all the fields.");
-			  }
+
+	$.ajax({
+		type: 'POST',
+		url: route,
+		data: {
+			"formValues": formValues
+		},
+		beforeSend: function beforeSend() {},
+		error: function error(data) {},
+		success: function success(data) {
+			if (data != "0") {
+
+			window.location.href = data;
+
+			} else {
+			alert("Please fill all the fields.");
 			}
-		  });
-	}
+		}
+		});
+	
 	
 }
 
@@ -482,6 +478,9 @@ function verifyCode(code) {
 					$("#send-code-button").attr("disabled", false);
 				break;
 				case "/demographics":
+					window.location.href = data;
+				break;
+				case "/welcome-back":
 					window.location.href = data;
 				break;
 				case "1":
