@@ -2,9 +2,10 @@
 <?php
 use App\Models\Question;
 if (session()->get('verified') != "1") {
-    redirect('/home');
+    redirect()->route('home');
  }
 //xdebug_break();
+
 
 $nextLevel = ($currentLevel != 6) ? $currentLevel+ 1 : 6; 
 $questionCount = 0;
@@ -30,6 +31,7 @@ $questionCount = 0;
                             </div>
                             <div class="options-container">
                                 @foreach ($question->options as $option)
+                                {{$option["id"]}}
                                     @if ($question->type == "dropdown")
                                     <div class="{{$questionType}}-option">
                                         <div class="label-holder">

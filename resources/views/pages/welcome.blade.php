@@ -6,9 +6,11 @@
 
 <div id="welcome-container" class="generic-container">
     <div class="container-header">
-        Find out what your health equity temperature is
+        Health Equity Thermometer and Screening Tool
     </div>
+
     <div class="container-text">
+        Find out what your health equity temperature is.<br><br>
         Reducing health inequalities is a vision shared by many individuals, organisations, and sectors. However, deciding what actions are appropriate in each context is more of a challenge. Making sense of and implementing an equity lens can be a non-linear journey whilst collaborating individuals/groups may be at different stages of that journey. 
         <br><br>
 The Health Equity Thermometer and Screening Tool is a free tool that was developed collaboratively by academics and members of the public with lived experience of health inequalities at the NIHR ARC NWC primarily aiming to support health equity research. It can be used flexibly to apply to individuals, teams or whole organizations and it can:<br>

@@ -89,4 +89,6 @@ class UserSessionController extends Controller
         $userSessionValues = json_decode($sessionData["session_values"]);
         return $userSessionValues;
     }
+
+
 }

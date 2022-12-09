@@ -17,6 +17,9 @@ class QuestionController extends Controller
      */
     public function checkAnswer(Request $request)
     {
+        $question = Question::where('id', $request->questionIds[0])->first();
+        $currentLevel = $question->level;
+        session(['current-level' => $currentLevel]);
         if (session()->get('quiz-completed') != true)
         {
 
@@ -74,6 +77,8 @@ class QuestionController extends Controller
                 {
                     if ($questionCount == count($request->questionIds))
                     {
+                        //session(['previous-level' => $currentLevel]);
+                        session(['current-level' => $currentLevel+1]);
                         return "1";
                     }
 
@@ -105,6 +110,7 @@ class QuestionController extends Controller
                     if ($exitQuiz) {
                         return "exit";
                     }else{
+                        session(['current-level' => $currentLevel+1]);
                         return "1";
                     }
                     
@@ -114,6 +120,7 @@ class QuestionController extends Controller
         }
         else
         {
+            session(['current-level' => $currentLevel+1]);
             return "1";
         }
 

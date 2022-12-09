@@ -35,7 +35,16 @@ $(document).ready(function() {
 	
 });
 
+
+
+
+
+
 var formValues = {};
+var demographicsSaved = false;
+var userInterest = "";
+var userActivity = "";
+var startWithNewSessionData = false;
 
 function setResultPage(params) {
 
@@ -108,6 +117,14 @@ function setLoginPage() {
 }
 
 function setQuizPage() {
+	//disable back buttons on browser
+	history.pushState(null, document.title, location.href);
+	window.addEventListener('popstate', function (event)
+	{
+	history.pushState(null, document.title, location.href);
+	});
+
+
 	$("#submit-answer-button").on("click", function() {
 		checkAnswer($(".single-question").data("id"));
 	});
@@ -142,9 +159,8 @@ function showFieldsForVisibleInputs() {
 }
 function setDemogprahicsPage() {
 	
-	var userInterest = "";
-	var userActivity = "";
-	var startWithNewSessionData = false;
+	
+	
 
 	
 	showFieldsForVisibleInputs();
@@ -175,7 +191,10 @@ function setDemogprahicsPage() {
 	});
 	$('#activity-target input').on('change', function() {
 		$(".target-text").hide();
-		$("#" + $('input:checked', '#activity-target').data("input-id")).show();
+		if ($("#" + $('input:checked', '#activity-target').data("input-id")).length > 0 ) {
+			$("#" + $('input:checked', '#activity-target').data("input-id")).show();
+		}
+		
 	});
 	$("#interest-section #next-button").on("click", function() {
 		var country = "";
@@ -220,7 +239,7 @@ function setDemogprahicsPage() {
 			formValues.organisation = organisation;
 		
 		}
-		if (country == "" || country == "Choose country" || city == "" || city == "Choose city") {
+		if (country == "" || country == "Choose country" || city == "" || city == "Choose County/Area") {
 			proceed = false;
 		}
 		if (proceed) {
@@ -243,9 +262,9 @@ function setDemogprahicsPage() {
 			var inputName = $('input:checked', '#activity-target').val();
 			var proceed = true;
 			//formValues = removeItem("target", formValues);
-			formValues.target = $('.target-text:visible').val();
+			formValues.target = $('.target-text:visible').length != 0 ? $('.target-text:visible').val() : "Self";
 	
-			if ($('.target-text:visible').val() == "") {
+			if (formValues.target == "") {
 				alert("Please fill all the fields.");
 			}else{
 				if (startWithNewSessionData) {
@@ -295,24 +314,7 @@ function setDemogprahicsPage() {
 		});
 	});
 	$("#start-button").on("click", function() {
-		
-		$.ajax({
-			type: 'POST',
-			url: $(this).data("route"),
-			data: {
-				"formValues":formValues
-			},
-			beforeSend: function() {},
-			error: function(data) {},
-			success: function(data) {
-				if (data != "0") {
-					window.location.href = data;
-				}else{
-					alert("Please fill all the fields.")
-				}
-				
-			}
-		});
+		sendFormValues($(this).data("route"));
 	});
 	let countryDropDowns = $('#work-country, #personal-country');
 	countryDropDowns.prepend('<option selected="true" disabled>Choose country</option>');
@@ -333,22 +335,33 @@ function setDemogprahicsPage() {
 	});
 }
 function sendFormValues(route) {
-	$.ajax({
-		type: 'POST',
-		url: route,
-		data: {
-		  "formValues": formValues
-		},
-		beforeSend: function beforeSend() {},
-		error: function error(data) {},
-		success: function success(data) {
-		  if (data != "0") {
-			window.location.href = data;
-		  } else {
-			alert("Please fill all the fields.");
-		  }
-		}
-	  });
+	if (demographicsSaved) {
+		window.location.href = "/quiz/1";
+	}else{
+		$.ajax({
+			type: 'POST',
+			url: route,
+			data: {
+			  "formValues": formValues
+			},
+			beforeSend: function beforeSend() {},
+			error: function error(data) {},
+			success: function success(data) {
+			  if (data != "0") {
+				  if (startWithNewSessionData) {
+					$("#information-section").removeClass("hidden");
+					showFieldsForVisibleInputs();
+				  }else{
+					window.location.href = data;
+				  }
+				  demographicsSaved = true;
+			  } else {
+				alert("Please fill all the fields.");
+			  }
+			}
+		  });
+	}
+	
 }
 
 function removeItem(itemName, array) {
@@ -367,11 +380,17 @@ function populateCities(field, cityArray) {
     }
     cityDropdown.empty();
     cityDropdown.show();
-    cityDropdown.append('<option selected="true" disabled>Choose city</option>');
-    cityDropdown.prop('selectedIndex', 0);
-    $.each(cityArray, function(key, entry) {
-        cityDropdown.append($('<option></option>').attr('value', entry.abbreviation).attr('city-id', entry.id).text(entry.name));
-    })
+    
+	if (cityArray.length == 0) {
+		cityDropdown.append('<option selected="true" disabled value="N/A" data-city-id="999">No country/area option available</option>');
+	}else{
+		cityDropdown.append('<option selected="true" disabled>Choose County/Area</option>');
+		$.each(cityArray, function(key, entry) {
+			cityDropdown.append($('<option></option>').attr('value', entry.abbreviation).attr('city-id', entry.id).text(entry.name));
+		})
+	}
+	cityDropdown.prop('selectedIndex', 0);
+    
 }
 
 function checkAnswer(questionId) {
@@ -454,14 +473,26 @@ function verifyCode(code) {
 		},
 		beforeSend: function() {},
 		success: function(data) {
-			if (data == "0") {
-				alert("Wrong verification code. Please try again. ");
-				$("#verify-code-container").css("display","none");
-				$("#send-code-container").show();
-				$("#send-code-button").removeClass("disable");
-				$("#send-code-button").attr("disabled", false);
-			} else {
-				window.location.href = data;
+			 switch (data) {
+				case "0":
+					alert("Wrong verification code. Please try again.");
+					$("#verify-code-container").css("display", "none");
+					$("#send-code-container").show();
+					$("#send-code-button").removeClass("disable");
+					$("#send-code-button").attr("disabled", false);
+				break;
+				case "/demographics":
+					window.location.href = data;
+				break;
+				case "1":
+					alert("Already used code. Please try again.");
+					$("#verify-code-container").css("display", "none");
+					$("#send-code-container").show();
+					$("#send-code-button").removeClass("disable");
+					$("#send-code-button").attr("disabled", false);
+				break;
+				default:
+				
 			}
 		}
 	});

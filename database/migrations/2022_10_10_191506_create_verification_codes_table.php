@@ -17,6 +17,7 @@ class CreateVerificationCodesTable extends Migration
             $table->increments('id'); // autoincrement id field
             $table->integer('user_id');   // string field
             $table->string('code', 500);   // string field
+            $table->boolean('is_used', 10);  
             $table->timestamps();
         });
     }

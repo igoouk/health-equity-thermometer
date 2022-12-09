@@ -15,7 +15,8 @@ class VerificationCode extends Model
      */
     protected $fillable = [
         'user_id',
-        'code'
+        'code',
+        'is_used'
     ];
     protected $table = 'verification_codes';
 }

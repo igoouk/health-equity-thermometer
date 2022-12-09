@@ -47,7 +47,7 @@ class UserController extends Controller
         $valid = "1";
         $getPreviousResults = false;
         foreach ($uservalues as $key => $item) {
-           if (!isset($item) || $item == null || $item == "" ||  $item == "Choose country" ||  $item == "Choose city" ) {
+           if (!isset($item) || $item == null || $item == "" ||  $item == "Choose country" ||  $item == "Choose County/Area" ) {
                 $valid = "0";
            }
            if (isset($item) && $item == "Review") {
@@ -66,6 +66,7 @@ class UserController extends Controller
             }else{
                 return "/quiz/2";
             }*/
+            session(["demographics-saved" => true]);
             if ($getPreviousResults) {
                 return "/previous-results";
             }else{

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\StateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserSessionController;
 use App\Http\Controllers\VerificationMailController;
@@ -26,19 +27,18 @@ require __DIR__.'/auth.php';
 
 Route::get('/', function () {
 	session(['user-id' => null]);
+	session(['current-level' => null]);
+	session(['selected-options' => null]);
+	session(['quiz-completed' => null]);
+	session(["demographics-saved" => null]);
     return view('pages/welcome');
 })->name("home");
 Route::get('/no-access', function () {
     return view('pages/no-access');
 })->name("no-access");
 Route::get('/quiz/{level}', function (Request $request, $level) {
-	if ($level == 1) { //TEST
-		//session(['selected-options' => null]);
-		//session(['user-id' => 4]);
-		//session(['quiz-completed' => null]);
-	}
-    return view('pages/quiz', ['questions' => Question::getQuestion($level), 'currentLevel' => $level]);
-})->middleware('verifiedUser')->name("quiz");
+	return view('pages/quiz', ['questions' => Question::getQuestion($level), 'currentLevel' => $level]);   
+})->middleware('verifiedUser')->middleware('isOnCorrectLevel')->name("quiz");
 //TEST})->name("quiz");
 
 Route::get('/result/{resultID?}', function (Request $request, $resultID = null) {
@@ -57,7 +57,7 @@ Route::get('/demographics', function () {
 	session(['selected-options' => null]);
 	session(['quiz-completed' => null]);
     return view('pages/demographics', ['countries' => Country::all(), 'resultCount' => ResultController::getResultCount()]);
-})->middleware('verifiedUser')->name("demographics");
+})->middleware('verifiedUser')->middleware('hasTestStarted')->name("demographics");
 //TEST})->name("demographics");
 
 
@@ -68,7 +68,7 @@ Route::get('/dashboard', function () {
 Route::post('send-code', [VerificationMailController::class, 'sendCode']);
 Route::post('verify-code', [VerificationMailController::class, 'verifyCode']);
 Route::post('check-answer', [QuestionController::class, 'checkAnswer']);
-Route::post('get-cities', [CityController::class, 'getCities']);
+Route::post('get-states', [StateController::class, 'getStates']);
 Route::post('save-demographics', [UserController::class, 'saveDemographics']);
 Route::post('use-previous-demographics', [UserController::class, 'usePreviousDemographics']);
 
