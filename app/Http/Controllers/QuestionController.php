@@ -91,28 +91,30 @@ class QuestionController extends Controller
                     }
                     try
                     {
-                        $result = Result::create(['user_id' => session()->get('user-id') , 'selected_options' => $selectedOptionsString, 'level' => $level]);
-
-                        $userSession = UserSession::where("user_id", session()->get('user-id'))
-                            ->orderByDesc('created_at')
-                            ->get()
-                            ->first();
-                        $userSession->result_id = $result->id;
-                        $userSession->save();
                         session(['selected-options' => null]);
                         session(['quiz-completed' => true]);
+                        if (!$exitQuiz) {
+                            $result = Result::create(['user_id' => session()->get('user-id') , 'selected_options' => $selectedOptionsString, 'level' => $level]);
+
+                            $userSession = UserSession::where("user_id", session()->get('user-id'))
+                                ->orderByDesc('created_at')
+                                ->get()
+                                ->first();
+                            $userSession->result_id = $result->id;
+                            $userSession->save();
+                            session(['current-level' => $currentLevel+1]);
+                            return "1";
+                        }else{
+                            return "exit"; 
+                        }
+                        
 
                     }
                     catch(\Throwable $th)
                     {
                         return $th;
                     }
-                    if ($exitQuiz) {
-                        return "exit";
-                    }else{
-                        session(['current-level' => $currentLevel+1]);
-                        return "1";
-                    }
+
                     
                 }
             }

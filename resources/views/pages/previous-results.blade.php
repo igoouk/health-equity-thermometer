@@ -4,20 +4,21 @@ use App\Models\Result;
 use App\Models\UserSession;
 
 //xdebug_break();
+$levelColours = ["Red", "Orange","Yellow","Green","Blue","Purple"]
 ?>
 
 @extends('layouts.app', ['page' => __('Previous Results'), 'pageSlug' => 'previous-results'])
 
 @section('content')
-<div class="row">
+<div class="row" id="previous-results-container">
   
   <div class="col-md-12">
     <div class="card  card-plain">
       <div class="card-header">
-        <h4 class="card-title">Previous Results</h4>
+        <h4 class="container-header">Previous Results</h4>
         <!--<p class="category"> Here is a subtitle for this table</p>-->
       </div>
-      <div class="card-body" id="previous-results-container">
+      <div class="card-body" id="results-table">
         <div class="table-responsive">
           <table class="table tablesorter " id="">
             <thead class=" text-primary">
@@ -33,7 +34,7 @@ use App\Models\UserSession;
                 <th>City</th>
                 <th>Job Role</th>
                 <th>Organisation/Person</th>
-                <th>Target</th>
+                <th>Project/Organisation</th>
                 <th>Date</th>
                 <th>Result</th>
                 
@@ -49,7 +50,7 @@ use App\Models\UserSession;
               @endphp  
               <tr>
                 <td>
-                  Level: {{$result["level"]}}
+                  Level: {{$levelColours[$result["level"]]}}
                 </td>    
                 <td>{{$resultDemographics->interest}}</td>
                 <td>{{$resultDemographics->country}}</td>
@@ -65,7 +66,9 @@ use App\Models\UserSession;
           </table>
         </div>
       </div>
+      
     </div>
+    <button class="button" id="go-back-button" data-route="{{url('/welcome-back')}}">Go back</button>
   </div>
 </div>
 @endsection

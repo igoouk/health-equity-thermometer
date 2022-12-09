@@ -12184,6 +12184,15 @@ ul {
   }
 }
 
+#previous-results-container {
+  margin-top: 50px;
+}
+#previous-results-container #go-back-button {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
 #welcome-back-container .container-header {
   font-size: 38px;
   line-height: 42px;
