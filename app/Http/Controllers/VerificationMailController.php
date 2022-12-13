@@ -46,8 +46,8 @@ class VerificationMailController extends Controller
     {
         $user_id = session()->get('user-id');
         $mostRecentRequestedCode = VerificationCode::where('user_id', $user_id)->orderByDesc('created_at')->limit(1)->first();
-        if($request->code == $mostRecentRequestedCode->code && $mostRecentRequestedCode->is_used == 0) {
-        //if (true) { //for testing purposes
+        //if($request->code == $mostRecentRequestedCode->code && $mostRecentRequestedCode->is_used == 0) {
+        if (true) { //for testing purposes
             session(['verified' => "1"]);
             $mostRecentRequestedCode->is_used = 1;
             $mostRecentRequestedCode->save();

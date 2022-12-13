@@ -36,30 +36,29 @@ Route::get('/', function () {
 Route::get('/no-access', function () {
     return view('pages/no-access');
 })->name("no-access");
-Route::get('/quiz/{level}', function (Request $request, $level) {
+Route::middleware('verifiedUser')->middleware('isOnCorrectLevel')->get('/quiz/{level}', function (Request $request, $level) {
 	return view('pages/quiz', ['questions' => Question::getQuestion($level), 'currentLevel' => $level]);   
-})->middleware('verifiedUser')->middleware('isOnCorrectLevel')->name("quiz");
-//TEST})->name("quiz");
+})->name("quiz");
 
-Route::get('/result/{resultID?}', function (Request $request, $resultID = null) {
+Route::middleware('verifiedUser')->middleware('validateUserResult')->get('/result/{resultID?}', function (Request $request, $resultID = null) {
     return view('pages/result',['result' => ResultController::getLatestResultPerUser($resultID), 'userSession' => UserSessionController::getLatestUserSession()]);
-})->middleware('verifiedUser')->middleware('validateUserResult')->name("result");
+})->name("result");
 
-Route::get('/welcome-back', function () {
+Route::middleware('verifiedUser')->get('/welcome-back', function () {
     return view('pages/welcome-back');
-})->middleware('verifiedUser')->name("welcome-back");
+})->name("welcome-back");
 
-Route::get('/previous-results', function () {
+Route::middleware('verifiedUser')->middleware('validateUserResult')->get('/previous-results', function () {
     return view('pages/previous-results',['previousResults' => ResultController::getPreviousResults()]);
-})->middleware('verifiedUser')->middleware('validateUserResult')->name("previous-results");
+})->name("previous-results");
 
 
 
-Route::get('/demographics', function () {
+Route::middleware('verifiedUser')->middleware('hasTestStarted')->get('/demographics', function () {
 	session(['selected-options' => null]);
 	session(['quiz-completed' => null]);
     return view('pages/demographics', ['countries' => Country::all(), 'resultCount' => ResultController::getResultCount()]);
-})->middleware('verifiedUser')->middleware('hasTestStarted')->name("demographics");
+})->name("demographics");
 //TEST})->name("demographics");
 
 

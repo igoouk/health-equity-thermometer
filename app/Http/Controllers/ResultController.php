@@ -91,8 +91,9 @@ class ResultController extends Controller
         }else{
             return Result::where("user_id" , 4)->orderByDesc('created_at')->limit(1)->first();
         }*/
-        
-        return Result::where("user_id" , session()->get('user-id'))->orderByDesc('created_at')->limit(1)->first();
+        $result = Result::where("user_id" , session()->get('user-id'))->orderByDesc('created_at')->limit(1)->first();
+
+        return $result;
     }
     public static function getResultCount(){
         return Result::where("user_id" , session()->get('user-id'))->count();

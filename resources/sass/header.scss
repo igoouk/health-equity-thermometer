@@ -1,6 +1,10 @@
 .header-decoration{
     display: flex;
     flex-direction: row;
+    position: sticky;
+    z-index: 100;
+    top: 0;
+  
     div{
         height: 10px;
         flex: 1 auto;

@@ -11,7 +11,24 @@ $levelTexts = [
     "Identification of health inequalities is straightforward, but application of an equity lens in <span>practice is challenging</span>",
     "Some policies, practices are applied through an equity lens. Additional support to <span>apply that more widely</span> would be welcomed.",
     "<span>All policies, systems, and practices</span> are applied through an equity lens",
-    "<span>Patients and the public</span> are involved and engaged at all stages of research. Their contribution is valued and its impact is recorded."]
+    "<span>Patients and the public</span> are involved and engaged at all stages of research. Their contribution is valued and its impact is recorded."];
+$target = "";
+$targetS = "s";
+switch ($userSession->target) {
+    case 'self':
+        $target = "you";
+        $targetS = "";
+        break;
+    case 'project':
+        $target = "your team";
+        break;
+    case 'organisation':
+        $target = "your organisation";
+        break;
+    default:
+        # code...
+        break;
+}
 ?>
 
     <div id="result-container" class="level level--{{$result->level}}">
@@ -54,7 +71,7 @@ $levelTexts = [
             
         </div>
         <div class="container-text" id="result-info">
-            <span>According to the answers you provided {{$userSession->target}} appear to on level {{$result->level}}. </span><br>
+            <span><b>According to the answers you provided, your team {{$target}} appear{{$targetS}} to be on level {{$result->level}}. </b></span><br><br>
             <span>We have compiled a list of resources that we thought you might find useful: <a href="/pdf/Further-Resources.pdf" target="_blank">Download Further Resources</a> </span><br>
             <span>Was this what you expected to get or did the scoring surprise you? </span><br>
             
@@ -66,7 +83,7 @@ $levelTexts = [
             
             <span>You can also find us on social media <a href="https://twitter.com/arc_nwc" target="_blank">@arc_nwc</a> <a href="https://twitter.com/search?q=%23ImplementEquity&src=typed_query" target="_blank">#ImplementEquity</a></span>
         </div>
-        <div id="button-container">
+        <div id="button-container" class="button-container">
             <button id="save-pdf-button" class="button" data-route="{{url('/result-pdf/')}}" data-result-id="{{$result->id}}">Save the result as PDF</button>
             <button id="read-more-button" class="button">Read more here</button>
             <button id="download-thermometer-button" class="button">Download blank thermometer</button>

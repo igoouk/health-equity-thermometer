@@ -12238,9 +12238,15 @@ ul {
   margin: auto;
   line-height: 25px;
 }
+@media only screen and (max-width: 600px) {
+  #result-container #result-info {
+    width: 100%;
+  }
+}
+#result-container #result-info span:nth-child(1) {
+  font-size: 1.8vh;
+}
 #result-container #button-container {
-  display: flex;
-  flex-direction: row;
   width: 65%;
   align-self: center;
   margin-top: 40px;
@@ -12294,6 +12300,7 @@ ul {
 @media only screen and (max-width: 600px) {
   #result-container #result-content #information-container .level-info.enabled:before {
     border-left: 6px solid #B70802;
+    left: 5.3%;
   }
 }
 #result-container #result-content #information-container .level-info.enabled.top:before {
@@ -12306,6 +12313,12 @@ ul {
   width: 100%;
   padding-right: 5px;
   color: black;
+  padding-left: 24px;
+}
+@media only screen and (max-width: 600px) {
+  #result-container #result-content #information-container .level-info .level-text {
+    padding-left: 18px;
+  }
 }
 #result-container #result-content #information-container .level-info .level-text::before {
   height: 15px;
@@ -12327,8 +12340,13 @@ ul {
   color: #F94144;
 }
 #result-container #result-content #information-container .level-info.level--0.enabled:before {
-  border: none;
   height: 40%;
+}
+@media only screen and (max-width: 600px) {
+  #result-container #result-content #information-container .level-info.level--0.enabled:before {
+    height: 57%;
+    z-index: 1;
+  }
 }
 #result-container #result-content #information-container .level-info.level--0.enabled.top:before {
   top: 43%;
@@ -12350,6 +12368,13 @@ ul {
   padding-bottom: 8%;
   left: -2%;
   z-index: 0;
+}
+@media only screen and (max-width: 600px) {
+  #result-container #result-content #information-container .level-info.level--0 .level-indicator {
+    width: 21%;
+    padding-bottom: 12%;
+    left: -3%;
+  }
 }
 #result-container #result-content #information-container .level-info.level--1 {
   color: #F94144;
@@ -12434,8 +12459,10 @@ ul {
   border-right: 10px solid #F3F3F3;
   border-left: 10px solid #F3F3F3;
 }
-
 @media only screen and (max-width: 600px) {
+  #result-container #result-content #information-container .level-info .level-indicator {
+    width: 13%;
+  }
   .container-header {
     font-size: 24px !important;
     line-height: 28px !important;
@@ -12444,6 +12471,9 @@ ul {
 .header-decoration {
   display: flex;
   flex-direction: row;
+  position: sticky;
+  z-index: 100;
+  top: 0;
 }
 .header-decoration div {
   height: 10px;
@@ -12919,6 +12949,7 @@ video {
   margin-left: auto;
   margin-right: auto;
   min-width: 175px;
+  order: 1;
   cursor: pointer;
 }
 .button.show {
@@ -12933,6 +12964,7 @@ video {
 .button.back {
   background-color: #000000 !important;
   color: #fff;
+  order: 2;
 }
 .button.back:hover {
   background-color: #fff !important;
@@ -12985,6 +13017,7 @@ select {
   height: 1.15em;
   border: 0.15em solid #E0D5F2;
   border-radius: 50%;
+  margin-right: 5px;
 }
 
 .checkbox-input {

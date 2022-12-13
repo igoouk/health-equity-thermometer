@@ -3,7 +3,7 @@
 @php
 use App\Models\Result;
 
-xdebug_break();
+//xdebug_break();
 
 $chart_data = DB::table('results')
                  ->select('level', DB::raw('count(*) as total'))

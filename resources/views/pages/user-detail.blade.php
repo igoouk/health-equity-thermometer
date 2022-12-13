@@ -6,7 +6,7 @@ use App\Models\Result;
 $results = Result::where("user_id", $user->id)->orderByDesc('created_at')->get();
 $question_options = QuestionOption::all();
 $question_count = QuestionOption::select("question_id")->distinct()->get();
-xdebug_break();
+//xdebug_break();
 ?>
 
 @extends('layouts.app', ['page' => __('User Detail'), 'pageSlug' => 'user-detail'])

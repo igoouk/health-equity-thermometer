@@ -8383,6 +8383,7 @@ function setWelcomePage() {
   $("#get-started-button").on("click", function () {
     $("#welcome-container").hide();
     $("#send-code-container").css("display", "flex");
+    $("body").scrollTop(300);
   });
 }
 
@@ -8544,11 +8545,12 @@ function setDemogprahicsPage() {
       var inputName = $('input:checked', '#activity-target').val();
       var proceed = true; //formValues = removeItem("target", formValues);
 
-      formValues.target = $('.target-text:visible').length != 0 ? $('.target-text:visible').val() : "Self";
+      formValues.targetName = $('.target-text:visible').length != 0 ? $('.target-text:visible').val() : "Self";
 
-      if (formValues.target == "") {
+      if (formValues.targetName == "") {
         alert("Please fill all the fields.");
       } else {
+        formValues.target = $("#activity-target input:checked").val();
         $("#information-section").removeClass("hidden");
         showFieldsForVisibleInputs();
         $("#activity-section, #activity-selection").addClass("hidden");
@@ -8719,6 +8721,7 @@ function sendCode(email) {
       console.log(data);
     },
     success: function success(data) {
+      window.scrollTo(0, 0);
       $("#send-code-container").hide();
       $("#verify-code-container").css("display", "flex");
     }

@@ -25,10 +25,16 @@ body,
         width: 75%;
         margin: auto;
         line-height: 25px;
+        @media only screen and (max-width: 600px) {
+            width: 100%;
+        }
+        span{
+            &:nth-child(1){
+                font-size: 1.8vh;
+            }
+        }
     }
     #button-container{
-        display: flex;
-        flex-direction: row;
         width: 65%;
         align-self: center;
         margin-top: 40px;
@@ -92,6 +98,7 @@ body,
                         left:3%;
                         @media only screen and (max-width: 600px) {
                             border-left: 6px solid #B70802;
+                            left: 5.3%;
                         }
                       }
                     &.top{
@@ -107,6 +114,11 @@ body,
                     width: 100%;
                     padding-right: 5px;
                     color: black;
+                    padding-left: 24px;
+                    @media only screen and (max-width: 600px) {
+                        padding-left: 18px;
+                    }
+                    
                     &::before{
                         height: 15px;
                         width: 15px;
@@ -131,8 +143,13 @@ body,
                         margin-top: -15px;
                         &.enabled{
                             &:before {
-                                border: none;
+                                
                                 height: 40%;
+                                @media only screen and (max-width: 600px) {
+                                    height: 57%;
+                                    z-index: 1;
+                                }
+                                
                               }
                               &.top{
                                 &:before{
@@ -160,6 +177,11 @@ body,
                             padding-bottom: 8%;
                             left: -2%;
                             z-index: 0;
+                            @media only screen and (max-width: 600px) {
+                                width: 21%;
+                                padding-bottom: 12%;
+                                left: -3%;
+                            }
                         }
                     }
                     &--1{
@@ -257,7 +279,9 @@ body,
                     width: 7%;                    
                     border-right: 10px solid #F3F3F3;
                     border-left: 10px solid #F3F3F3;
-                   
+                    @media only screen and (max-width: 600px) {
+                        width: 13%; 
+                    }
                     
                     
                 }
