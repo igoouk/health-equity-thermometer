@@ -12223,13 +12223,12 @@ ul {
   position: relative;
 }
 
-.container-text {
-  font-size: 16px !important;
-}
-
 #result-container {
   display: flex;
   flex-direction: column;
+}
+#result-container .container-text {
+  font-size: 16px !important;
 }
 #result-container .container-header {
   margin-bottom: 25px;
