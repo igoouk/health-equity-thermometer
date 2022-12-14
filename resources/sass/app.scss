@@ -372,14 +372,18 @@ video{
             width: 100%;
         }
     }
+    .button{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
 .button{
     background-color: #722DDB !important;
     border-radius: 16px;
     color: #fff;
     padding: 16px 42px 16px 42px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: auto;
+    margin-right: auto;
     min-width: 175px;
     order: 1;
     cursor: pointer;
