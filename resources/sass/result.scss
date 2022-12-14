@@ -11,6 +11,9 @@ body,
 .container{
     position: relative;
 }
+.container-text{
+    font-size: 16px !important;
+}
 #result-container{
     display: flex;
     flex-direction: column;
@@ -29,9 +32,7 @@ body,
             width: 100%;
         }
         span{
-            &:nth-child(1){
-                font-size: 1.8vh;
-            }
+    
         }
     }
     #button-container{
@@ -48,25 +49,84 @@ body,
         text-align: center;
         margin-bottom: 30px;
     }
+    #text-level{
+        font-size: 16px;
+        text-align: center;
+        width: 100%;
+        border-width: 20px;
+        padding: 10px;
+        &.level-border{
+            &--0{
+                border-color: $red;
+            }
+            &--1{
+                border-color: $red;
+               
+            }
+            &--2{
+                border-color: $orange;
+               
+            }
+            &--3{
+                border-color: $yellow;
+                
+            }
+            &--4{
+                border-color: $green;
+                
+            }
+            &--5{
+                border-color: $blue;
+                
+            }
+            &--6{
+                border-color: $purple; 
+            }
+        }
+        .level{
+            &--1{
+                color: $red;
+               
+            }
+            &--2{
+                color: $orange;
+               
+            }
+            &--3{
+                color: $yellow;
+                
+            }
+            &--4{
+                color: $green;
+                
+            }
+            &--5{
+                color: $blue;
+                
+            }
+            &--6{
+                color: $purple; 
+            }
+        }
+    }
     #result-content{
         display: flex;
         flex-direction: row;
         flex-grow: 1;
         justify-content: center;
-        margin-bottom: 25px;
         #information-container{
             @media only screen and (max-width: 600px) {
                 max-width: 100%;
             }
-            margin-top: 30px;
+            
             margin-bottom: 20px;
-            max-width: 800px;
+            max-width: 730px;
             display: flex;
             flex-direction: column;
             height: 100%;
        
             .level-info{
-                font-size: 1.8vh;
+                font-size: 16px;
                 line-height: 2.5vh;
                 display: flex;
                 flex-direction: row;
@@ -97,7 +157,7 @@ body,
                         height: 100%;
                         left:3%;
                         @media only screen and (max-width: 600px) {
-                            border-left: 6px solid #B70802;
+                            
                             left: 5.3%;
                         }
                       }
@@ -115,6 +175,7 @@ body,
                     padding-right: 5px;
                     color: black;
                     padding-left: 24px;
+                    margin-left: 20px;
                     @media only screen and (max-width: 600px) {
                         padding-left: 18px;
                     }
@@ -144,11 +205,9 @@ body,
                         &.enabled{
                             &:before {
                                 
-                                height: 40%;
-                                @media only screen and (max-width: 600px) {
-                                    height: 57%;
-                                    z-index: 1;
-                                }
+                                height: 57%;
+                                z-index: 1;
+                            
                                 
                               }
                               &.top{

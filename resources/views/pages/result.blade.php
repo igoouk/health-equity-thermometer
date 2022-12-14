@@ -37,6 +37,7 @@ switch ($userSession->target) {
         <div class="container-text" id="result-info">
             <span>The indicated health equity temperature is based on the first question of the screening tool you didn’t tick all applicable options for, even if you correctly did so for following questions.</span><br>
         </div>
+        <div class="break-line"></div>
         <div id="result-content">
 
             <div id="information-container">
@@ -70,18 +71,21 @@ switch ($userSession->target) {
             </div>
             
         </div>
+        <div class="break-line"></div>
+        <div id="text-level" class="level-border--{{$result->level}}"><b>According to the answers you provided, your team {{$target}} appear{{$targetS}} to be on <span class="level--{{$result->level}}">level {{$result->level}}</span>. </b></div>
+        <div class="break-line"></div>
         <div class="container-text" id="result-info">
-            <span><b>According to the answers you provided, your team {{$target}} appear{{$targetS}} to be on level {{$result->level}}. </b></span><br><br>
+           
             <span>We have compiled a list of resources that we thought you might find useful: <a href="/pdf/Further-Resources.pdf" target="_blank">Download Further Resources</a> </span><br>
-            <span>Was this what you expected to get or did the scoring surprise you? </span><br>
+            <span>Was this what you expected to get or did the scoring surprise you? </span><br><br>
             
-            <span>To find out about research in health inequalities conducted by NIHR ARC NWC and how you can be involved check our <a href="https://arc-nwc.nihr.ac.uk/" target="_blank">website</a></span><br>
+            <span>To find out about research in health inequalities conducted by NIHR ARC NWC and how you can be involved check our <a href="https://arc-nwc.nihr.ac.uk/" target="_blank">website</a></span><br><br>
             
-            <span>If you want to find out more about the Health Equity Mainstreaming Strategy and actions NIHR ARC NWC has planned visit our dedicated part of the <a href="https://arc-nwc.nihr.ac.uk/midas/overview/health-equity-mainstreaming-strategy-2020-2024/" target="_blank">website</a></span><br>
+            <span>If you want to find out more about the Health Equity Mainstreaming Strategy and actions NIHR ARC NWC has planned visit our dedicated part of the <a href="https://arc-nwc.nihr.ac.uk/midas/overview/health-equity-mainstreaming-strategy-2020-2024/" target="_blank">website</a></span><br><br>
             
-            <span>To discuss how NIHR ARC NWC can support you in implementing an equity lens contact: <a href="mailto:k.panagaki@lancaster.ac.uk" target="_blank">k.panagaki@lancaster.ac.uk</a></span><br>
+            <span>To discuss how NIHR ARC NWC can support you in implementing an equity lens contact: <a href="mailto:k.panagaki@lancaster.ac.uk" target="_blank">k.panagaki@lancaster.ac.uk</a></span><br><br>
             
-            <span>You can also find us on social media <a href="https://twitter.com/arc_nwc" target="_blank">@arc_nwc</a> <a href="https://twitter.com/search?q=%23ImplementEquity&src=typed_query" target="_blank">#ImplementEquity</a></span>
+            <span>You can also find us on social media <a href="https://twitter.com/arc_nwc" target="_blank">@arc_nwc</a> <a href="https://twitter.com/search?q=%23ImplementEquity&src=typed_query" target="_blank">#ImplementEquity</a></span><br>
         </div>
         <div id="button-container" class="button-container">
             <button id="save-pdf-button" class="button" data-route="{{url('/result-pdf/')}}" data-result-id="{{$result->id}}">Save the result as PDF</button>

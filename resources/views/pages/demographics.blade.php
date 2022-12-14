@@ -81,7 +81,7 @@ if ($resultCount > 0 ) {
                 </div>
                 <div>
                   <label for="work-country">Country: {{$countryName}}</label>
-                  <select id="work-country" data-route="{{url('get-states')}}"> @foreach ($countries as $country) <option name="{{$country->name}}" data-id="{{$country->country_id}}" @if ($country->name == $countryName) selected @endif>{{$country->name}}</option> @endforeach </select>
+                  <select id="work-country" data-route="{{url('get-states')}}"> @foreach ($countries as $country) <option name="{{$country->name}}" data-id="{{$country->id}}" @if ($country->name == $countryName) selected @endif>{{$country->name}}</option> @endforeach </select>
                 </div>
                 <div>
                   <label for="work-city">County/Area:</label>

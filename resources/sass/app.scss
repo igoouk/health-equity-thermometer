@@ -378,8 +378,8 @@ video{
     border-radius: 16px;
     color: #fff;
     padding: 16px 42px 16px 42px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 10px;
+    margin-right: 10px;
     min-width: 175px;
     order: 1;
     cursor: pointer;
@@ -395,11 +395,14 @@ video{
     &.back{
         background-color: #000000 !important;
         color: #fff;
-        order: 2;
+        order: 0;
         &:hover{
             background-color: #fff !important;
             color: #000000;
             border: 1px solid #000000;
+        }
+        @media only screen and (max-width: 800px) {
+            order: 2;
         }
     }
     @media only screen and (max-width: 800px) {
@@ -473,6 +476,8 @@ a{
 }
 
 .break-line{
+    margin-top: 25px;
+    margin-bottom: 25px;
     border-bottom: 1px dashed #B7B7B7;
     height: 1px;
     width: 100%;
