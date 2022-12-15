@@ -66,21 +66,21 @@ function setResultPage(params) {
 		
 		var optDesktop = {
 			margin:       	[50,1,0,1],
-			filename:     	'myfile.pdf',
-			image:        	{ type: 'png'},
-			html2canvas:  	{ scale: 1 },
+			filename:     	'desktop.pdf',
+			image:        	{ type: 'jpeg', quality: 0.9},
+			html2canvas:  	{ scale: 2, ignoreElements: ["#loading-overlay"]},
 			jsPDF:        	{ unit: 'px', format: [window.screen.width,window.screen.height], orientation: 'portrait' },
 			pagebreak: 		{ after: ['#result-content'] }
 			};
 		var optMobile = {
 			margin:       	[130,40,0,40],
-			filename:     	'myfile.pdf',
-			image:        	{ type: 'png'},
+			filename:     	'mobile.pdf',
+			image:        	{ type: 'jpeg', quality: 0.9},
 			html2canvas:  	{ scale: 3, ignoreElements: ["#loading-overlay"]},
 			jsPDF:        	{ unit: 'px', format: [700,1400], orientation: 'portrait',precision:100 },
 			pagebreak: 		{ after: ['#result-content'] }
 			};
-		var opt = window.mobileCheck ? optMobile : optDesktop;
+		var opt = window.mobileCheck() ? optMobile : optDesktop;
 			// New Promise-based usage:
 			html2pdf().set(opt).from(document.body).save().then(
 				function (pdf) {

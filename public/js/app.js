@@ -8353,12 +8353,14 @@ function setResultPage(params) {
     });
     var optDesktop = {
       margin: [50, 1, 0, 1],
-      filename: 'myfile.pdf',
+      filename: 'desktop.pdf',
       image: {
-        type: 'png'
+        type: 'jpeg',
+        quality: 0.9
       },
       html2canvas: {
-        scale: 1
+        scale: 2,
+        ignoreElements: ["#loading-overlay"]
       },
       jsPDF: {
         unit: 'px',
@@ -8371,9 +8373,10 @@ function setResultPage(params) {
     };
     var optMobile = {
       margin: [130, 40, 0, 40],
-      filename: 'myfile.pdf',
+      filename: 'mobile.pdf',
       image: {
-        type: 'png'
+        type: 'jpeg',
+        quality: 0.9
       },
       html2canvas: {
         scale: 3,
@@ -8389,7 +8392,7 @@ function setResultPage(params) {
         after: ['#result-content']
       }
     };
-    var opt = window.mobileCheck ? optMobile : optDesktop; // New Promise-based usage:
+    var opt = window.mobileCheck() ? optMobile : optDesktop; // New Promise-based usage:
 
     html2pdf().set(opt).from(document.body).save().then(function (pdf) {
       $("#result-container .container-header").css({
