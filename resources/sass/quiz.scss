@@ -1,6 +1,7 @@
 
 #questions-container{
-  .single-question{
+    font-size: 16px;
+    .single-question{
         display: none;
         margin-bottom: 20px;
         .question-image{
@@ -136,6 +137,9 @@
             text-align: center;
             margin-bottom: 20px;
             color: green;
+            @media only screen and (min-width: 600px) {
+                width: 100%
+            }
             .quote{
                 display: block;
                 font-size: 32px;

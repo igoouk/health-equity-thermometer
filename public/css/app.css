@@ -11928,6 +11928,9 @@ select{
 .ease-in{
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
+#questions-container {
+  font-size: 16px;
+}
 #questions-container .single-question {
   display: none;
   margin-bottom: 20px;
@@ -12052,6 +12055,11 @@ select{
   text-align: center;
   margin-bottom: 20px;
   color: green;
+}
+@media only screen and (min-width: 600px) {
+  #information-popup #information-text .quote-container {
+    width: 100%;
+  }
 }
 #information-popup #information-text .quote-container .quote {
   display: block;
@@ -12248,7 +12256,6 @@ ul {
   }
 }
 #result-container #button-container {
-  width: 65%;
   align-self: center;
   margin-top: 40px;
   margin-bottom: 40px;
@@ -12335,6 +12342,7 @@ ul {
   background: #CDCDCD;
 }
 #result-container #result-content #information-container .level-info.enabled:before {
+  display: none;
   content: "";
   position: absolute;
   border-left: 6px solid #B70802;
@@ -12385,8 +12393,13 @@ ul {
   color: #F94144;
 }
 #result-container #result-content #information-container .level-info.level--0.enabled:before {
-  height: 57%;
+  height: 45%;
   z-index: 1;
+}
+@media only screen and (max-width: 600px) {
+  #result-container #result-content #information-container .level-info.level--0.enabled:before {
+    height: 57%;
+  }
 }
 #result-container #result-content #information-container .level-info.level--0.enabled.top:before {
   top: 43%;
@@ -12959,7 +12972,7 @@ video {
 .container-text {
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 22px;
   color: #000000;
   margin-bottom: 60px;
@@ -12974,6 +12987,7 @@ video {
 @media only screen and (max-width: 800px) {
   .button-container {
     flex-direction: column;
+    width: 100%;
   }
   .button-container .button {
     margin-bottom: 20px;
@@ -12983,6 +12997,12 @@ video {
 .button-container .button {
   margin-left: 10px;
   margin-right: 10px;
+}
+@media only screen and (max-width: 800px) {
+  .button-container .button {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .button {

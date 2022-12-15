@@ -72,7 +72,7 @@ switch ($userSession->target) {
             
         </div>
         <div class="break-line"></div>
-        <div id="text-level" class="level-border--{{$result->level}}"><b>According to the answers you provided, your team {{$target}} appear{{$targetS}} to be on <span class="level--{{$result->level}}">level {{$result->level}}</span>. </b></div>
+        <div id="text-level" class="level-border--{{$result->level}}"><b>According to the answers you provided, {{$target}} appear{{$targetS}} to be on <span class="level--{{$result->level}}">level {{$result->level}}</span>. </b></div>
         <div class="break-line"></div>
         <div class="container-text" id="result-info">
            

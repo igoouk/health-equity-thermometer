@@ -11,7 +11,7 @@ use App\Models\Result;
   <div class="col-md-12">
     <div class="card  card-plain">
       <div class="card-header">
-        <h4 class="card-title">User List</h4>
+        <h2 class="card-title">User List</h2>
         <!--<p class="category"> Here is a subtitle for this table</p>-->
       </div>
       <div class="card-body">

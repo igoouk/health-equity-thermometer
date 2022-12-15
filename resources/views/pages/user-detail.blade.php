@@ -12,7 +12,7 @@ $question_count = QuestionOption::select("question_id")->distinct()->get();
 @extends('layouts.app', ['page' => __('User Detail'), 'pageSlug' => 'user-detail'])
 
 @section('content')
-<div class="row">
+<div class="row user-detail-container">
   
   <div class="col-md-12">
     <div class="card  card-plain">
@@ -50,7 +50,7 @@ $question_count = QuestionOption::select("question_id")->distinct()->get();
                       @php
                       $answerText = QuestionOption::find($answer)
                       @endphp
-                      {{$answerText->text}}
+                      <span class="single-answer">{{$answerText->text}}</span>
                       <br>
                     @endforeach
 

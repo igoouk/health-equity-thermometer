@@ -28,10 +28,18 @@
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
+        <div class="header-decoration">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
             <div class="wrapper">
                     @include('layouts.navbars.sidebar')
                 <div class="main-panel">
-                    <@include('layouts.navbars.navbar')
+                    @include('layouts.navbars.navbar')
 
                     <div class="content">
                         @yield('content')

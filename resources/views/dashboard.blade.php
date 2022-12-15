@@ -28,7 +28,10 @@ $chart_data = DB::table('results')
         </div>
         <div class="card-body">
             <div class="chart-area">
-                <canvas id="chartBig1"></canvas>
+                <div id="canvas-container">
+                    <canvas id="chartBig1"></canvas> 
+                </div>
+                
             </div>
         </div>
     </div>
@@ -45,7 +48,7 @@ $chart_data = DB::table('results')
         var chart_data = [];
         var chart_labels = []
         var baseBackgroundColors = [
-                    '#FFF',
+                    '#a4a5a5',
                     '#E7514C',
                     '#EB9A3F',
                     '#E5B94D',
@@ -56,7 +59,7 @@ $chart_data = DB::table('results')
         var backgroundColorsToUse = [];
             @foreach ($chart_data as $data)
                 chart_data.push({{$data->total}});
-                chart_labels.push("Level "+ "{{ $data->level }} - Total: {{$data->total}}");
+                chart_labels.push("Level "+ "{{ $data->level }} ");
                 backgroundColorsToUse.push(baseBackgroundColors[{{ $data->level }}])
             @endforeach
         var ctx = document.getElementById("chartBig1").getContext('2d');
@@ -77,9 +80,18 @@ $chart_data = DB::table('results')
                 }]
             },
             options: {
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
                 legend: {
-                    display: true
+                    display: true,
+                    position: "left",
+                    labels: {
+                        boxWidth: 50,
+                        padding: 50,
+                        font: {
+                            size: 14,
+                            weight: "900"
+                        }
+                    }
                 },
 
                 tooltips: {
@@ -97,8 +109,20 @@ $chart_data = DB::table('results')
                 responsive: true
                 
             
-            }
+            },
+            plugins: [{
+                beforeInit: function(chart, args,options) {
+                    chart.legend.afterFit = function() {
+                        
+                        this.legendItems.forEach(element => {
+                            element.height = "60px";
+                        });
+                        
+                    };
+                }
+            }]
         };
         var myChartData = new Chart(ctx, config);
+        //# sourceURL=chartSetup.js
     </script>
 @endpush

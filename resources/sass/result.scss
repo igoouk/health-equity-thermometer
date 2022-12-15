@@ -37,7 +37,7 @@ body,
         }
     }
     #button-container{
-        width: 65%;
+        
         align-self: center;
         margin-top: 40px;
         margin-bottom: 40px;
@@ -151,6 +151,7 @@ body,
                     }
                 &.enabled{
                     &:before {
+                        display: none;
                         content: "";
                         position: absolute;
                         border-left: 6px solid #B70802;
@@ -205,8 +206,10 @@ body,
                         margin-top: -15px;
                         &.enabled{
                             &:before {
-                                
-                                height: 57%;
+                                @media only screen and (max-width: 600px) {
+                                    height: 57%;
+                                }
+                                height: 45%;
                                 z-index: 1;
                             
                                 
