@@ -32,6 +32,7 @@ switch ($userSession->target) {
 ?>
 
     <div id="result-container" class="level level--{{$result->level}}">
+        
         <div class="container-header">What is your health equity temperature?</div>
    
         <div class="container-text" id="result-info">

@@ -8348,6 +8348,9 @@ function setResultPage(params) {
       "line-height": "22px"
     });
     $("#button-container").hide();
+    $("#loading-overlay").css({
+      "display": "flex"
+    });
     var optDesktop = {
       margin: [50, 1, 0, 1],
       filename: 'myfile.pdf',
@@ -8373,7 +8376,8 @@ function setResultPage(params) {
         type: 'png'
       },
       html2canvas: {
-        scale: 3
+        scale: 3,
+        ignoreElements: ["#loading-overlay"]
       },
       jsPDF: {
         unit: 'px',
@@ -8391,6 +8395,9 @@ function setResultPage(params) {
       $("#result-container .container-header").css({
         "font-size": "42px",
         "line-height": "44px"
+      });
+      $("#loading-overlay").css({
+        "display": "none"
       });
       $("#button-container").show();
       console.log("done");

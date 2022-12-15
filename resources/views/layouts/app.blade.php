@@ -27,6 +27,7 @@
         @endauth
     </head>
     <body class="{{ $class ?? '' }}">
+        <div id="loading-overlay" data-html2canvas-ignore><img src="/img/loading.gif"></div>
         @auth()
         <div class="header-decoration">
             <div></div>

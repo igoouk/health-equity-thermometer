@@ -62,6 +62,7 @@ function setResultPage(params) {
 	$("#save-pdf-button").on("click", function() {
 		$("#result-container .container-header").css({"font-size": "21px", "line-height":"22px"});
 		$("#button-container").hide();
+		$("#loading-overlay").css({"display": "flex"});
 		
 		var optDesktop = {
 			margin:       	[50,1,0,1],
@@ -75,7 +76,7 @@ function setResultPage(params) {
 			margin:       	[130,40,0,40],
 			filename:     	'myfile.pdf',
 			image:        	{ type: 'png'},
-			html2canvas:  	{ scale: 3},
+			html2canvas:  	{ scale: 3, ignoreElements: ["#loading-overlay"]},
 			jsPDF:        	{ unit: 'px', format: [700,1400], orientation: 'portrait',precision:100 },
 			pagebreak: 		{ after: ['#result-content'] }
 			};
@@ -84,7 +85,7 @@ function setResultPage(params) {
 			html2pdf().set(opt).from(document.body).save().then(
 				function (pdf) {
 					$("#result-container .container-header").css({"font-size": "42px", "line-height":"44px"});
-			
+					$("#loading-overlay").css({"display": "none"});
 					$("#button-container").show();
 					console.log("done");
 					}, 
