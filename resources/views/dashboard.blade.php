@@ -4,6 +4,7 @@
 use App\Models\Result;
 
 //xdebug_break();
+$data_total = Result::all()->count();
 
 $chart_data = DB::table('results')
                  ->select('level', DB::raw('count(*) as total'))
@@ -86,11 +87,8 @@ $chart_data = DB::table('results')
                     position: "left",
                     labels: {
                         boxWidth: 50,
-                        padding: 50,
-                        font: {
-                            size: 14,
-                            weight: "900"
-                        }
+                        padding: 30,
+                        fontSize: 16
                     }
                 },
 
@@ -106,8 +104,13 @@ $chart_data = DB::table('results')
                     position: "nearest"
                 }
                 ,
-                responsive: true
-                
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Total {{$data_total}}',
+                    fontSize: 24,
+                    position: "bottom"
+                }
             
             },
             plugins: [{
