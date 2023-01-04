@@ -8,6 +8,7 @@ window.mobileCheck = function() {
 	return check;
   };
 Alpine.start();
+
 $(document).ready(function() {
 	$.ajaxSetup({
 		headers: {
@@ -19,12 +20,15 @@ $(document).ready(function() {
 		setWelcomePage();
 		setLoginPage();
 	}
+
 	if ($("#quiz-container").length > 0) {
 		setQuizPage();
-	};
+	}
+
 	if ($("#demographics-container").length > 0) {
 		setDemogprahicsPage();
 	}
+
 	if ($("#result-container").length > 0) {
 		setResultPage();
 	}
@@ -35,17 +39,8 @@ $(document).ready(function() {
 
 	if ($("#welcome-back-container").length > 0) {
 		setWelcomeBackPage();
-	}
-
-
-
-	
+	}	
 });
-
-
-
-
-
 
 var formValues = {};
 var userInterest = "";
@@ -54,11 +49,15 @@ var userActivity = "";
 function setWelcomeBackPage(params) {
 	$(".button").on("click", function(){
 		window.location.href = $(this).data("route");
-	})
+	});
+
+	$("#download-thermometer").on("click", function (params) {
+		params.preventDefault();
+		window.open("/pdf/blank-thermometer.pdf", '_blank');
+	});
 }
 
 function setResultPage(params) {
-
 	$("#save-pdf-button").on("click", function() {
 		$("#result-container .container-header").css({"font-size": "21px", "line-height":"22px"});
 		$("#button-container").hide();
@@ -81,39 +80,35 @@ function setResultPage(params) {
 			pagebreak: 		{ after: ['#result-content'] }
 			};
 		var opt = window.mobileCheck() ? optMobile : optDesktop;
-			// New Promise-based usage:
-			html2pdf().set(opt).from(document.body).save().then(
-				function (pdf) {
-					$("#result-container .container-header").css({"font-size": "42px", "line-height":"44px"});
-					$("#loading-overlay").css({"display": "none"});
-					$("#button-container").show();
-					console.log("done");
-					}, 
-					function(){
-					
-						//Error Here
-						
-					});;
-			
-					
-		
-		
-
+		// New Promise-based usage:
+		html2pdf().set(opt).from(document.body).save().then(
+			function (pdf) {
+				$("#result-container .container-header").css({"font-size": "42px", "line-height":"44px"});
+				$("#loading-overlay").css({"display": "none"});
+				$("#button-container").show();
+				console.log("done");
+			}, 
+			function(){
+				// Error Here
+			}
+		);
 	});
 
 	$("#read-more-button").on("click", function (params) {
 		window.open("/pdf/Further-Resources.pdf", '_blank');
 	});
+
 	$("#download-thermometer-button").on("click", function (params) {
 		window.open("/pdf/blank-thermometer.pdf", '_blank');
 	});
 }
-function setPreviousResultsPage(params) {
 
+function setPreviousResultsPage(params) {
 	$(".button").on("click", function() {
 		window.location.href = $(this).data("route");
 	});
 }
+
 function setWelcomePage() {
 	$("#get-started-button").on("click", function() {
 		
@@ -125,15 +120,13 @@ function setWelcomePage() {
 
 function setLoginPage() {
 	$("#send-code-button").on("click", function() {
-
-		if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($("#email-input").val()))
-		{
+		if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($("#email-input").val())) {
 			sendCode($("#email-input").val());
-		}else{
+		} else {
 			alert("You have entered an invalid email address!");
 		}
-		
 	});
+
 	$("#verify-code-button").on("click", function() {
 		verifyCode($("#code-input").val());
 	});
@@ -147,10 +140,10 @@ function setQuizPage() {
 	history.pushState(null, document.title, location.href);
 	});
 
-
 	$("#submit-answer-button").on("click", function() {
 		checkAnswer($(".single-question").data("id"));
 	});
+
 	$("#next-button,#result-button").on("click", function() {
 		window.location.href = $(this).data("route");
 	});
@@ -168,24 +161,30 @@ function setQuizPage() {
 	$("input").on("change", function() {
 		if ($(this).is(':checked')  && $("#"+$(this).attr("id")+"-text").length > 0) {
 			$("#"+$(this).attr("id")+"-text").show();
-		}else{
+		} else {
 			$(".input-holder-text input").hide();
 		}
 	});
-
 }
+
 function showFieldsForVisibleInputs() {
 	//Show fields for checked options
+	userInterest = $('input:checked', '#interest-selection').val();
+
+	if (userInterest == "Personal") {
+		$("#interest-options-personal").show();
+		$("#interest-options-work").hide();
+	} else {
+		$("#interest-options-personal").hide();
+		$("#interest-options-work").show();
+	}
+
 	$("input:checked").delay(1500).each(function(){
-			$(this).change();
+		$(this).change();
 	})
 }
-function setDemogprahicsPage() {
-	
-	
-	
 
-	
+function setDemogprahicsPage() {
 	showFieldsForVisibleInputs();
 	$('#interest-selection input').on('change', function() {
 		userInterest = $('input:checked', '#interest-selection').val();
@@ -199,8 +198,9 @@ function setDemogprahicsPage() {
 			$("#interest-options-personal").hide();
 			$("#interest-options-work").show();
 		}
-		console.log(formValues)  ;
+		console.log(formValues);
 	});
+
 	$('#activity-selection input').on('change', function() {
 		userActivity = $('input:checked', '#activity-selection').val();
 		//formValues = removeItem("activity", formValues);
@@ -212,13 +212,15 @@ function setDemogprahicsPage() {
 			$("#activity-target").hide();
 		}
 	});
+
 	$('#activity-target input').on('change', function() {
 		$(".target-text").hide();
+
 		if ($("#" + $('input:checked', '#activity-target').data("input-id")).length > 0 ) {
 			$("#" + $('input:checked', '#activity-target').data("input-id")).show();
 		}
-		
 	});
+
 	$("#interest-section #next-button").on("click", function() {
 		var country = "";
 		var city = "";
@@ -237,51 +239,57 @@ function setDemogprahicsPage() {
 		delete formValues.jobRole;
 		delete formValues.organisation;
 		delete formValues.reason;
+
 		if (userInterest == "Personal") {
 			country = $("#personal-country").find(":selected").val();
 			city = $("#personal-city").find(":selected").val();
 			reason = $("#personal-reason").val();
+
 			if (reason == "") {
 				proceed = false;
 			}
+
 			formValues.country = country;
 			formValues.city = city;
 			formValues.reason = reason;
-			
 		} else {
 			country = $("#work-country").find(":selected").val();
 			city = $("#work-city").find(":selected").val();
 			jobRole = $("#work-role").val();
 			organisation = $("#work-organisation").val();
+
 			if (organisation == "" || jobRole == "") {
 				proceed = false;
 			}
+
 			formValues.country = country;
 			formValues.city = city;
 			formValues.jobRole = jobRole;
 			formValues.organisation = organisation;
-		
 		}
+
 		if (country == "" || country == "Choose country" || city == "" || city == "Choose County/Area") {
 			proceed = false;
 		}
+
 		if (proceed) {
 			$("#interest-section").addClass("hidden");
 			$("#activity-section, #activity-selection").removeClass("hidden");
 			showFieldsForVisibleInputs();
-		}else{
+		} else {
 			alert("Please fill all the fields.");
 		}
-		
 	});
+
 	$("#activity-button-container #back-button").on("click", function() {
 		$("#interest-section").removeClass("hidden");
 		$("#activity-section, #activity-selection").addClass("hidden");
 	});
+
 	$("#activity-button-container #next-button").on("click", function() {
 		if ($('input:checked', '#activity-target').val() == undefined) {
 			alert("Please select one option.");
-		}else{
+		} else {
 			var inputName = $('input:checked', '#activity-target').val();
 			var proceed = true;
 			//formValues = removeItem("target", formValues);
@@ -297,14 +305,13 @@ function setDemogprahicsPage() {
 				$("#activity-section, #activity-selection").addClass("hidden");
 			}
 		}
-		
-		
-		
 	});
+
 	$("#information-button-container #back-button").on("click", function() {
 		$("#information-section").addClass("hidden");
 		$("#activity-section, #activity-selection").removeClass("hidden");
 	});
+	
 	$("#start-new-button").on("click", function() {
 		$("#information-section").addClass("hidden");
 		showFieldsForVisibleInputs();
@@ -314,8 +321,8 @@ function setDemogprahicsPage() {
 	$("#previous-results-button").on("click", function() {
 		window.location.href = $(this).data("route");
 	});
-	$("#start-previous-button").on("click", function() {
-		
+
+	$("#start-previous-button").on("click", function() {	
 		$.ajax({
 			type: 'POST',
 			url: $(this).data("route"),
@@ -324,16 +331,17 @@ function setDemogprahicsPage() {
 			success: function(data) {
 				if (data != "0") {
 					window.location.href = data;
-				}else{
+				} else {
 					alert("There has been an errror, please try again later: " + data);
 				}
-				
 			}
 		});
 	});
+
 	$("#start-button").on("click", function() {
 		sendFormValues($(this).data("route"));
 	});
+	
 	let countryDropDowns = $('#work-country, #personal-country');
 	countryDropDowns.prepend('<option selected="true" disabled>Choose country</option>');
 	countryDropDowns.prop('selectedIndex', 0);
@@ -352,8 +360,8 @@ function setDemogprahicsPage() {
 		});
 	});
 }
-function sendFormValues(route) {
 
+function sendFormValues(route) {
 	$.ajax({
 		type: 'POST',
 		url: route,
@@ -364,16 +372,12 @@ function sendFormValues(route) {
 		error: function error(data) {},
 		success: function success(data) {
 			if (data != "0") {
-
-			window.location.href = data;
-
+				window.location.href = data;
 			} else {
-			alert("Please fill all the fields.");
+				alert("Please fill all the fields.");
 			}
 		}
-		});
-	
-	
+	});	
 }
 
 function removeItem(itemName, array) {
@@ -395,36 +399,34 @@ function populateCities(field, cityArray) {
     
 	if (cityArray.length == 0) {
 		cityDropdown.append('<option selected="true" disabled value="N/A" data-city-id="999">No country/area option available</option>');
-	}else{
+	} else {
 		cityDropdown.append('<option selected="true" disabled>Choose County/Area</option>');
 		$.each(cityArray, function(key, entry) {
 			cityDropdown.append($('<option></option>').attr('value', entry.abbreviation).attr('city-id', entry.id).text(entry.name));
 		})
 	}
 	cityDropdown.prop('selectedIndex', 0);
-    
 }
 
 function checkAnswer(questionId) {
     var questionIDs = [];
     var selectedOptions = [];
-
 	
 	$(".single-question").each(function() {
 		questionIDs.push($(this).data("id"))
     });
+
     $("input:checked,option:selected").each(function() {
 		var optionValue = "";
 		if ($(this).data("additional-field") == "") {
 			optionValue = $(this).val();	
-		}else{
+		} else {
 			optionValue = $("#"+$(this).attr("id")+"-text").val();		
 		}
 		selectedOptions.push({"id":$(this).data("question-id"), "option":$(this).data("option-id"), "value":optionValue});
-        
     });
-    $("#questions-container").hide();
 
+    $("#questions-container").hide();
     
     $.ajax({
         type: 'POST',
@@ -434,12 +436,12 @@ function checkAnswer(questionId) {
             "selectedOptions": selectedOptions
         },
         beforeSend: function() {
-			
 		},
         error: function(data) {
             console.log(data);
         },
         success: function(data) {
+			console.log(data);
             if (data == "1") {
 				$("#information-popup").show();
                 $("#next-button").css("display","flex");
@@ -454,6 +456,7 @@ function checkAnswer(questionId) {
         }
     });
 }
+
 function sendCode(email) {
 	$.ajax({
 		type: 'POST',
@@ -508,7 +511,6 @@ function verifyCode(code) {
 					$("#send-code-button").attr("disabled", false);
 				break;
 				default:
-				
 			}
 		}
 	});

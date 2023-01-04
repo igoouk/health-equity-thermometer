@@ -26,7 +26,7 @@ if (session()->get('verified') != "1") {
        
         <button id="previous-results-button" data-route="{{ 'previous-results' }}" class="button">See Previous Results</button>
         <button id="start-new-button" data-route="{{ 'demographics' }}" class="button">Start a new session of the screening tool</button>
-        <button id="download-thermometer" data-route="/blank-template.pdf"class="button">Download a copy of the thermometer</button>
+        <button id="download-thermometer" data-route="/welcome-back" class="button">Download a copy of the thermometer</button>
     </div>
 
 </div>

@@ -1,176 +1,161 @@
-html, 
-body,
-.wrapper,
-.wrapper-full-page,
-.full-page,
-.content,
-.container,
-#result-container {
-    //height: 100%;
-}
-.container{
+.container {
     position: relative;
 }
 
-#result-container{
+#result-container {
     display: flex;
     flex-direction: column;
-    .container-text{
+
+    .container-text {
         font-size: 16px !important;
     }
-    .container-header{
+
+    .container-header {
         margin-bottom: 25px;
         font-size: 42px;
         line-height: 44px;
     }
 
-    #result-info{
-        text-align: center;
-        width: 75%;
+    #result-info {
+        width: 100%;
         margin: auto;
         line-height: 25px;
+        max-width: 950px;
+
         @media only screen and (max-width: 600px) {
             width: 100%;
         }
-        span{
-    
-        }
     }
-    #button-container{
-        
+
+    #button-container {
         align-self: center;
         margin-top: 40px;
         margin-bottom: 40px;
-        .button{
-            //margin-bottom: 30px;
-        }
     }
-    
-    #note{
+
+    #note {
         text-align: center;
         margin-bottom: 30px;
     }
-    #text-level{
+
+    #text-level {
         font-size: 16px;
         text-align: center;
         width: 100%;
         border-width: 20px;
         padding: 10px;
-        &.level-border{
-            &--0{
+        max-width: 950px;
+        margin: 0 auto;
+
+        &.level-border {
+            &--0 {
                 border-color: $red;
             }
-            &--1{
+            &--1 {
                 border-color: $red;
-               
             }
-            &--2{
+            &--2 {
                 border-color: $orange;
-               
             }
-            &--3{
+            &--3 {
                 border-color: $yellow;
-                
             }
-            &--4{
+            &--4 {
                 border-color: $green;
-                
             }
-            &--5{
+            &--5 {
                 border-color: $blue;
-                
             }
-            &--6{
-                border-color: $purple; 
+            &--6 {
+                border-color: $purple;
             }
         }
-        .level{
-            &--1{
+
+        .level {
+            &--1 {
                 color: $red;
-               
             }
-            &--2{
+            &--2 {
                 color: $orange;
-               
             }
-            &--3{
+            &--3 {
                 color: $yellow;
-                
             }
-            &--4{
+            &--4 {
                 color: $green;
-                
             }
-            &--5{
+            &--5 {
                 color: $blue;
-                
             }
-            &--6{
-                color: $purple; 
+            &--6 {
+                color: $purple;
             }
         }
     }
-    #result-content{
+
+    #result-content {
         display: flex;
         flex-direction: row;
         flex-grow: 1;
         justify-content: center;
-        #information-container{
-            @media only screen and (max-width: 600px) {
-                max-width: 100%;
-            }
-            
+
+        #information-container {
             margin-bottom: 20px;
             max-width: 730px;
             display: flex;
             flex-direction: column;
             height: 100%;
-       
-            .level-info{
+
+            @media only screen and (max-width: 600px) {
+                max-width: 100%;
+            }
+
+            .level-info {
                 font-size: 16px;
                 line-height: 2.5vh;
                 display: flex;
                 flex-direction: row;
                 position: relative;
-                &:nth-child(even)
-                    {
-                        &.disabled{
-                            .level-indicator{
-                                background:#DDDDDD;
-                            }
+
+                &:nth-child(even) {
+                    &.disabled {
+                        .level-indicator {
+                            background: #dddddd;
                         }
                     }
-                &:nth-child(odd)
-                    {
-                        &.disabled{
-                            .level-indicator{
-                                background: #CDCDCD;
-                            }
+                }
+
+                &:nth-child(odd) {
+                    &.disabled {
+                        .level-indicator {
+                            background: #cdcdcd;
                         }
-                        
                     }
-                &.enabled{
+                }
+
+                &.enabled {
                     &:before {
                         display: none;
                         content: "";
                         position: absolute;
-                        border-left: 6px solid #B70802;
+                        border-left: 6px solid #b70802;
                         width: 100%;
                         height: 100%;
-                        left:3%;
+                        left: 3%;
                         @media only screen and (max-width: 600px) {
-                            
                             left: 5.3%;
                         }
-                      }
-                    &.top{
-                        &:before{
+                    }
+
+                    &.top {
+                        &:before {
                             height: 50%;
-                            top:50%;
+                            top: 50%;
                         }
                     }
                 }
-                .level-text{
+
+                .level-text {
                     padding: 18px;
                     font-size: 16px;
                     width: 100%;
@@ -178,68 +163,73 @@ body,
                     color: black;
                     padding-left: 24px;
                     margin-left: 20px;
+
                     @media only screen and (max-width: 600px) {
                         padding-left: 18px;
                     }
-                    
-                    &::before{
+
+                    &::before {
                         height: 15px;
                         width: 15px;
                         border-radius: 50%;
                         display: inline-block;
-                        content:"";
+                        content: "";
                         position: absolute;
-                        top: 26px;  
+                        top: 26px;
                     }
-                    div{
+
+                    div {
                         margin-left: 25px;
-                    }   
-                    
+                    }
                 }
-                
-                &.level{
+
+                &.level {
                     color: black !important;
                 }
-                &.level{
-                    
-                    &--0{
+
+                &.level {
+                    &--0 {
                         margin-top: -15px;
-                        &.enabled{
+                        color: $red;
+
+                        &.enabled {
                             &:before {
                                 @media only screen and (max-width: 600px) {
                                     height: 57%;
                                 }
                                 height: 45%;
                                 z-index: 1;
-                            
-                                
-                              }
-                              &.top{
-                                &:before{
-                                    top:43%;
+                            }
+
+                            &.top {
+                                &:before {
+                                    top: 43%;
                                 }
                             }
                         }
-                        color: $red;
-                        .level-text{
-                            &::before{
+                        
+                        .level-text {
+                            &::before {
                                 display: none;
                             }
-                            span{
-                                color: $red; 
+                            
+                            span {
+                                color: $red;
                             }
                         }
-                        .level-indicator{
+
+                        .level-indicator {
                             background-color: $red;
                             border-radius: 50px 50px 50px 50px;
                             width: 12%;
                             top: 1%;
-                            border: 10px solid #F3F3F3;
+                            border: 10px solid #f3f3f3;
                             position: relative;
                             height: 0;
                             padding-bottom: 8%;
                             left: -2%;
                             z-index: 0;
+
                             @media only screen and (max-width: 600px) {
                                 width: 21%;
                                 padding-bottom: 12%;
@@ -247,122 +237,115 @@ body,
                             }
                         }
                     }
-                    &--1{
+
+                    &--1 {
                         color: $red;
-                        &::before{
+                        &::before {
                             z-index: 2;
                         }
-                        .level-text{
-                            &::before{
+                        .level-text {
+                            &::before {
                                 background-color: $red;
                             }
-                            span{
-                                color: $red; 
+                            span {
+                                color: $red;
                             }
                         }
-                        .level-indicator{
+                        .level-indicator {
                             background-color: $red;
                             z-index: 1;
                         }
                     }
-                    &--2{
+                    &--2 {
                         color: $orange;
-                        .level-text{
-                            &::before{
+                        .level-text {
+                            &::before {
                                 background-color: $orange;
                             }
-                            span{
-                                color: $orange; 
+                            span {
+                                color: $orange;
                             }
                         }
-                        .level-indicator{
+                        .level-indicator {
                             background-color: $orange;
                         }
                     }
-                    &--3{
+                    &--3 {
                         color: $yellow;
-                        .level-text{
-                            &::before{
+                        .level-text {
+                            &::before {
                                 background-color: $yellow;
                             }
-                            span{
-                                color: $yellow; 
+                            span {
+                                color: $yellow;
                             }
                         }
-                        .level-indicator{
-                            background-color: $yellow;;
+                        .level-indicator {
+                            background-color: $yellow;
                         }
                     }
-                    &--4{
+                    &--4 {
                         color: $green;
-                        .level-text{
-                            &::before{
+                        .level-text {
+                            &::before {
                                 background-color: $green;
                             }
-                            span{
-                                color: $green; 
+                            span {
+                                color: $green;
                             }
                         }
-                        .level-indicator{
+                        .level-indicator {
                             background-color: $green;
                         }
                     }
-                    &--5{
+                    &--5 {
                         color: $blue;
-                        .level-text{
-                            &::before{
+                        .level-text {
+                            &::before {
                                 background-color: $blue;
                             }
-                            span{
-                                color: $blue; 
+                            span {
+                                color: $blue;
                             }
                         }
-                        .level-indicator{
+                        .level-indicator {
                             background-color: $blue;
                         }
                     }
-                    &--6{
-                        color: $purple; 
-                        .level-text{
-                            &::before{
+                    &--6 {
+                        color: $purple;
+                        .level-text {
+                            &::before {
                                 background-color: $purple;
                             }
-                            span{
-                                color: $purple; 
+                            span {
+                                color: $purple;
                             }
                         }
-                        .level-indicator{
+                        .level-indicator {
                             background-color: $purple;
-                            border-top: 10px solid #F3F3F3;
-                            border-radius: 40px 40px 0px 0px;  
+                            border-top: 10px solid #f3f3f3;
+                            border-radius: 40px 40px 0px 0px;
                         }
                     }
                 }
-                .level-indicator{
-                    width: 7%;                    
-                    border-right: 10px solid #F3F3F3;
-                    border-left: 10px solid #F3F3F3;
+
+                .level-indicator {
+                    width: 7%;
+                    border-right: 10px solid #f3f3f3;
+                    border-left: 10px solid #f3f3f3;
                     @media only screen and (max-width: 600px) {
-                        width: 13%; 
+                        width: 13%;
                     }
-                    
-                    
                 }
             }
         }
     }
-
-   
-
-    
 }
 
 @media only screen and (max-width: 600px) {
-        
-    .container-header{
+    .container-header {
         font-size: 24px !important;
         line-height: 28px !important;
     }
-    
-  
 }

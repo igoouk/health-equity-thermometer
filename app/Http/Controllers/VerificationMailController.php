@@ -19,14 +19,11 @@ class VerificationMailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function sendCode(Request $request)
-    {
-
-        
+    public function sendCode(Request $request) {
         $userFound = User::where('email', $request->email)->first();
         if ($userFound) {
             # code...
-        }else{
+        } else {
             $userFound = User::create([
                 'email' => $request->email
             ]);
@@ -42,11 +39,10 @@ class VerificationMailController extends Controller
         echo $result;
     }
 
-    public function verifyCode(Request $request)
-    {
+    public function verifyCode(Request $request) {
         $user_id = session()->get('user-id');
         $mostRecentRequestedCode = VerificationCode::where('user_id', $user_id)->orderByDesc('created_at')->limit(1)->first();
-        //if($request->code == $mostRecentRequestedCode->code && $mostRecentRequestedCode->is_used == 0) {
+        // if ($request->code == $mostRecentRequestedCode->code && $mostRecentRequestedCode->is_used == 0) {
         if (true) { //for testing purposes
             session(['verified' => "1"]);
             $mostRecentRequestedCode->is_used = 1;
@@ -54,15 +50,14 @@ class VerificationMailController extends Controller
             $hasPreviousResult = Result::where('user_id', $user_id)->count();
             if ($hasPreviousResult > 0) {
                 return "/welcome-back";
-            }else{
+            } else {
                 return "/demographics";
             } 
-        }else if($mostRecentRequestedCode->is_used == 1){
+        } else if($mostRecentRequestedCode->is_used == 1) {
             return "1";
-        }else{
+        } else {
             return "0";
         }
-        
     }
 
     function generateRandomString($length = 10) {
@@ -74,5 +69,4 @@ class VerificationMailController extends Controller
         }
         return $randomString;
     }
-    
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Question;
@@ -6,41 +7,37 @@ use App\Models\Result;
 use App\Models\UserSession;
 use Illuminate\Http\Request;
 
-class QuestionController extends Controller
-{
-
+class QuestionController extends Controller {
     /**
      * Send verification code to user
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function checkAnswer(Request $request)
-    {
+
+    public function checkAnswer(Request $request) {
         $question = Question::where('id', $request->questionIds[0])->first();
         $currentLevel = $question->level;
         session(['current-level' => $currentLevel]);
-        if (session()->get('quiz-completed') != true)
-        {
 
+        // if (session()->get('quiz-completed') != true) {
             $answeredCorrect = false;
             $exitQuiz = false;
             $questionCount = 0;
-            foreach ($request->questionIds as $key => $questionID)
-            {
+
+            foreach ($request->questionIds as $key => $questionID) {
                 $question = Question::where('id', $questionID)->first();
                 $answer = explode(",", $question->answer);
                 $selectedOptions = [];
                 $enteredValues = [];
-                foreach ($request->selectedOptions as $key => $option)
-                {
-                    if ($option["id"] == $questionID)
-                    {
+
+                foreach ($request->selectedOptions as $key => $option) {
+                    if ($option["id"] == $questionID) {
                         array_push($selectedOptions, $option["option"]);
                         array_push($enteredValues, $option["value"]);
                     }
-
                 }
+
                 if ($question->answer_type == "exclude") {
                     $answeredCorrect = true;
                     foreach ($selectedOptions as $key => $value) {
@@ -49,21 +46,21 @@ class QuestionController extends Controller
                             $exitQuiz = true;
                         }
                     }
-                }else if(strlen($answer[0]) > 0){
+                } else if (strlen($answer[0]) > 0) {
                     $answeredCorrect = $answer === $selectedOptions;
-                }else{
+                } else {
                     $answeredCorrect = true;
                 }
-                
+
                 $previouslySelectedOptions = json_decode(session()->get('selected-options'));
                 $selectedAnswerObject = json_encode(array(
                     "id" => $questionID,
                     "answers" => array_values($selectedOptions),
                     "values" => array_values($enteredValues)
                 ));
+
                 $tempOptions = [];
-                if ($previouslySelectedOptions)
-                {
+                if ($previouslySelectedOptions) {
                     $tempOptions = $previouslySelectedOptions;
                 }
 
@@ -73,28 +70,22 @@ class QuestionController extends Controller
                 session(['selected-options' => $selectedOptionsString]);
                 $questionCount++;
 
-                if ($answeredCorrect && $questionID != 8)
-                {
-                    if ($questionCount == count($request->questionIds))
-                    {
+                if ($answeredCorrect && $questionID != 8) {
+                    if ($questionCount == count($request->questionIds)) {
                         //session(['previous-level' => $currentLevel]);
-                        session(['current-level' => $currentLevel+1]);
+                        session(['current-level' => $currentLevel + 1]);
                         return "1";
                     }
-
-                }
-                else
-                {
-                    $level = ($question->level)-1;
+                } else {
+                    $level = ($question->level) - 1;
                     if ($answeredCorrect && $questionID == 8) {
                         $level = $question->level;
                     }
-                    try
-                    {
+                    try {
                         session(['selected-options' => null]);
                         session(['quiz-completed' => true]);
                         if (!$exitQuiz) {
-                            $result = Result::create(['user_id' => session()->get('user-id') , 'selected_options' => $selectedOptionsString, 'level' => $level]);
+                            $result = Result::create(['user_id' => session()->get('user-id'), 'selected_options' => $selectedOptionsString, 'level' => $level]);
 
                             $userSession = UserSession::where("user_id", session()->get('user-id'))
                                 ->orderByDesc('created_at')
@@ -102,40 +93,28 @@ class QuestionController extends Controller
                                 ->first();
                             $userSession->result_id = $result->id;
                             $userSession->save();
-                            session(['current-level' => $currentLevel+1]);
+                            session(['current-level' => $currentLevel + 1]);
                             return "1";
-                        }else{
-                            return "exit"; 
+                        } else {
+                            return "exit";
                         }
-                        
-
-                    }
-                    catch(\Throwable $th)
-                    {
+                    } catch (\Throwable $th) {
                         return $th;
                     }
-
-                    
                 }
             }
-
-        }
-        else
-        {
-            session(['current-level' => $currentLevel+1]);
-            return "1";
-        }
-
+        // } else {
+        //     session(['current-level' => $currentLevel + 1]);
+        //     return "1";
+        // }
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-        
+    public function index() {
+
     }
 
     /**
@@ -143,10 +122,8 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-        
+    public function create() {
+
     }
 
     /**
@@ -155,10 +132,8 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-        
+    public function store(Request $request) {
+
     }
 
     /**
@@ -167,10 +142,8 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function show(Question $question)
-    {
-        //
-        
+    public function show(Question $question) {
+
     }
 
     /**
@@ -179,10 +152,8 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function edit(Question $question)
-    {
-        //
-        
+    public function edit(Question $question) {
+
     }
 
     /**
@@ -192,10 +163,8 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
-    {
-        //
-        
+    public function update(Request $request, Question $question) {
+
     }
 
     /**
@@ -204,10 +173,7 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question)
-    {
-        //
-        
+    public function destroy(Question $question) {
+
     }
 }
-
