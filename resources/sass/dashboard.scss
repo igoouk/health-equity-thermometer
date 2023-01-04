@@ -1,0 +1,45 @@
+.login-page {
+    .login-page {
+        margin-top: 40px;
+
+        .card-header {
+            h1 {
+                margin-top: 5px;
+                font-size: 1.25rem;
+            }
+        }
+
+        .input-group {
+            &:first-child {
+                margin-bottom: 20px;
+            }
+
+            .input-group-prepend {
+                display: flex;
+                margin-right: 15px;
+            }
+
+            input {
+                border-radius: 5px !important;
+            }
+        }
+
+        .card-footer {
+            .btn {
+                font-size: 1rem;
+                margin-top: 15px;
+                background-color: #722ddb;
+                border-radius: 5px;
+                color: #fff;
+                padding: 10px 30px;
+                margin-left: auto;
+                margin-right: auto;
+
+                &:focus,
+                &:hover {
+                    background-color: #9871d1;
+                }
+            }
+        }
+    }
+}

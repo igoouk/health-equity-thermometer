@@ -1,9 +1,19 @@
-#previous-results-container{
+#previous-results-container {
     margin-top: 50px;
-    #go-back-button{
-        margin-top: 40px;
+
+    #results-table {
+        table {
+            tr {
+                td {
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+
+    #go-back-button {
+        margin: 40px auto;
         display: flex;
         justify-content: center;
     }
-
 }
